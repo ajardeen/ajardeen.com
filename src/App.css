@@ -1,0 +1,43 @@
+@import 'lenis/dist/lenis.css';
+@import "react-medium-image-zoom/dist/styles.css";
+
+html {
+  scroll-behavior: auto !important;
+}
+section {
+  will-change: transform;
+}
+
+/* markdown.css */
+.markdown ul {
+  list-style: disc  !important;
+  
+  padding-left: 1.25rem;
+  
+}
+
+.markdown ol {
+  list-style: decimal !important;
+  padding-left: 1.25rem;
+}
+
+.markdown li {
+  margin: 0.25rem 0;
+  
+}
+
+
+
+
+.logo-container {
+  width: 100%;
+  height: 100%;
+  /* Add your background pattern here */
+  background-color: var(--color-background);
+  background-image: radial-gradient(
+    var(--color-muted) 1.5px,
+    transparent 0
+  );
+  background-size: 10px 10px;
+  background-position: -5px -5px;
+}
