@@ -1,5 +1,3 @@
-import React from "react";
-
 import { EXPERIENCES } from "@/data/experiences";
 import { Panel, PanelHeader, PanelTitle } from "@/components/panel";
 import { ExperienceItem } from "./experience-item";

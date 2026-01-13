@@ -1,5 +1,3 @@
-import { RssIcon, X } from "lucide-react";
-
 import { SOCIAL_LINKS } from "@/data/social-links";
 
 function FooterSection() {

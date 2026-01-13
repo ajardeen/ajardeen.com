@@ -1,5 +1,3 @@
-import React from "react";
-
 import { SOCIAL_LINKS } from "@/data/social-links";
 import { Panel } from "@/components/panel";
 import { SocialLinkItem } from "@/components/social-link-item";

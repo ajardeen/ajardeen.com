@@ -13,11 +13,7 @@ import { USER } from "@/data/user";
 import { useSound } from "@/hooks/use-sounds";
 import GlobalMenu from "@/components/global-menu";
 import { pagesSearch } from "@/configs/globalSearchConfig";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+
 import {
   DropdownMenu,
   DropdownMenuContent,

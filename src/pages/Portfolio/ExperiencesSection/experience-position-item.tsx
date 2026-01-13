@@ -1,11 +1,10 @@
 import {
-  ChevronDown,
-  ChevronsDown,
+
   ChevronsDownUp,
   ChevronsUpDown,
   InfinityIcon,
 } from "lucide-react";
-import React, { useState } from "react";
+import  { useState } from "react";
 
 import { Markdown } from "@/components/markdown";
 // Updated to standard shadcn/ui collapsible exports

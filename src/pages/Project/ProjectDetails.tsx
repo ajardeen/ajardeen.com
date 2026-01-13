@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { PROJECTS } from "@/data/projects";
 import {
   Panel,
@@ -42,7 +42,6 @@ type MediaItem =
 function ProjectDetails() {
   const { theme } = useTheme();
   const { id } = useParams<{ id: string }>();
-  const location = useLocation();
   const navigate = useNavigate();
 
   const project = PROJECTS.find((p) => p.id === id);
@@ -63,9 +62,9 @@ function ProjectDetails() {
   }, [project]);
 
   const [selected, setSelected] = useState<MediaItem | null>(null);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
-  const mediaKey = id;
+
 
   if (!project) {
     return (
@@ -98,11 +97,11 @@ function ProjectDetails() {
   useEffect(() => {
     if (mediaList.length > 0) {
       setSelected(mediaList[0]); // first media of NEW project
-      setLoading(true);
+      // setLoading(true);
     } else {
       // IMPORTANT: clear stale media
       setSelected(null);
-      setLoading(false);
+      // setLoading(false);
     }
   }, [id]); // 👈 depend ONLY on id
 
@@ -223,7 +222,7 @@ function ProjectDetails() {
                 allow="autoplay; fullscreen; picture-in-picture"
                 allowFullScreen
                 className="aspect-video w-full"
-                onLoad={() => setLoading(false)}
+                // onLoad={() => setLoading(false)}
               />
             )}
 
@@ -233,7 +232,7 @@ function ProjectDetails() {
                   src={selected.src}
                   alt={project.title}
                   className="aspect-video w-full object-contain"
-                  onLoad={() => setLoading(false)}
+                  // onLoad={() => setLoading(false)}
                 />
               </Zoom>
             )}
@@ -247,7 +246,7 @@ function ProjectDetails() {
                   <button
                     key={idx}
                     onClick={() => {
-                      setLoading(true);
+                      // setLoading(true);
                       setSelected(item);
                     }}
                     className={cn(

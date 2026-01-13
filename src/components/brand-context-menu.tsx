@@ -13,11 +13,11 @@ import {
   ContextMenuItem,
   ContextMenuTrigger,
 } from "./ui/context-menu";
-import { useTheme } from "./theme-provider";
+
 import { Link } from "react-router-dom";
 
 export function BrandContextMenu({ children }: { children: React.ReactNode }) {
-  const { theme } = useTheme();
+
 
   return (
     <ContextMenu>
