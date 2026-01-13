@@ -7,15 +7,11 @@ import darkIcon from "@/assets/icons/maicondark.png";
 import { useTheme } from "@/components/theme-provider";
 import { useLenis } from "lenis/react";
 
-const calcDistance = (el: HTMLElement) => {
-  const rect = el.getBoundingClientRect();
-  const headerHeight = 56;
-  return rect.bottom + window.scrollY - headerHeight;
-};
 
 function ChanhDaiMarkMotion() {
   const { theme } = useTheme();
   const { scrollY } = useScroll();
+  const lenis = useLenis();
 
   const [visible, setVisible] = useState(false);
   const distanceRef = useRef(160);
@@ -28,6 +24,12 @@ function ChanhDaiMarkMotion() {
   useEffect(() => {
     const coverMark = document.getElementById("js-cover-mark");
     if (!coverMark) return;
+
+    const calcDistance = (el: HTMLElement) => {
+      const rect = el.getBoundingClientRect();
+      const headerHeight = 56;
+      return rect.bottom + window.scrollY - headerHeight;
+    };
 
     const updateDistance = () => {
       distanceRef.current = calcDistance(coverMark);
@@ -45,13 +47,9 @@ function ChanhDaiMarkMotion() {
       window.removeEventListener("resize", updateDistance);
     };
   }, []);
-  const lenis = useLenis();
+
   const handleScrollTop = () => {
-    
-      lenis?.scrollTo(`#profile`, {
-        // offset: getHeaderOffset(),
-        duration: 0.6,
-      });
+    lenis?.scrollTo("#profile", { duration: 0.6 });
   };
 
   return (
@@ -66,9 +64,27 @@ function ChanhDaiMarkMotion() {
     />
   );
 }
+function ChanhDaiMarkStatic() {
+  const { theme } = useTheme();
+  const lenis = useLenis();
+
+  const handleScrollTop = () => {
+    lenis?.scrollTo("#profile", { duration: 0 });
+  };
+
+  return (
+    <img
+      src={theme === "light" ? darkIcon : lightIcon}
+      onClick={handleScrollTop}
+      alt="icon"
+      className="opacity-100 translate-y-0"
+    />
+  );
+}
 
 export function SiteHeaderMark() {
   const { pathname } = useLocation();
   const isHome = pathname === "/" || pathname === "/index";
-  return isHome ? <ChanhDaiMarkMotion /> : null;
+
+  return isHome ? <ChanhDaiMarkMotion /> : <ChanhDaiMarkStatic />;
 }

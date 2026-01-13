@@ -2,7 +2,6 @@ import { cn } from "@/lib/utils";
 import { ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { Project } from "@/types/projects";
-import maplaceholder from "@/assets/images/maplaceholder.webp";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export function ProjectCard({

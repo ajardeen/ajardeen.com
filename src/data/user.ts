@@ -19,6 +19,8 @@ export const USER = {
   phoneNumber: "KzkxOTk1MjE4NzUzOQ==", // E.164 format, base64 encoded (https://t.io.vn/base64-string-converter)
   email: "bW5hemFyODc1NDBAZ21haWwuY29t", // base64 encoded
   website: "https://mohamed-ajardeen-portfolio.netlify.app/",
+  resumeUrl:
+    "https://drive.google.com/file/d/129BCxe3WNPqH2f56psCGFgHITHSNvvRy/view?usp=drive_link",
   jobTitle: "Junior Full Stack Developer",
   jobs: [
     {
@@ -27,47 +29,24 @@ export const USER = {
       website: "#",
     },
   ],
-  
+
   avatar: avatar,
-  //   about: `
-  // Hello, World! I am Chánh Đại — a Design Engineer passionate about creating high-performance, user-centric software solutions with intuitive and engaging designs.
 
-  // With 5+ years of experience, I specialize in building high-quality web and mobile applications using Next.js, React, TypeScript, and modern front-end technologies. Beyond work, I love exploring new technologies and turning ideas into reality through personal projects.
+  about: `
+- **Front-End Developer** focused on building modern, responsive, and scalable web applications using **React**, **TypeScript**, and modern UI frameworks.
+- Hands-on experience delivering **real-world projects** including management systems, dashboards, real-time applications, and user-focused platforms.
+- Strong in translating requirements into clean, maintainable UI with attention to **UX, performance, and accessibility**.
+- Built multiple **end-to-end MERN applications** such as:
+  - Hostel Management System with payments, reports, and role-based access
+  - Placement Management System with scheduling, analytics, and animations
+  - Real-time Chat Application using Socket.IO and JWT authentication
+- Comfortable working with **modern UI ecosystems** like Tailwind CSS, shadcn/ui, Radix UI, Framer Motion, and TanStack tools.
+- Experienced in integrating **APIs, authentication, payments, email services**, and real-time features into front-end workflows.
+- Actively improving skills through continuous learning, certifications, and hands-on experimentation.
+- Passionate about building **clean UI, smooth interactions, and meaningful user experiences**.
 
-  // One of my key projects, [ZaDark](https://zadark.com), launched in 2022, enhances the Zalo experience on PC and Web, surpassing 80k+ downloads on [SourceForge](https://sourceforge.net/projects/zadark) and reaching 20k+ active users on the [Chrome Web Store](https://chromewebstore.google.com/detail/llfhpkkeljlgnjgkholeppfnepmjppob) (as of Sep 2025).
-
-  // I'm also the creator of [React Wheel Picker](https://react-wheel-picker.chanhdai.com) — iOS-like wheel picker for React with smooth inertia scrolling and infinite loop support. It has earned 4k+ weekly downloads on [npm](https://www.npmjs.com/package/@ncdai/react-wheel-picker) and was selected for [▲Vercel OSS Program](https://vercel.com/blog/summer-2025-oss-program#react-wheel-picker) summer 2025 cohort.
-
-  // Let's connect and collaborate!
-  //   `,
-about: `
-
-- **Design Engineer** with 5+ years of experience, known for pixel-perfect execution and strong attention to small details.
-- Skilled in **Next.js**, **React**, **TypeScript**, and modern front-end technologies; building high-quality, user-centric web and mobile applications.
-- Passionate about exploring new technologies and turning ideas into reality through polished, thoughtfully crafted personal projects.
-- Creator of [ZaDark](https://zadark.com) (2022): enhances the Zalo experience on PC & Web
-  - 80k+ downloads on [SourceForge](https://sourceforge.net/projects/zadark)
-  - 30k+ active users on the [Chrome Web Store](https://chromewebstore.google.com/detail/llfhpkkeljlgnjgkholeppfnepmjppob)
-- Creator of [React Wheel Picker](https://react-wheel-picker.chanhdai.com)
-  - 10k+ weekly downloads on [npm](https://www.npmjs.com/package/@ncdai/react-wheel-picker)
-  - [▲Vercel OSS Program](https://vercel.com/blog/summer-2025-oss-program#react-wheel-picker)
 `,
-
-  ogImage:
-    "https://assets.chanhdai.com/images/screenshot-og-image-light.png?v=4",
-  namePronunciationUrl: "/audio/chanhdai.mp3",
-  timeZone: "Asia/Ho_Chi_Minh",
-  keywords: [
-    "ncdai",
-    "nguyenchanhdai",
-    "nguyen chanh dai",
-    "chanhdai",
-    "chanh dai",
-    "iamncdai",
-    "quaric",
-    "zadark",
-    "nguyễn chánh đại",
-    "chánh đại",
-  ],
+  timeZone: "Asia/Chennai",
+  keywords: ["ajardeen", "mohamed"],
   dateCreated: "2023-10-20", // YYYY-MM-DD
 } satisfies User;

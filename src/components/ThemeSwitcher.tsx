@@ -9,7 +9,7 @@ function ThemeSwitcher() {
   const playClick = useSound("/audio/ui-sounds/click.wav");
   const { theme, setTheme } = useTheme();
   return (
-    <motion.div className="max-h-10" initial={{ opacity: 50 }} animate={{ opacity: 100 }}>
+    <motion.div className="max-h-9 my-2" initial={{ opacity: 50 }} animate={{ opacity: 100 }}>
       {theme === "light" ? (
         <Button
           variant={"outline"}
@@ -19,7 +19,7 @@ function ThemeSwitcher() {
           }}
              className="p-0 h-fit"
         >
-          <MoonIcon className="p-2.5"/>
+          <MoonIcon className="p-[9px]"/>
         </Button>
       ) : (
         <Button
@@ -30,7 +30,7 @@ function ThemeSwitcher() {
           }}
           className="p-0 h-fit"
         >
-          <SunIcon className="p-2.5" />
+          <SunIcon className="p-[9px]" />
         </Button>
       )}
     </motion.div>

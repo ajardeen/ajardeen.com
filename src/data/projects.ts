@@ -9,15 +9,9 @@ export const PROJECTS: Project[] = [
     },
     link: "https://lunchboxlegends.netlify.app/",
     skills: ["Open Source", "React", "TypeScript"],
-    shortDescription:"iOS-like wheel picker for React with smooth inertia scrolling and infinite loop support",
+    shortDescription:"",
     description: `
-iOS-like wheel picker for React with smooth inertia scrolling and infinite loop support.
 
-- 📱 Natural touch scrolling
-- 🖱️ Mouse + touch support
-- 🔄 Infinite loop
-- 🎨 Unstyled components
-- ⚡ shadcn CLI install
 `,
     logo: "https://res.cloudinary.com/di2vg4ur3/image/upload/v1768222582/Lunchbox-legends_ptewjk.webp",
     imageUrls: [
@@ -35,6 +29,7 @@ iOS-like wheel picker for React with smooth inertia scrolling and infinite loop 
     id: "hostel-management-system",
     title: "Hostel Management System",
     period: { start: "06.2024" },
+    logo:"https://res.cloudinary.com/di2vg4ur3/image/upload/v1768321239/hosteledge_mtjdgc.webp",
     link: "https://hosteledge-management-system-ajar.netlify.app/",
     skills: [
       "React",
@@ -55,7 +50,7 @@ A full-featured system for efficient hostel operations.
 - Financial reporting with charts
 - Role-based access & notifications
 `,
-    imageUrls: [],
+    imageUrls: ["https://res.cloudinary.com/di2vg4ur3/image/upload/v1768325743/hostel1_nurr8u.webp","https://res.cloudinary.com/di2vg4ur3/image/upload/v1768325748/hostel2_ffatcx.webp","https://res.cloudinary.com/di2vg4ur3/image/upload/v1768325746/hostel3_qukrvi.webp","https://res.cloudinary.com/di2vg4ur3/image/upload/v1768325751/hostel4_e6vsjx.webp","https://res.cloudinary.com/di2vg4ur3/image/upload/v1768325754/hostel5_w2wbfn.webp"],
     videoUrl: "",
     cardUi: true,
   },
@@ -65,6 +60,7 @@ A full-featured system for efficient hostel operations.
     id: "placement-management-system",
     title: "Placement Management System",
     period: { start: "05.2024" },
+    logo:"https://res.cloudinary.com/di2vg4ur3/image/upload/v1768321237/collage_woeeb9.webp",
     link: "https://college-placement-system-ajar.netlify.app/home",
     skills: [
       "React",
@@ -84,7 +80,7 @@ A MERN-based platform to streamline college placement workflows.
 - Placement drive coordination
 - Reports & analytics
 `,
-    imageUrls: [],
+    imageUrls: ["https://res.cloudinary.com/di2vg4ur3/image/upload/v1768325722/college1_wbgutr.webp","https://res.cloudinary.com/di2vg4ur3/image/upload/v1768325719/college2_a3l2it.webp","https://res.cloudinary.com/di2vg4ur3/image/upload/v1768325717/college3_rng4o4.webp","https://res.cloudinary.com/di2vg4ur3/image/upload/v1768325714/college4_teggp6.webp","https://res.cloudinary.com/di2vg4ur3/image/upload/v1768325712/college5_cloqmj.webp"],
     videoUrl: "",
     cardUi: true,
   },
@@ -94,6 +90,7 @@ A MERN-based platform to streamline college placement workflows.
     id: "realtime-chat-application",
     title: "Real-Time Chat Application",
     period: { start: "03.2024" },
+    logo:"https://res.cloudinary.com/di2vg4ur3/image/upload/v1768321239/realtimechat_oljkuj.webp",
     link: "https://chatapplication-ajardeen.netlify.app/",
     skills: ["React", "Socket.IO", "MongoDB", "JWT", "Material UI", "Formik"],
     description: `
@@ -104,7 +101,7 @@ A one-on-one real-time chat application.
 - Message status (delivered, seen, typing)
 - Responsive UI for mobile & desktop
 `,
-    imageUrls: [],
+    imageUrls: ["https://res.cloudinary.com/di2vg4ur3/image/upload/v1768326429/chat-bubble_zhglit.webp","https://res.cloudinary.com/di2vg4ur3/image/upload/v1768326427/realtimechat_1_ohpqzj.webp","https://res.cloudinary.com/di2vg4ur3/image/upload/v1768326423/realtimechat_3_tp36gv.webp","https://res.cloudinary.com/di2vg4ur3/image/upload/v1768326420/realtimechat_2_q14kyj.webp",""],
     videoUrl: "",
     cardUi: true,
   },
@@ -114,6 +111,7 @@ A one-on-one real-time chat application.
     id: "recipe-app",
     title: "Recipe App",
     period: { start: "02.2024" },
+    logo:"https://res.cloudinary.com/di2vg4ur3/image/upload/v1768321240/recipe_j1lxw3.webp",
     link: "https://recipe-app-ajar.netlify.app/",
     skills: ["React", "Redux", "TailwindCSS", "Spoonacular API"],
     description: `
@@ -124,8 +122,8 @@ A recipe discovery and management app powered by Spoonacular API.
 - Save favorite recipes
 - Dietary preference support
 `,
-    imageUrls: [],
-    videoUrl: "",
+    imageUrls: ["https://res.cloudinary.com/di2vg4ur3/image/upload/v1768325830/receipe_3_y9vuiq.webp","https://res.cloudinary.com/di2vg4ur3/image/upload/v1768325835/receipe_1_ev2m5u.webp","https://res.cloudinary.com/di2vg4ur3/image/upload/v1768325832/receipe_2_dnj6rk.webp","",""],
+    videoUrl: "https://youtu.be/WoK7NfpDR8k",
     cardUi: false,
   },
 
@@ -144,7 +142,7 @@ Secure password reset system with email verification.
 - Secure password update
 - Expiry-based security handling
 `,
-    imageUrls: [],
+    imageUrls: ["https://res.cloudinary.com/di2vg4ur3/image/upload/v1768325777/password1_lq2kr7.webp","https://res.cloudinary.com/di2vg4ur3/image/upload/v1768325774/password2_yrv51f.webp","https://res.cloudinary.com/di2vg4ur3/image/upload/v1768326737/passwordflow_3_x4lfdu.webp","https://res.cloudinary.com/di2vg4ur3/image/upload/v1768326745/passwordflow_2_tr8l72.webp","https://res.cloudinary.com/di2vg4ur3/image/upload/v1768326741/passwordflow_1_ye19xj.webp"],
     videoUrl: "",
   },
 
@@ -162,7 +160,7 @@ Pixel-perfect responsive landing page based on Figma design.
 - Tailwind utility-first styling
 - Optimized performance
 `,
-    imageUrls: [],
+    imageUrls: ["https://res.cloudinary.com/di2vg4ur3/image/upload/v1768325822/landing1_sye2b8.webp","https://res.cloudinary.com/di2vg4ur3/image/upload/v1768325819/landing3_b5pwoc.webp","https://res.cloudinary.com/di2vg4ur3/image/upload/v1768325816/landing2_egecp7.webp","https://res.cloudinary.com/di2vg4ur3/image/upload/v1768325814/landing4_fzejkm.webp","https://res.cloudinary.com/di2vg4ur3/image/upload/v1768325811/landing5_qqeivc.webp"],
     videoUrl: "",
   },
 ];

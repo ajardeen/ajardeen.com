@@ -1,6 +1,6 @@
 import IconWrapper from "@/components/IconWrapper";
 import { USER } from "@/data/user";
-import { CodeXml, Mail, MapPin, PhoneCall } from "lucide-react";
+import { CodeXml, FileUser, Mail, MapPin, PhoneCall } from "lucide-react";
 
 function ProfileData() {
   return (
@@ -55,10 +55,35 @@ function ProfileData() {
             <a
               className="underline-offset-4 hover:underline tracking-wider"
               href={`tel:${decodeBase64(USER.phoneNumber)}`}
+            >
+              {decodeBase64(USER.phoneNumber)}
+            </a>{" "}
+            or
+            <a
+              className="underline-offset-4 hover:underline tracking-wider"
+              href={`https://wa.me/${decodeBase64(USER.phoneNumber).replace(
+                /\D/g,
+                ""
+              )}`}
               target="_blank"
               rel="noopener noreferrer"
             >
-              {decodeBase64(USER.phoneNumber)}
+              &nbsp;WhatsApp
+            </a>
+          </p>
+        </div>
+        <div className="flex gap-3.5  py-1">
+          <IconWrapper>
+            <FileUser />
+          </IconWrapper>
+          <p className="text-balance">
+            <a
+              className="underline-offset-4 hover:underline tracking-wider"
+              href={USER.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Resume File
             </a>
           </p>
         </div>

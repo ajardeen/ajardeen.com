@@ -4,8 +4,8 @@ import { SOCIAL_LINKS } from "@/data/social-links";
 
 function FooterSection() {
   return (
-    <footer className="max-w-screen overflow-x-hidden ">
-      <div className="screen-line-before mx-auto border-x border-edge pt-4 md:max-w-3xl">
+    <footer className="max-w-screen overflow-x-hidden screen-line-before ">
+      <div className="screen-line-before  mx-auto border-x border-edge pt-4 md:max-w-3xl">
         <p className="mb-1 px-4 text-center font-mono text-sm text-balance text-muted-foreground">
           Inspired by ui.shadcn.com & chanhdai
         </p>

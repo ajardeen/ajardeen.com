@@ -7,9 +7,10 @@ import RootLayout from "./layout/RootLayout";
 import "lenis/dist/lenis.css";
 import "./App.css";
 
-import ProjectDetails from "./pages/ProjectDetails/ProjectDetails";
+import ProjectDetails from "./pages/Project/ProjectDetails";
 import PortfolioPage from "./pages/Portfolio/PortfolioPage";
 import FooterSection from "./pages/Portfolio/FooterSection/FooterSection";
+import Project from "./pages/Project/Project";
 
 export function App() {
   return (
@@ -26,9 +27,10 @@ export function App() {
           }}
         >
           <RootLayout>
-            <div className="mx-auto md:max-w-3xl *:[[id]]:scroll-mt-22">
+            <div className="mx-auto md:max-w-3xl *:[[id]]:scroll-mt-22 ">
               <Routes>
                 <Route path="/" element={<PortfolioPage />} />
+                <Route path="/project" element={<Project />} />
                 <Route path="/project/:id" element={<ProjectDetails />} />
               </Routes>
                <FooterSection />

@@ -15,8 +15,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { ProseMono } from "@/components/ui/typography";
-import { UTM_PARAMS } from "@/configs/site";
-import { addQueryParams } from "@/utils/url";
+
 
 import type { Project } from "@/types/projects";
 
@@ -88,7 +87,7 @@ export function ProjectItem({
                 <TooltipTrigger asChild>
                   <a
                     className="relative flex size-6 shrink-0 items-center justify-center text-muted-foreground after:absolute after:-inset-2 hover:text-foreground"
-                    href={addQueryParams(project.link, UTM_PARAMS)}
+                    href={(project.link)}
                     target="_blank"
                     rel="noopener"
                   >

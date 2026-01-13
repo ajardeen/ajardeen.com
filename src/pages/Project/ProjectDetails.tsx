@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { PROJECTS } from "@/data/projects";
 import {
   Panel,
@@ -8,11 +8,13 @@ import {
   PanelTitle,
 } from "@/components/panel";
 import SeparatorUi from "@/components/SeparatorUi";
-import { ArrowLeft, ArrowRight, Play } from "lucide-react";
+import { ArrowLeft, ArrowRight, Play, Share } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Markdown } from "@/components/markdown";
 import Zoom from "react-medium-image-zoom";
 import { useMemo, useState } from "react";
+import { toast, Toaster } from "sonner";
+import { motion } from "framer-motion";
 
 import "react-medium-image-zoom/dist/styles.css";
 import { cn } from "@/lib/utils";
@@ -22,6 +24,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Kbd } from "@/components/ui/kbd";
+import { useTheme } from "@/components/theme-provider";
 
 /* ---------- helpers ---------- */
 function getYouTubeEmbedUrl(url: string) {
@@ -37,7 +40,9 @@ type MediaItem =
   | { type: "video"; src: string };
 
 function ProjectDetails() {
+  const { theme } = useTheme();
   const { id } = useParams<{ id: string }>();
+  const location = useLocation();
   const navigate = useNavigate();
 
   const project = PROJECTS.find((p) => p.id === id);
@@ -115,30 +120,53 @@ function ProjectDetails() {
     return () => window.removeEventListener("keydown", handler);
   }, [prevProjectId, nextProjectId, navigate]);
 
+  const handleShareProject = async () => {
+    const fullUrl = window.location.href;
+
+    try {
+      await navigator.clipboard.writeText(fullUrl);
+      toast.success("Copied Link");
+    } catch (err) {
+      toast.error("Failed to copy URL");
+      console.error(err);
+    }
+  };
+
   return (
     <div className="">
+      <Toaster position="top-center" theme={theme} />
       <SeparatorUi />
 
       {/* Back */}
       <div className="screen-line-before screen-line-after mx-auto border-x border-edge md:max-w-4xl flex justify-between p-1.5 py-1">
         <Button
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/project")}
           variant="link"
           className="gap-2 text-muted-foreground"
         >
           <ArrowLeft className="size-4" />
-          Portfolio
+          Projects
         </Button>
         <div className="flex gap-1.5">
+          <Button
+            onClick={() => handleShareProject()}
+            variant="secondary"
+            className="py-2 h-fit"
+          >
+            <Share className="size-4" />
+          </Button>
+
           <Tooltip>
             <TooltipTrigger>
               <Button
                 onClick={() => handleProjectNavigaion("prev")}
                 variant="secondary"
-                className="py-2 h-fit"
+                className="p-0 flex h-fit"
                 disabled={!prevProjectId}
               >
-                <ArrowLeft className="size-4" />
+                <motion.span whileTap={{ x: -2 }} className="p-2">
+                  <ArrowLeft className="size-4" />
+                </motion.span>
               </Button>
             </TooltipTrigger>
             <TooltipContent className="text-base flex gap-2 p-2 justify-between items-center">
@@ -153,16 +181,18 @@ function ProjectDetails() {
               <Button
                 onClick={() => handleProjectNavigaion("next")}
                 variant="secondary"
-                className="py-2 h-fit"
+                className="p-0 flex h-fit"
                 disabled={!nextProjectId}
               >
-                <ArrowRight className="size-4" />
+                <motion.span whileTap={{ x: 2 }} className="p-2">
+                  <ArrowRight className="size-4" />
+                </motion.span>
               </Button>
             </TooltipTrigger>
             <TooltipContent className="text-base flex gap-2 p-2 justify-between items-center">
               Next Project
               <Kbd className="size-6">
-                <ArrowRight size={25}/>
+                <ArrowRight size={25} />
               </Kbd>
             </TooltipContent>
           </Tooltip>
@@ -212,29 +242,33 @@ function ProjectDetails() {
           {/* THUMBNAILS */}
           <div className="grid grid-cols-4 gap-3 sm:grid-cols-6">
             {mediaList.map((item, idx) => (
-              <button
-                key={idx}
-                onClick={() => {
-                  setLoading(true);
-                  setSelected(item);
-                }}
-                className={cn(
-                  "group relative overflow-hidden rounded-md border border-edge",
-                  selected?.src === item.src && "ring-2 ring-primary"
+              <>
+                {item.src == "" ? null : (
+                  <button
+                    key={idx}
+                    onClick={() => {
+                      setLoading(true);
+                      setSelected(item);
+                    }}
+                    className={cn(
+                      "group relative overflow-hidden rounded-md border border-edge",
+                      selected?.src === item.src && "ring-2 ring-primary"
+                    )}
+                  >
+                    {item.type === "image" ? (
+                      <img
+                        src={item.src}
+                        alt=""
+                        className="aspect-video w-full object-cover"
+                      />
+                    ) : (
+                      <div className="flex aspect-video w-full items-center justify-center bg-[#FF0033]">
+                        <Play className="size-6 text-white fill-white" />
+                      </div>
+                    )}
+                  </button>
                 )}
-              >
-                {item.type === "image" ? (
-                  <img
-                    src={item.src}
-                    alt=""
-                    className="aspect-video w-full object-cover"
-                  />
-                ) : (
-                  <div className="flex aspect-video w-full items-center justify-center bg-black/80">
-                    <Play className="size-6 text-white" />
-                  </div>
-                )}
-              </button>
+              </>
             ))}
           </div>
 
