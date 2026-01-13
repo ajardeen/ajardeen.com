@@ -67,7 +67,7 @@ function TopNavigation() {
     // We remove the standard 'shadow' and 'border' and use your custom utilities
     <SiteHeaderWrapper
       className={cn(
-        "sticky top-0 z-50 max-w-screen overflow-x-hidden bg-background px-2 pt-2",
+        "sticky top-0 z-50 max-w-screen overflow-x-hidden bg-background px-2 pt-2 overflow-hidden",
         "data-[affix=true]:shadow-[0_0_16px_0_black]/8 dark:data-[affix=true]:shadow-[0_0_16px_0_black]",
         "not-dark:data-[affix=true]:**:data-header-container:after:bg-border",
         "transition-shadow duration-300"
@@ -109,11 +109,11 @@ function TopNavigation() {
          
           <GlobalMenu pagesSearch={pagesSearch} />
           <ThemeSwitcher />
-          <DropdownMenu>
+          <DropdownMenu dir="ltr">
             <DropdownMenuTrigger>
               <Menu className="block md:hidden " />
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-50 h-30 py-3 mt-2">
+            <DropdownMenuContent align="center" className="w-50 h-30 py-3 mt-2">
               <DropdownMenuGroup>
                 <DropdownMenuItem onClick={() => scrollToSection("profile")}>
                   Portfolio
