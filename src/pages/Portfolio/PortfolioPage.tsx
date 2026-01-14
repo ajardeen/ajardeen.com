@@ -7,6 +7,7 @@ import CertificationsSection from "@/pages/Portfolio/CertificationsSection/Certi
 import BrandSection from "@/pages/Portfolio/BrandSection/BrandSection";
 import HeroSection from "@/pages/Portfolio/HeroSection/HeroSection";
 import SeparatorUi from "@/components/SeparatorUi";
+import Example from '@/components/demo-chatgpt'
 
 function PortfolioPage() {
   return (
@@ -27,6 +28,7 @@ function PortfolioPage() {
       <SeparatorUi />
       <BrandSection />
       <SeparatorUi />
+      <Example/>
      
     </>
   );
