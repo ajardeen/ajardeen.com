@@ -102,7 +102,7 @@ A one-on-one real-time chat application.
 - Responsive UI for mobile & desktop
 `,
     imageUrls: ["https://res.cloudinary.com/di2vg4ur3/image/upload/v1768326429/chat-bubble_zhglit.webp","https://res.cloudinary.com/di2vg4ur3/image/upload/v1768326427/realtimechat_1_ohpqzj.webp","https://res.cloudinary.com/di2vg4ur3/image/upload/v1768326423/realtimechat_3_tp36gv.webp","https://res.cloudinary.com/di2vg4ur3/image/upload/v1768326420/realtimechat_2_q14kyj.webp",""],
-    videoUrl: "",
+    videoUrl: "https://youtu.be/WoK7NfpDR8k",
     cardUi: true,
   },
 
@@ -123,7 +123,7 @@ A recipe discovery and management app powered by Spoonacular API.
 - Dietary preference support
 `,
     imageUrls: ["https://res.cloudinary.com/di2vg4ur3/image/upload/v1768325830/receipe_3_y9vuiq.webp","https://res.cloudinary.com/di2vg4ur3/image/upload/v1768325835/receipe_1_ev2m5u.webp","https://res.cloudinary.com/di2vg4ur3/image/upload/v1768325832/receipe_2_dnj6rk.webp","",""],
-    videoUrl: "https://youtu.be/WoK7NfpDR8k",
+    videoUrl: "",
     cardUi: false,
   },
 

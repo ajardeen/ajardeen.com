@@ -65,14 +65,14 @@ function GlobalMenu({
       {/* Trigger */}
       <Button
         variant="outline"
-        className="flex items-center gap-3"
+        className="flex items-center gap-1 px-2 hover:bg-background"
         onClick={() => setOpen(true)}
       >
         <Search className="h-4 w-4" />
-        <span className="hidden md:block">
+        <span className="hidden md:block ">
 
         {searchBtnText}
-        <KbdGroup>
+        <KbdGroup className="ml-0.5">
           <Kbd>Ctrl</Kbd>
           <Kbd>/</Kbd>
         </KbdGroup>

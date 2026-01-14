@@ -1,8 +1,10 @@
 import IconWrapper from "@/components/IconWrapper";
 import { USER } from "@/data/user";
+import { useSound } from "@/hooks/use-sounds";
 import { CodeXml, FileUser, Mail, MapPin, PhoneCall } from "lucide-react";
 
 function ProfileData() {
+  const playClick = useSound("/audio/ui-sounds/redirectUiSound.wav");
   return (
     <div className="screen-line-after screen-line-before border-x border-t-0 p-4 space-y-2.5 ">
       <div className="flex gap-3.5  py-1">
@@ -18,7 +20,7 @@ function ProfileData() {
           <IconWrapper>
             <MapPin />
           </IconWrapper>
-          <p className="text-balance">
+          <p className="text-balance" onClick={()=>playClick()}>
             <a
               className="underline-offset-4 hover:underline tracking-wider"
               // Encodes the address and opens it in Google Maps
@@ -37,7 +39,7 @@ function ProfileData() {
           <IconWrapper>
             <Mail />
           </IconWrapper>
-          <p className="text-balance">
+          <p className="text-balance" onClick={()=>playClick()}>
             <a
               className="underline-offset-4 hover:underline tracking-wider"
               href={`mailto:${decodeBase64(USER.email)}`}
@@ -51,7 +53,7 @@ function ProfileData() {
           <IconWrapper>
             <PhoneCall />
           </IconWrapper>
-          <p className="text-balance">
+          <p className="text-balance" onClick={()=>playClick()}>
             <a
               className="underline-offset-4 hover:underline tracking-wider"
               href={`tel:${decodeBase64(USER.phoneNumber)}`}
@@ -76,7 +78,7 @@ function ProfileData() {
           <IconWrapper>
             <FileUser />
           </IconWrapper>
-          <p className="text-balance">
+          <p className="text-balance" onClick={()=>playClick()}>
             <a
               className="underline-offset-4 hover:underline tracking-wider"
               href={USER.resumeUrl}

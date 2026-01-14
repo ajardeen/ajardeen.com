@@ -26,7 +26,7 @@ function TopNavigation() {
   const lenis = useLenis();
   const location = useLocation();
   const navigate = useNavigate();
-  const playClick = useSound("/audio/ui-sounds/click.wav");
+  const playClick = useSound("/audio/ui-sounds/redirectUiSound.wav");
 
   const getHeaderOffset = () => {
     const header = document.querySelector("[data-header-container]");
@@ -84,7 +84,7 @@ function TopNavigation() {
         >
           <SiteHeaderMark />
         </Link>
-        <div className=" flex gap-3 items-center">
+        <div className="flex gap-2 items-center">
           <Button
             variant="link"
             className="hidden md:block decoration-background cursor-pointer px-0"
@@ -129,7 +129,7 @@ function TopNavigation() {
           </DropdownMenu>
            <Separator
             orientation="vertical"
-            className="my-2.5 bg-muted-foreground/60"
+            className="my-2.5 bg-muted-foreground/60 md:mr-1"
           />
           <motion.a
             href={USER.resumeUrl}

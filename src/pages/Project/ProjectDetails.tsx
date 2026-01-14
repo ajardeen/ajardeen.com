@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/tooltip";
 import { Kbd } from "@/components/ui/kbd";
 import { useTheme } from "@/components/theme-provider";
+import { useSound } from "@/hooks/use-sounds";
 
 /* ---------- helpers ---------- */
 function getYouTubeEmbedUrl(url: string) {
@@ -40,6 +41,7 @@ type MediaItem =
   | { type: "video"; src: string };
 
 function ProjectDetails() {
+  const playNotification = useSound("/audio/ui-sounds/notification.mp3");
   const { theme } = useTheme();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -124,7 +126,9 @@ function ProjectDetails() {
 
     try {
       await navigator.clipboard.writeText(fullUrl);
+      playNotification();
       toast.success("Copied Link");
+      
     } catch (err) {
       toast.error("Failed to copy URL");
       console.error(err);
@@ -227,7 +231,7 @@ function ProjectDetails() {
             )}
 
             {selected?.type === "image" && (
-              <Zoom>
+              <Zoom >
                 <img
                   src={selected.src}
                   alt={project.title}
