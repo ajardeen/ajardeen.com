@@ -302,13 +302,18 @@ const Example = () => {
   const [streamingMessageId, setStreamingMessageId] = useState<string | null>(
     null
   );
+  useEffect(() => {
 
+    console.log(status,streamingMessageId)
+},[])
   const streamReasoning = async (
     messageKey: string,
     versionId: string,
     reasoningContent: string
   ) => {
     const words = reasoningContent.split(" ");
+console.log("versionId",versionId);
+
     let currentContent = "";
 
     for (let i = 0; i < words.length; i++) {
@@ -563,7 +568,11 @@ const Example = () => {
   return (
     <div className="relative flex size-full flex-col divide-y overflow-hidden">
       <Conversation>
-        <ConversationContent>
+         <ConversationContent
+  className="h-full overflow-y-auto overscroll-contain"
+  onWheel={(e) => e.stopPropagation()}
+  onTouchMove={(e) => e.stopPropagation()}
+>
           {messages.map(({ versions, ...message }) => (
             <MessageBranch defaultBranch={0} key={message.key}>
               <MessageBranchContent>
@@ -633,6 +642,7 @@ const Example = () => {
         >
           <PromptInputTextarea
             className="px-5 md:text-base"
+            rows={1}
             onChange={(event) => setText(event.target.value)}
             placeholder="Ask anything"
             value={text}
