@@ -10,17 +10,22 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { BotMessageSquareIcon } from "./ui/bot-message-square";
+import { useSound } from "@/hooks/use-sounds";
 
 export function FloatingAiChat({
   className,
   ...props
 }: React.ComponentProps<"button">) {
+  const playChatOpen = useSound("/audio/ui-sounds/chatuiopen.wav");
+  const playChatClose = useSound("/audio/ui-sounds/chatuiclose.wav");
   const [open, setOpen] = useState(false);
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
+      playChatOpen();
     } else {
       document.body.style.overflow = "";
+      playChatClose();
     }
 
     return () => {
@@ -33,14 +38,36 @@ export function FloatingAiChat({
       <PopoverTrigger asChild>
         <Button
           className={cn(
-            "fixed right-4 bottom-4 z-50 lg:right-8 lg:bottom-8 shadow-lg pointer-events-auto p-0! ",
+            "fixed right-4 bottom-4 z-50 lg:right-8 lg:bottom-8",
+            "pointer-events-auto p-0!",
+            "transition-all duration-500 ease-out",
+            "shadow-lg",
+            open
+              ? [
+                  // 🔥 fancy open state
+                  "animate-gradient",
+                  "bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500",
+                  "text-white",
+                  "shadow-[0_0_30px_rgba(168,85,247,0.7)]",
+                  "scale-105",
+                ]
+              : [
+                  // 😌 normal state
+                  "bg-secondary",
+                  "hover:scale-105",
+                ],
             className
           )}
           variant="secondary"
-          size={"icon-lg"}
+          size="icon-lg"
           {...props}
         >
-          <BotMessageSquareIcon className="p-4" />
+          <BotMessageSquareIcon
+            className={cn(
+              "p-4 transition-transform duration-300",
+              open && "rotate-12"
+            )}
+          />
           <span className="sr-only">Open AI Chat</span>
         </Button>
       </PopoverTrigger>

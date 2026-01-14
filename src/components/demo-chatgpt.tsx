@@ -59,6 +59,7 @@ import {
 import { nanoid } from "nanoid";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
+import { useRef } from "react";
 
 type MessageType = {
   key: string;
@@ -292,6 +293,11 @@ const mockMessageResponses = [
 ];
 
 const Example = () => {
+//  const scrollRef = useRef<HTMLDivElement | null>(null);
+const bottomRef = useRef<HTMLDivElement | null>(null);
+
+const [autoScroll, setAutoScroll] = useState(true);
+  
   const [text, setText] = useState<string>("");
   const [useWebSearch, setUseWebSearch] = useState<boolean>(false);
   const [useMicrophone, setUseMicrophone] = useState<boolean>(false);
@@ -303,16 +309,15 @@ const Example = () => {
     null
   );
   useEffect(() => {
-
-    console.log(status,streamingMessageId)
-},[])
+    console.log(status, streamingMessageId);
+  }, []);
   const streamReasoning = async (
     messageKey: string,
     versionId: string,
     reasoningContent: string
   ) => {
     const words = reasoningContent.split(" ");
-console.log("versionId",versionId);
+    console.log("versionId", versionId);
 
     let currentContent = "";
 
@@ -393,6 +398,18 @@ console.log("versionId",versionId);
       })
     );
   };
+//   const handleScroll = () => {
+//   setAutoScroll(false);
+// };
+ useEffect(() => {
+  if (!autoScroll) return;
+
+  bottomRef.current?.scrollIntoView({
+    behavior: status === "streaming" ? "auto" : "smooth",
+  });
+}, [messages, streamingMessageId, status, autoScroll]);
+
+
 
   const streamMessageResponse = useCallback(
     async (
@@ -457,6 +474,7 @@ console.log("versionId",versionId);
 
   const addUserMessage = useCallback(
     (content: string) => {
+      setAutoScroll(true);
       const userMessage: MessageType = {
         key: `user-${Date.now()}`,
         from: "user",
@@ -568,11 +586,11 @@ console.log("versionId",versionId);
   return (
     <div className="relative flex size-full flex-col divide-y overflow-hidden">
       <Conversation>
-         <ConversationContent
-  className="h-full overflow-y-auto overscroll-contain"
-  onWheel={(e) => e.stopPropagation()}
-  onTouchMove={(e) => e.stopPropagation()}
->
+        <ConversationContent
+          className="h-full overflow-y-auto overscroll-contain"
+          onWheel={(e) => e.stopPropagation()}
+          onTouchMove={(e) => e.stopPropagation()}
+        >
           {messages.map(({ versions, ...message }) => (
             <MessageBranch defaultBranch={0} key={message.key}>
               <MessageBranchContent>
@@ -632,6 +650,7 @@ console.log("versionId",versionId);
               )}
             </MessageBranch>
           ))}
+           {/* <div ref={bottomRef} /> */}
         </ConversationContent>
         <ConversationScrollButton />
       </Conversation>
