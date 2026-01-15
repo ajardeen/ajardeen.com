@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/popover";
 import { BotMessageSquareIcon } from "./ui/bot-message-square";
 import { useSound } from "@/hooks/use-sounds";
+import { AiChat } from "./ui/ai-chat";
 
 export function FloatingAiChat({
   className,
@@ -89,7 +90,7 @@ export function FloatingAiChat({
         <div className="flex items-center justify-between border-b px-4 py-3">
           <div className="flex items-center gap-2">
             <BotMessageSquareIcon />
-            <span className="text-sm font-medium">AI Assistant</span>
+            <span className="text-sm font-medium">Dexes AI</span>
           </div>
 
           <Button
@@ -104,7 +105,8 @@ export function FloatingAiChat({
 
         {/* Chat body */}
         <div className="h-[calc(100%-3.25rem)] overflow-y-auto">
-          <Example />
+          {/* <Example /> */}
+          <AiChat/>
         </div>
       </PopoverContent>
     </Popover>

@@ -49,5 +49,5 @@ export const USER = {
 `,
   timeZone: "Asia/Chennai",
   keywords: ["ajardeen", "mohamed"],
-  dateCreated: "2023-10-20", // YYYY-MM-DD
+  dateCreated: "2026-1-1", // YYYY-MM-DD
 } satisfies User;
