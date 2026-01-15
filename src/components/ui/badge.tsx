@@ -21,13 +21,13 @@ const badgeVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
 
         success:
-          " border-emerald-600 text-white [a]:hover:bg-emerald-600/90 focus-visible:ring-emerald-500/40",
+          " border-emerald-600 text-default [a]:hover:bg-emerald-600/90 focus-visible:ring-emerald-500/40",
 
         pending:
-          "border-amber-500 text-white [a]:hover:bg-amber-500/90 focus-visible:ring-amber-500/40",
+          "border-amber-500 text-default [a]:hover:bg-amber-500/90 focus-visible:ring-amber-500/40",
 
         error:
-          "border-red-600 text-white [a]:hover:bg-red-600/90 focus-visible:ring-red-500/40",
+          "border-red-600 text-default [a]:hover:bg-red-600/90 focus-visible:ring-red-500/40",
       },
     },
     defaultVariants: {
