@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import Example from "@/components/demo-chatgpt";
+// import Example from "@/components/demo-chatgpt";
 import {
   Popover,
   PopoverContent,
@@ -12,6 +12,14 @@ import {
 import { BotMessageSquareIcon } from "./ui/bot-message-square";
 import { useSound } from "@/hooks/use-sounds";
 import { AiChat } from "./ui/ai-chat";
+import { Badge } from "./ui/badge";
+import type { AiStatus } from "@/types/ai-status";
+
+const INITIAL_STATUS: AiStatus = {
+  state: "loading",
+  text: "checking",
+  variant: "secondary",
+};
 
 export function FloatingAiChat({
   className,
@@ -20,6 +28,8 @@ export function FloatingAiChat({
   const playChatOpen = useSound("/audio/ui-sounds/chatuiopen.wav");
   const playChatClose = useSound("/audio/ui-sounds/chatuiclose.wav");
   const [open, setOpen] = useState(false);
+  const [aiStatus, setAiStatus] = useState<AiStatus>(INITIAL_STATUS);
+
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
@@ -91,6 +101,9 @@ export function FloatingAiChat({
           <div className="flex items-center gap-2">
             <BotMessageSquareIcon />
             <span className="text-sm font-medium">Dexes AI</span>
+            <Badge className="uppercase text-[10px]" variant={aiStatus.variant}>
+              {aiStatus.text}
+            </Badge>
           </div>
 
           <Button
@@ -106,7 +119,7 @@ export function FloatingAiChat({
         {/* Chat body */}
         <div className="h-[calc(100%-3.25rem)] overflow-y-auto">
           {/* <Example /> */}
-          <AiChat/>
+          <AiChat onStatusChange={setAiStatus} />
         </div>
       </PopoverContent>
     </Popover>
