@@ -2,6 +2,17 @@ import type { Certification } from "../types/certifications";
 
 export const CERTIFICATIONS: Certification[] = [
   {
+    title: "Build a free website with WordPress",
+    issuer: "Coursera",
+    issuerIconName: "coursera",
+    issuerLogoURL:"https://res.cloudinary.com/di2vg4ur3/image/upload/v1768846739/coursera_dobckc.webp",
+    issueDate: "2026-1-19",
+    credentialID: "P9JIATFD0VCG",
+    credentialURL:
+      "https://coursera.org/share/2a5caaf94303e0faaf9bd4bda37c4692",
+    previewCredentialUrl : "https://res.cloudinary.com/di2vg4ur3/image/upload/v1768846340/Coursera_P9JIATFD0VCG_ofdtvn.webp",
+  },
+  {
     title: "5-Day AI Agents Intensive Course with Google",
     issuer: "Kaggle",
     issuerIconName: "kaggle",
@@ -17,7 +28,7 @@ export const CERTIFICATIONS: Certification[] = [
     issuer: "Guvi",
     issuerIconName: "guvi",
     issuerLogoURL:"https://res.cloudinary.com/di2vg4ur3/image/upload/v1768156205/guvi_ifndnr.webp",
-    issueDate: "2025-12-18",
+    issueDate: "2024-9",
     credentialID: "Mx9Ysjpo26bWJThx",
     credentialURL:
       "https://www.zenclass.in/certificateDownload/Mx9Ysjpo26bWJThx",
