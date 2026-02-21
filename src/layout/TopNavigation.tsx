@@ -102,7 +102,7 @@ function TopNavigation() {
           <Button
             variant="link"
             className="hidden md:block decoration-background cursor-pointer px-0"
-            onClick={() => scrollToSection("projects")}
+            onClick={() => navigate("/project")}
           >
             Projects
           </Button>
@@ -121,7 +121,7 @@ function TopNavigation() {
                 <DropdownMenuItem onClick={() => scrollToSection("tech-stack")}>
                   Skills
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => scrollToSection("projects")}>
+                <DropdownMenuItem onClick={() => navigate("/project")}>
                   Projects
                 </DropdownMenuItem>
               </DropdownMenuGroup>

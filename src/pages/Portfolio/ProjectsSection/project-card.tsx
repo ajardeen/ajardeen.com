@@ -3,6 +3,7 @@ import { ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { Project } from "@/types/projects";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Badge } from "@/components/ui/badge";
 
 export function ProjectCard({
   project,
@@ -18,7 +19,7 @@ export function ProjectCard({
       className={cn(
         "group flex flex-col gap-3   border-edge p-3 transition hover:bg-muted/40",
         "max-sm:screen-line-before max-sm:screen-line-after",
-        "sm:nth-[2n+1]:screen-line-before sm:nth-[2n+1]:screen-line-after"
+        "sm:nth-[2n+1]:screen-line-before sm:nth-[2n+1]:screen-line-after",
       )}
     >
       {!image && <Skeleton className="aspect-video! w-full" />}
@@ -39,7 +40,12 @@ export function ProjectCard({
 
       <div className="flex flex-col gap-1">
         <h3 className="text-lg font-medium group-hover:underline underline-offset-4">
-          {project.title}{" "}
+          {project.title}
+          {project.isUnderDevelopment && (
+            <Badge variant="destructive" className="ml-2 text-[8px] p-1!">
+              Under Development
+            </Badge>
+          )}
           <span className="ml-2 mt-auto inline-flex items-center gap-1 text-sm text-primary">
             <ExternalLink className="size-4" />
           </span>

@@ -26,6 +26,7 @@ import {
 import { Kbd } from "@/components/ui/kbd";
 import { useTheme } from "@/components/theme-provider";
 import { useSound } from "@/hooks/use-sounds";
+import { Badge } from "@/components/ui/badge";
 
 /* ---------- helpers ---------- */
 function getYouTubeEmbedUrl(url: string) {
@@ -53,7 +54,7 @@ function ProjectDetails() {
 
     const images =
       project.imageUrls?.map(
-        (img) => ({ type: "image", src: img } as MediaItem)
+        (img) => ({ type: "image", src: img }) as MediaItem,
       ) ?? [];
 
     const video = project.videoUrl
@@ -65,8 +66,6 @@ function ProjectDetails() {
 
   const [selected, setSelected] = useState<MediaItem | null>(null);
   // const [loading, setLoading] = useState(false);
-
-
 
   if (!project) {
     return (
@@ -128,7 +127,6 @@ function ProjectDetails() {
       await navigator.clipboard.writeText(fullUrl);
       playNotification();
       toast.success("Copied Link");
-      
     } catch (err) {
       toast.error("Failed to copy URL");
       console.error(err);
@@ -206,7 +204,14 @@ function ProjectDetails() {
 
       <Panel>
         <PanelHeader>
-          <PanelTitle>{project.title}</PanelTitle>
+          <PanelTitle>
+            {project.title}{" "}
+            {project.isUnderDevelopment && (
+              <Badge variant="destructive" className="ml-2">
+                Under Development
+              </Badge>
+            )}
+          </PanelTitle>
         </PanelHeader>
 
         <PanelContent className="space-y-5">
@@ -216,7 +221,7 @@ function ProjectDetails() {
             key={id}
             className={cn(
               "relative w-full overflow-hidden rounded-xl border border-edge bg-white",
-              !selected ? "hidden" : "block"
+              !selected ? "hidden" : "block",
             )}
           >
             {selected?.type === "video" && (
@@ -231,7 +236,7 @@ function ProjectDetails() {
             )}
 
             {selected?.type === "image" && (
-              <Zoom >
+              <Zoom>
                 <img
                   src={selected.src}
                   alt={project.title}
@@ -255,7 +260,7 @@ function ProjectDetails() {
                     }}
                     className={cn(
                       "group relative overflow-hidden rounded-md border border-edge",
-                      selected?.src === item.src && "ring-2 ring-primary"
+                      selected?.src === item.src && "ring-2 ring-primary",
                     )}
                   >
                     {item.type === "image" ? (

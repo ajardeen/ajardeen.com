@@ -26,4 +26,5 @@ export type Project = {
   cardUi?: boolean;
   /** Whether the project card is expanded by default in the UI. */
   isExpanded?: boolean;
+  isUnderDevelopment?: boolean;
 };

@@ -4,7 +4,8 @@ export const EXPERIENCES: Experience[] = [
   {
     id: "kjb-solution",
     companyName: "KJB Solution",
-    companyLogo: "https://res.cloudinary.com/di2vg4ur3/image/upload/v1768236586/kjbSolution_thvn3k.webp",
+    companyLogo:
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1768236586/kjbSolution_thvn3k.webp",
     positions: [
       {
         id: "20f8bfe5-b6a3-4b0d-ac2f-6fccd50d417e",
@@ -14,27 +15,25 @@ export const EXPERIENCES: Experience[] = [
         },
         employmentType: "Full-time",
         icon: "code",
-        description: `- Develop [AI Chat](https://help.simplamo.com/features/simplamo-ai/ai-chat/guide_simplamo_ai_chat?ref=IN-926722) and [AI Assistant](https://help.simplamo.com/features/simplamo-ai/ai-expert/aiexpert-rockdiscribe?ref=IN-926722) features.
-- Develop [Whiteboards](https://help.simplamo.com/features/whiteboard/overview?ref=IN-926722) with real-time collaboration.
-- Build and maintain the [Zalo Mini App](https://zalo.me/s/1736112917405511258/) for Simplamo with seamless integration.
-- Develop interactive chart and analytics widgets for the [Dashboard](https://help.simplamo.com/features/dashboard/overview) to enhance data visualization.
-- Develop and maintain core features to enhance functionality and user experience.
-- Ensure UI/UX consistency and adherence to standards.
-- Implement robust frontend solutions for web and mobile platforms.
-- Analyze technical capabilities and provide optimal solutions.`,
+        description: `- Built **Channel Manager dashboards** (Reservation & Performance) using React (Vite), delivering 10+ desktop-focused screens with reusable UI architecture and complex reporting modules.
+- Rebuilt **Hostel Management System (HMS)** UI using React + TypeScript and Shadcn design system, introducing responsive layouts, reusable components, dark/light themes, and modern dashboard visualizations.
+- Led frontend architecture for **Retailo Restaurant POS**, migrating 20+ legacy HTML/CSS/JS screens into modular React structure with MUI, optimized state handling, and scalable component patterns.
+- Implemented centralized API workflows using TanStack Query to reduce redundant requests and improve data performance across billing, KOT, inventory, ledger, and reporting modules.
+- Developed POS printing backend using Node.js (PDFKit, pdf-to-printer), converting billing HTML into formatted PDFs for automated physical printing workflows.
+- Contributed to full-stack product development including real-time order flows, reusable contexts, and performance-focused UI delivery across business-critical applications.`,
         skills: [
+          "React",
+          "Vite",
           "TypeScript",
-          "Next.js",
-          "React Native",
-          "MobX",
-          "MobX-State-Tree",
-          "Tailwind CSS",
-          "Dify",
-          "Zalo Mini App",
-          "Agile",
-          "Teamwork",
-          "Research",
-          "Problem-solving",
+          "Material UI",
+          "TanStack Query",
+          "React Data Table",
+          "Node.js",
+          "Express.js",
+          "PDFKit",
+          "Shadcn UI",
+          "Responsive UI",
+          "REST API Integration",
         ],
       },
     ],
@@ -49,13 +48,29 @@ export const EXPERIENCES: Experience[] = [
         id: "20f8bfe5-b6a3-4b0d-ac2f-6fccd50d417e",
         title: "Front End Developer",
         employmentPeriod: {
-          start: "4.2025",
+          start: "1.2024",
+          end: "4.2025",
         },
-        employmentType: "Full-time",
+        employmentType: "Freelance",
         icon: "code",
-        description: `- .`,
+        description: `
+- Developed responsive portfolio websites and modern landing pages using HTML, CSS, and JavaScript.
+- Built clean UI layouts with mobile-first design and cross-browser compatibility.
+- Converted Figma and design mockups into pixel-accurate frontend interfaces.
+- Optimized page performance, image loading, and basic SEO structure.
+- Implemented interactive UI components such as sliders, forms, and animations.
+- Delivered client-ready static websites with reusable structure and maintainable code.
+      `,
         skills: [
-        ""
+          "HTML5",
+          "CSS3",
+          "JavaScript",
+          "Responsive Design",
+          "Landing Pages",
+          "Portfolio Websites",
+          "UI Implementation",
+          "Figma to Code",
+          "Web Performance",
         ],
       },
     ],
@@ -73,7 +88,7 @@ export const EXPERIENCES: Experience[] = [
           end: "2021",
         },
         icon: "education",
-        description: `- Completed Engineering In Mechanical`,
+        description: `- Mechanical Engineering Graduated  `,
         skills: ["C++", "Self-learning", "Teamwork", "Presentation"],
       },
     ],
