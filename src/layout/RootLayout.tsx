@@ -1,6 +1,7 @@
 import React from "react";
 import TopNavigation from "./TopNavigation";
 import { ScrollToTop } from "@/components/scroll-to-top";
+import { FloatingAiChat } from "@/components/floating-ai-chat";
 
 
 function RootLayout({ children }: { children: React.ReactNode }) {
@@ -14,7 +15,7 @@ function RootLayout({ children }: { children: React.ReactNode }) {
         {children}
     
       </main>
-     
+     <FloatingAiChat/>
       <ScrollToTop />
     </>
   );

@@ -8,6 +8,7 @@ import BrandSection from "@/pages/Portfolio/BrandSection/BrandSection";
 import HeroSection from "@/pages/Portfolio/HeroSection/HeroSection";
 import SeparatorUi from "@/components/SeparatorUi";
 
+
 function PortfolioPage() {
   return (
     <>
@@ -27,7 +28,7 @@ function PortfolioPage() {
       <SeparatorUi />
       <BrandSection />
       <SeparatorUi />
-     
+    
     </>
   );
 }

@@ -21,6 +21,7 @@ export const USER = {
   website: "https://mohamed-ajardeen-portfolio.netlify.app/",
   resumeUrl:
     "https://drive.google.com/file/d/129BCxe3WNPqH2f56psCGFgHITHSNvvRy/view?usp=drive_link",
+    // https://drive.usercontent.google.com/u/0/uc?id=129BCxe3WNPqH2f56psCGFgHITHSNvvRy&export=download
   jobTitle: "Junior Full Stack Developer",
   jobs: [
     {
@@ -48,5 +49,5 @@ export const USER = {
 `,
   timeZone: "Asia/Chennai",
   keywords: ["ajardeen", "mohamed"],
-  dateCreated: "2023-10-20", // YYYY-MM-DD
+  dateCreated: "2026-1-1", // YYYY-MM-DD
 } satisfies User;
