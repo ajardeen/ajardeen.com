@@ -57,6 +57,7 @@ type AiChatProps = {
 /* ------------------------------------------------------------------ */
 
 export function AiChat({ onStatusChange }: AiChatProps) {
+  const [isCheckingAI, setIsCheckingAI] = useState(true);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [isTyping, setIsTyping] = useState(false);
   const [charCount, setCharCount] = useState(0);
@@ -69,7 +70,7 @@ export function AiChat({ onStatusChange }: AiChatProps) {
   /* 🔹 Model state */
   const [selectedModel, setSelectedModel] = useState("gemma-3-1b-it");
   const [modelDisabled, setModelDisabled] = useState<Record<string, boolean>>(
-    {}
+    {},
   );
   const [modelSelectorOpen, setModelSelectorOpen] = useState(false);
 
@@ -84,6 +85,22 @@ export function AiChat({ onStatusChange }: AiChatProps) {
     "Can you explain Mohamed’s Hostel Management System project?",
     "How does Mohamed stand out from other junior developers?",
     "What type of roles is Mohamed best suited for?",
+
+    "What problems has Mohamed solved using React or React Native?",
+    "How does Mohamed structure scalable frontend architecture?",
+    "What performance optimizations has Mohamed implemented?",
+    "How does Mohamed handle API integration and error states?",
+    "What UI/UX practices does Mohamed follow in real projects?",
+    "Has Mohamed worked with complex forms or dynamic data tables?",
+    "How experienced is Mohamed with state management patterns?",
+    "What challenges did Mohamed face in production projects?",
+    "How does Mohamed debug difficult frontend issues?",
+    "What makes Mohamed’s coding style maintainable?",
+    "Can you explain Mohamed’s approach to responsive design?",
+    "What tools does Mohamed use for testing or code quality?",
+    "How comfortable is Mohamed working with backend APIs?",
+    "What kind of team environments does Mohamed work best in?",
+    "What are Mohamed’s next growth areas as a developer?",
   ];
 
   const getRandomQuestions = () =>
@@ -94,6 +111,8 @@ export function AiChat({ onStatusChange }: AiChatProps) {
   /* -------------------------------------------------- */
 
   useEffect(() => {
+    setIsCheckingAI(true);
+
     onStatusChange({
       state: "loading",
       text: "checking",
@@ -133,6 +152,8 @@ export function AiChat({ onStatusChange }: AiChatProps) {
           text: "offline",
           variant: "error",
         });
+      } finally {
+        setIsCheckingAI(false); // ⭐ unlock UI
       }
     })();
   }, []);
@@ -203,7 +224,7 @@ export function AiChat({ onStatusChange }: AiChatProps) {
           setErrorMessage(
             data.recommendedModel
               ? `⚠️ Model limit reached. Switch to ${data.recommendedModel}.`
-              : data.error
+              : data.error,
           );
           onStatusChange({
             state: "limited",
@@ -233,8 +254,8 @@ export function AiChat({ onStatusChange }: AiChatProps) {
 
         setMessages((prev) =>
           prev.map((m) =>
-            m.id === assistantId ? { ...m, content: m.content + chunk } : m
-          )
+            m.id === assistantId ? { ...m, content: m.content + chunk } : m,
+          ),
         );
       }
 
@@ -242,7 +263,7 @@ export function AiChat({ onStatusChange }: AiChatProps) {
         setAiDisabled(true);
         setModelDisabled((p) => ({ ...p, [selectedModel]: true }));
         setErrorMessage(
-          "⚠️ This model returned no output. Try switching to Gemma 3 (recommended)."
+          "⚠️ This model returned no output. Try switching to Gemma 3 (recommended).",
         );
       }
     } catch {
@@ -276,6 +297,11 @@ export function AiChat({ onStatusChange }: AiChatProps) {
 
   return (
     <div className="flex h-full flex-col overflow-hidden">
+      {isCheckingAI && (
+        <div className="flex items-center justify-center text-sm text-muted-foreground py-3">
+          <Shimmer>Checking AI service… please wait</Shimmer>
+        </div>
+      )}
       <Conversation>
         <ConversationContent
           className="flex-1 overflow-y-auto"
@@ -287,10 +313,10 @@ export function AiChat({ onStatusChange }: AiChatProps) {
               <MessageContent
                 className={cn(
                   "group-[.is-user]:rounded-[20px] group-[.is-user]:bg-secondary",
-                  "group-[.is-assistant]:bg-transparent"
+                  "group-[.is-assistant]:bg-transparent",
                 )}
               >
-                {msg.isIntro && showIntroShimmer ? (
+                {msg.isIntro && showIntroShimmer && !isCheckingAI ? (
                   <Shimmer>{msg.content}</Shimmer>
                 ) : (
                   <MessageResponse>{msg.content}</MessageResponse>
@@ -311,7 +337,7 @@ export function AiChat({ onStatusChange }: AiChatProps) {
         <ConversationScrollButton />
       </Conversation>
 
-      {!isTyping && !aiDisabled && (
+      {!isTyping && !aiDisabled && !isCheckingAI && (
         <div className="px-4 pb-2 flex gap-2 flex-wrap">
           {quickQuestions.map((q) => (
             <button
@@ -342,7 +368,7 @@ export function AiChat({ onStatusChange }: AiChatProps) {
             }
             rows={1}
             maxLength={MAX_CHARS}
-            disabled={isTyping || aiDisabled || !serverOnline}
+            disabled={isTyping || aiDisabled || !serverOnline || isCheckingAI}
             onChange={(e) => setCharCount(e.target.value.length)}
           />
 
@@ -353,7 +379,10 @@ export function AiChat({ onStatusChange }: AiChatProps) {
                 onOpenChange={setModelSelectorOpen}
               >
                 <ModelSelectorTrigger className="text-xs">
-                  <Button variant={"secondary"} className="">
+                  <Button
+                    variant={"secondary"}
+                    disabled={isCheckingAI || aiDisabled || !serverOnline}
+                  >
                     Model: {selectedModel}
                   </Button>
                 </ModelSelectorTrigger>
@@ -380,7 +409,7 @@ export function AiChat({ onStatusChange }: AiChatProps) {
                         >
                           <ModelSelectorLogo provider="google" />
                           <span className="ml-2">{model}</span>
-                          {model === "gemma-3-1b-it" && (
+                          {model === "gemini-2.5-flash" && (
                             <span className="ml-auto text-xs text-green-500">
                               Recommended
                             </span>
