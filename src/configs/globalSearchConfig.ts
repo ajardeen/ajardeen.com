@@ -1,13 +1,7 @@
 import {
   Home,
   FileText,
-  Settings,
-  BarChart,
-  HelpCircle,
-  LayoutDashboard,
-  FolderOpen,
   HomeIcon,
-  LucideProjector,
   FolderGit2,
 } from "lucide-react";
 

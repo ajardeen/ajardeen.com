@@ -137,34 +137,34 @@ function GlobalMenu({
                 })}
               </CommandGroup>
             )}
-       {projectSearch.length > 0 && <CommandSeparator />}
+            {projectSearch.length > 0 && <CommandSeparator />}
 
-{projectSearch.map((grp, i) => (
-  <CommandGroup key={i} heading={grp.group}>
-    {grp.items.map((item, index) => {
-      const Icon = item.icon;
+            {projectSearch.map((grp, i) => (
+              <CommandGroup key={i} heading={grp.group}>
+                {grp.items.map((item, index) => {
+                  const Icon = item.icon;
 
-      return (
-        <CommandItem
-          key={index}
-          onSelect={() => handleNavigate(item.link)}
-        >
-          {item.image ? (
-            <img
-              src={item.image}
-              alt={item.searchName}
-              className="mr-2 h-4 w-4 rounded-sm object-cover"
-            />
-          ) : Icon ? (
-            <Icon className="mr-2 h-4 w-4" />
-          ) : null}
+                  return (
+                    <CommandItem
+                      key={index}
+                      onSelect={() => handleNavigate(item.link)}
+                    >
+                      {item.image ? (
+                        <img
+                          src={item.image}
+                          alt={item.searchName}
+                          className="mr-2 h-4 w-4 rounded-sm object-cover"
+                        />
+                      ) : Icon ? (
+                        <Icon className="mr-2 h-4 w-4" />
+                      ) : null}
 
-          {item.searchName}
-        </CommandItem>
-      );
-    })}
-  </CommandGroup>
-))}
+                      {item.searchName}
+                    </CommandItem>
+                  );
+                })}
+              </CommandGroup>
+            ))}
           </CommandList>
           {/* Footer */}
           <div>
