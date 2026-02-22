@@ -16,12 +16,11 @@ import { Kbd, KbdGroup } from "@/components/ui/kbd";
 import maicon from "@/assets/icons/maicon.png";
 import maDarkIcon from "@/assets/icons/maicondark.png";
 import { useTheme } from "./theme-provider";
-;
-
 export interface SearchItem {
   searchName: string;
   link: string;
   icon?: LucideIcon;
+  image?: string; // ✅ project logo support
 }
 
 interface GlobalMenuProps {
@@ -29,15 +28,26 @@ interface GlobalMenuProps {
   searchBtnText?: string;
   suggestedSearch?: SearchItem[];
   pagesSearch?: SearchItem[];
+  projectSearch?: SearchGroup[];
+}
+interface SearchGroup {
+  group: string;
+  items: SearchItem[];
+}
+
+interface GlobalMenuProps {
+  suggestedSearch?: SearchItem[];
+  pagesSearch?: SearchItem[];
+  projectSearch?: SearchGroup[]; // ✅ NEW
 }
 
 function GlobalMenu({
   suggestedSearch = [],
   pagesSearch = [],
+  projectSearch = [],
   placeholder = "Search...",
   searchBtnText = "Search",
 }: GlobalMenuProps) {
- 
   const { theme } = useTheme();
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
@@ -70,12 +80,11 @@ function GlobalMenu({
       >
         <Search className="h-4 w-4" />
         <span className="hidden md:block ">
-
-        {searchBtnText}
-        <KbdGroup className="ml-0.5">
-          <Kbd>Ctrl</Kbd>
-          <Kbd>/</Kbd>
-        </KbdGroup>
+          {searchBtnText}
+          <KbdGroup className="ml-0.5">
+            <Kbd>Ctrl</Kbd>
+            <Kbd>/</Kbd>
+          </KbdGroup>
         </span>
       </Button>
 
@@ -128,6 +137,34 @@ function GlobalMenu({
                 })}
               </CommandGroup>
             )}
+       {projectSearch.length > 0 && <CommandSeparator />}
+
+{projectSearch.map((grp, i) => (
+  <CommandGroup key={i} heading={grp.group}>
+    {grp.items.map((item, index) => {
+      const Icon = item.icon;
+
+      return (
+        <CommandItem
+          key={index}
+          onSelect={() => handleNavigate(item.link)}
+        >
+          {item.image ? (
+            <img
+              src={item.image}
+              alt={item.searchName}
+              className="mr-2 h-4 w-4 rounded-sm object-cover"
+            />
+          ) : Icon ? (
+            <Icon className="mr-2 h-4 w-4" />
+          ) : null}
+
+          {item.searchName}
+        </CommandItem>
+      );
+    })}
+  </CommandGroup>
+))}
           </CommandList>
           {/* Footer */}
           <div>
@@ -140,7 +177,6 @@ function GlobalMenu({
               />
               <div className="flex gap-2">
                 <span className="flex items-end gap-2">
-
                   Go to Page
                   <kbd className="flex bg-accent text-accent-foreground h-5 items-center gap-1 rounded border px-1 text-[0.7rem]">
                     <CornerDownLeft size={14} />

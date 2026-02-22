@@ -21,6 +21,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { buildProjectSearch } from "@/utils/projectSearchBuilder";
 
 function TopNavigation() {
   const lenis = useLenis();
@@ -107,7 +108,7 @@ function TopNavigation() {
             Projects
           </Button>
          
-          <GlobalMenu pagesSearch={pagesSearch} />
+          <GlobalMenu pagesSearch={pagesSearch} projectSearch={buildProjectSearch()} />
           <ThemeSwitcher />
           <DropdownMenu dir="ltr">
             <DropdownMenuTrigger>

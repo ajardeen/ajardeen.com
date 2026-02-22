@@ -6,6 +6,9 @@ import {
   HelpCircle,
   LayoutDashboard,
   FolderOpen,
+  HomeIcon,
+  LucideProjector,
+  FolderGit2,
 } from "lucide-react";
 
 import type { LucideIcon } from "lucide-react";
@@ -36,38 +39,14 @@ export const suggestedSearch: SearchItem[] = [
 
 export const pagesSearch: SearchItem[] = [
   {
-    searchName: "Dashboard",
-    link: "/dashboard",
-    icon: LayoutDashboard,
+    searchName: "Home",
+    link: "/",
+    icon: HomeIcon,
   },
   {
-    searchName: "Reports",
-    link: "/reports",
-    icon: BarChart,
+    searchName: "Projects",
+    link: "/project",
+    icon: FolderGit2,
   },
-  {
-    searchName: "Quick Access",
-    link: "/quick-access",
-    icon: FolderOpen,
-  },
-  {
-    searchName: "Management",
-    link: "/management",
-    icon: FileText,
-  },
-  {
-    searchName: "Documents",
-    link: "/documents",
-    icon: FileText,
-  },
-  {
-    searchName: "Settings",
-    link: "/settings",
-    icon: Settings,
-  },
-  {
-    searchName: "Help",
-    link: "/help",
-    icon: HelpCircle,
-  },
+ 
 ];
