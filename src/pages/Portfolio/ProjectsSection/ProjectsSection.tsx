@@ -8,6 +8,7 @@ import {
 } from "@/components/panel";
 import { ProjectItem } from "./project-item";
 import { ProjectCard } from "./project-card";
+import { Link } from "react-router-dom";
 
 function ProjectsSection() {
   const cardProjects = PROJECTS.filter((p) => p.cardUi === true);
@@ -17,8 +18,18 @@ function ProjectsSection() {
     <Panel id="projects">
       <PanelHeader>
         <PanelTitle>
-          Projects
-          <PanelTitleSup>({PROJECTS.length})</PanelTitleSup>
+          <div className="flex items-center justify-between">
+            <span>
+              Projects
+              <PanelTitleSup>({PROJECTS.length})</PanelTitleSup>
+            </span>
+            <Link
+              to="/project"
+              className="text-sm font-medium text-primary hover:underline"
+            >
+              View All
+            </Link>
+          </div>
         </PanelTitle>
       </PanelHeader>
 
@@ -32,7 +43,7 @@ function ProjectsSection() {
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {cardProjects.map((project) => (
-              <ProjectCard key={project.id} project={project}  />
+              <ProjectCard key={project.id} project={project} />
             ))}
           </div>
         </div>
@@ -42,7 +53,7 @@ function ProjectsSection() {
       {listProjects.length > 0 && (
         <CollapsibleList
           items={listProjects}
-          max={4}
+          max={3}
           renderItem={(project) => (
             <ProjectItem key={project.id} project={project} />
           )}

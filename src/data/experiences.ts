@@ -16,7 +16,7 @@ export const EXPERIENCES: Experience[] = [
         employmentType: "Full-time",
         icon: "code",
         description: `- Built **Channel Manager dashboards** (Reservation & Performance) using React (Vite), delivering 10+ desktop-focused screens with reusable UI architecture and complex reporting modules.
-- Rebuilt **Hostel Management System (HMS)** UI using React + TypeScript and Shadcn design system, introducing responsive layouts, reusable components, dark/light themes, and modern dashboard visualizations.
+- Rebuilt [**Hostel Management System (HMS)** ](https://template-uii.netlify.app/) UI using React + TypeScript and Shadcn design system, introducing responsive layouts, reusable components, dark/light themes, and modern dashboard visualizations.
 - Led frontend architecture for **Retailo Restaurant POS**, migrating 20+ legacy HTML/CSS/JS screens into modular React structure with MUI, optimized state handling, and scalable component patterns.
 - Implemented centralized API workflows using TanStack Query to reduce redundant requests and improve data performance across billing, KOT, inventory, ledger, and reporting modules.
 - Developed POS printing backend using Node.js (PDFKit, pdf-to-printer), converting billing HTML into formatted PDFs for automated physical printing workflows.
