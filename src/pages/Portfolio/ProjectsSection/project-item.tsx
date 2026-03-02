@@ -1,4 +1,4 @@
-import { BoxIcon, InfinityIcon, LinkIcon } from "lucide-react";
+import { BoxIcon, FileText, InfinityIcon, LinkIcon } from "lucide-react";
 
 import { Markdown } from "@/components/markdown";
 // Updated to standard shadcn/ui collapsible exports
@@ -6,7 +6,6 @@ import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-  
 } from "@/components/ui/collapsible";
 import { Tag } from "@/components/ui/tag";
 import {
@@ -16,8 +15,8 @@ import {
 } from "@/components/ui/tooltip";
 import { ProseMono } from "@/components/ui/typography";
 
-
 import type { Project } from "@/types/projects";
+import { Link } from "react-router-dom";
 
 export function ProjectItem({
   className,
@@ -85,9 +84,23 @@ export function ProjectItem({
 
               <Tooltip>
                 <TooltipTrigger asChild>
+                  <Link to={"/project/" + project.id}>
+                    <a className="relative flex size-6 shrink-0 items-center justify-center text-muted-foreground after:absolute after:-inset-2 hover:text-foreground">
+                      <FileText className="pointer-events-none size-4" />
+                      <span className="sr-only">Open Doc</span>
+                    </a>
+                  </Link>
+                </TooltipTrigger>
+
+                <TooltipContent>
+                  <p>Open Doc</p>
+                </TooltipContent>
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger asChild>
                   <a
                     className="relative flex size-6 shrink-0 items-center justify-center text-muted-foreground after:absolute after:-inset-2 hover:text-foreground"
-                    href={(project.link)}
+                    href={project.link}
                     target="_blank"
                     rel="noopener"
                   >

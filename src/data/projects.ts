@@ -203,29 +203,29 @@ A recruitment workflow system built using MERN stack to streamline student place
     cardUi: true,
   },
 
-{
-  id: "vision-action-toolkit",
-  title: "Vision Action Toolkit",
-  period: {
-    start: "06.11.2025",
-  },
-  link: "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772278154/va_ui_components_2_r4n1oc.webp",
-  skills: [
-    "React 19",
-    "TypeScript",
-    "Vite",
-    "Tailwind CSS v4",
-    "Radix UI",
-    "React Hook Form",
-    "Zod",
-    "Design System Architecture",
-    "Reusable Component Patterns",
-    "Dark/Light Theme Engine"
-  ],
-  shortDescription:
-    "Scalable design system and reusable UI toolkit built with React 19 and TypeScript, featuring schema-based validation, theme extensibility, and composable architecture.",
+  {
+    id: "vision-action-toolkit",
+    title: "Vision Action Toolkit",
+    period: {
+      start: "06.11.2025",
+    },
+    link: "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772278154/va_ui_components_2_r4n1oc.webp",
+    skills: [
+      "React 19",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS v4",
+      "Radix UI",
+      "React Hook Form",
+      "Zod",
+      "Design System Architecture",
+      "Reusable Component Patterns",
+      "Dark/Light Theme Engine",
+    ],
+    shortDescription:
+      "Scalable design system and reusable UI toolkit built with React 19 and TypeScript, featuring schema-based validation, theme extensibility, and composable architecture.",
 
-  description: `
+    description: `
 Vision Action Toolkit is a production-ready UI component system built to deliver scalable, type-safe, and validation-integrated frontend architecture.
 
 It combines React 19, TypeScript, and Vite with a ShadCN-inspired structure to create reusable, accessible, and theme-extensible components.
@@ -244,14 +244,52 @@ Quick Links:
 • 🌐 Live Demo — https://va-reusable-components.netlify.app/
 • ⚙️ GitHub — https://github.com/ajardeen/va-reusable-components
 `,
-  logo: "",
-  imageUrls: [
-    "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772278153/va_ui_components_4_qdrlix.webp",
-    "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772278153/va_ui_components_1_lsnrhd.webp",
-    "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772278153/va_ui_components_3_iyrcci.webp",
-    "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772278154/va_ui_components_2_r4n1oc.webp",
+    logo: "",
+    imageUrls: [
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772278153/va_ui_components_4_qdrlix.webp",
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772278153/va_ui_components_1_lsnrhd.webp",
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772278153/va_ui_components_3_iyrcci.webp",
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772278154/va_ui_components_2_r4n1oc.webp",
+    ],
+    // isExpanded: true,
+  },
+  {
+  "id": "gamified-portfolio",
+  "title": "Gamified Portfolio",
+  "period": { "start": "15.02.2026" },
+  "link": "https://gamified-portfolio.netlify.app/",
+  "skills": [
+    "React",
+    "Vite",
+    "TypeScript",
+    "Tailwind CSS",
+    "Framer Motion",
+    "Gamification UI/UX"
   ],
-  isExpanded: true,
+  "shortDescription":
+    "Experimental gamified developer portfolio with interactive UI and playful mechanics.",
+
+  "description": `
+Gamified portfolio project built as an experimental and fun UI concept.
+
+Note: This project is under active development. The data and metrics displayed are intentionally non-realistic and purely for creative demonstration purposes.
+
+- Designed interactive, game-inspired UI components.
+- Implemented animated transitions using Framer Motion.
+- Structured modular architecture with Vite + React + TypeScript.
+- Focused on engagement-driven UX patterns.
+- Built playful navigation and progression-style layout.
+- Exploring creative storytelling through frontend engineering.
+
+
+**Quick Links**
+- 🌐 Live Demo — https://gamified-portfolio.netlify.app/
+- 💻 GitHub — https://github.com/ajardeen/PortfolioV3
+- 🎥 Demo Video — https://youtu.be/ukeToi3DlRY
+`,
+  "imageUrls": ["https://res.cloudinary.com/di2vg4ur3/image/upload/v1772480950/gamified_porfolio_en5wtt.webp"],
+  "videoUrl": "https://youtu.be/ukeToi3DlRY",
+  isUnderDevelopment: true,
 },
   {
     id: "realtime-chat-application",
@@ -371,7 +409,43 @@ Recipe discovery application focused on search-driven UX and dynamic API data re
     videoUrl: "",
     cardUi: false,
   },
+  {
+    id: "movie-search-app",
+    title: "Movie Search App",
+    period: { start: "05.01.2026" },
+    logo: "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772478804/clapperboard_icon_kkt9s4.webp",
+    link: "https://movie-searching-app-ajar.netlify.app/",
+    skills: [
+      "React",
+      "Vite",
+      "Tailwind CSS",
+      "OMDB API",
+      "REST API Integration",
+    ],
+    shortDescription:
+      "Movie search application integrated with OMDB API for real-time movie data fetching.",
 
+    description: `
+Movie search application built with modern frontend tooling and external API integration.
+
+- Developed responsive and minimal UI using Tailwind CSS.
+- Integrated OMDB REST API with API key authentication.
+- Implemented dynamic movie search with real-time data fetching.
+- Displayed movie details including poster, title, year, and type.
+- Handled loading states and error responses gracefully.
+- Optimized component structure using Vite + React architecture.
+
+
+**Quick Links**
+- 🌐 Live Demo — https://movie-searching-app-ajar.netlify.app/
+- 💻 GitHub — https://github.com/ajardeen/Movie-Searching-App
+`,
+    imageUrls: [
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772478479/movie_search_app_1_lssvwt.webp",
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772478479/movie_search_app_2_ihkr9x.webp",
+    ],
+    videoUrl: "",
+  },
   {
     id: "google-oauth-implementation",
     title: "Google OAuth Implementation",

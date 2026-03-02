@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { ArrowUpRightIcon, ShieldCheckIcon } from "lucide-react";
+import { ArrowUpRightIcon, Eye, ShieldCheckIcon } from "lucide-react";
 
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
@@ -92,7 +92,7 @@ export function CertificationItem({
                 variant={"link"}
                 className="p-0 cursor-help tracking-widest text-muted-foreground"
               >
-                Preview
+                <Eye/>
               </Button>
             </HoverCardTrigger>
             <HoverCardContent className="w-96 h-fit cursor-pointer border border-muted dark:brightness-90">
