@@ -205,7 +205,20 @@ function ProjectDetails() {
       <Panel>
         <PanelHeader>
           <PanelTitle>
+            <span className="flex items-center">
+
+            {project.logo && (
+              <img
+              src={project.logo}
+              alt={project.title}
+              width={32}
+              height={32}
+              className="mr-2 flex size-6 shrink-0 select-none"
+              aria-hidden
+              />
+            )}
             {project.title}{" "}
+            </span>
             {project.isUnderDevelopment && (
               <Badge variant="destructive" className="ml-2">
                 Under Development
