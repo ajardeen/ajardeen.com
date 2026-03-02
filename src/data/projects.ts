@@ -2,6 +2,65 @@ import type { Project } from "../types/projects";
 
 export const PROJECTS: Project[] = [
   {
+    id: "portfolio-v3",
+    title: "Personal Portfolio Website (V3 + AI Powered)",
+    period: { start: "20.01.2026" },
+    link: "https://ajardeen.netlify.app/",
+    logo: "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772495046/maicon_ji1nag.webp",
+    skills: [
+      "React 19",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS v4",
+      "shadcn/ui",
+      "AI SDK",
+      "Google Gemini API",
+      "Framer Motion",
+      "Lenis Smooth Scroll",
+      "CMDK Global Search",
+      "Cloudinary Image Optimization",
+      "React Router v7",
+      "Zod Validation",
+    ],
+    shortDescription:
+      "AI-powered personal portfolio with global search, optimized media delivery, and interactive micro-experiences.",
+
+    description: `
+Third iteration of my personal portfolio, architected as a performance-focused and AI-enhanced developer platform.
+
+- Built with Vite + React 19 + TypeScript using a scalable modular structure.
+- Integrated AI SDK with Google Gemini API to power “Dexes”, my personal AI agent for recruiter/visitor interaction.
+- Implemented global command-based search (CMDK) to search projects, skills, and pages.
+- Created dedicated project listing and detailed project view screens.
+- Optimized images using Cloudinary (WebP format) with fast loading strategies.
+- Implemented skeleton loaders using shadcn/ui components.
+- Added micro-interactions and motion effects with Framer Motion.
+- Integrated smooth scrolling using Lenis.
+- Included interactive sound effects and image zoom modal functionality.
+- Structured routing with React Router v7.
+- Designed for performance, accessibility, and clean UI architecture.
+
+
+**Quick Links**
+- 🌐 Live Demo — https://ajardeen.netlify.app/
+- 💻 GitHub — https://github.com/ajardeen/ajardeen.com
+`,
+    imageUrls: [
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772495136/PortfokioV3_5_m27we6.webp",
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772495135/PortfokioV3_4_ztg8uh.webp",
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772495135/PortfokioV3_3_fgdxlx.webp",
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772495134/PortfokioV3_2_etlkbz.webp",
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772495133/PortfokioV3_1_durhic.webp",
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772495137/PortfokioV3_7_kgzzfz.webp",
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772495137/PortfokioV3_6_i5zhvk.webp",
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772495138/PortfokioV3_8_frtvpc.webp",
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772495139/PortfokioV3_9_vocxsb.webp",
+    ],
+    videoUrl: "",
+    cardUi: true,
+    // isUnderDevelopment: true,
+  },
+  {
     id: "lunchbox-legends",
     title: "Lunchbox Legends",
     period: {
@@ -200,7 +259,48 @@ A recruitment workflow system built using MERN stack to streamline student place
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1768325712/college5_cloqmj.webp",
     ],
     videoUrl: "",
-    cardUi: true,
+    // cardUi: true,
+  },
+  {
+    id: "portfolio-v2",
+    title: "Personal Portfolio Website (V2)",
+    period: { start: "18.07.2025", end: "10.12.2025" },
+    link: "https://mohamed-ajardeen-portfolio.netlify.app/",
+    logo: "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772491646/logo_pg6les.webp",
+    skills: [
+      "React",
+      "Vite",
+      "Framer Motion",
+      "Scroll-triggered Animations",
+      "Responsive Design",
+      "Web3Forms",
+      "Third-party API Integration",
+    ],
+    shortDescription:
+      "Animated personal portfolio website with scroll-based interactions and contact form integration.",
+
+    description: `
+Second iteration of my personal portfolio website, now deprecated but preserved as a showcase of earlier frontend work.
+
+- Built using Vite + React with modular component architecture.
+- Implemented scroll-triggered animations using Framer Motion.
+- Added project pop-up modal functionality on item interaction.
+- Integrated Web3Forms third-party email API for contact submissions.
+- Designed fully responsive layouts for desktop and mobile devices.
+- Focused on smooth motion, timing, and interaction feedback.
+
+
+**Quick Links**
+- 🌐 Live Demo — https://mohamed-ajardeen-portfolio.netlify.app/
+- 💻 GitHub — https://github.com/ajardeen/PortfolioV2
+`,
+    imageUrls: [
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772491144/portfoliov2_3_oamzjm.webp",
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772491144/portfoliov2_2_ow85ka.webp",
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772491144/portfoliov2_4_fvyxk7.webp",
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772491144/portfoliov2_1_y5pfpf.webp",
+    ],
+    videoUrl: "",
   },
 
   {
@@ -254,22 +354,22 @@ Quick Links:
     // isExpanded: true,
   },
   {
-  "id": "gamified-portfolio",
-  "title": "Gamified Portfolio",
-  "period": { "start": "15.02.2026" },
-  "link": "https://gamified-portfolio.netlify.app/",
-  "skills": [
-    "React",
-    "Vite",
-    "TypeScript",
-    "Tailwind CSS",
-    "Framer Motion",
-    "Gamification UI/UX"
-  ],
-  "shortDescription":
-    "Experimental gamified developer portfolio with interactive UI and playful mechanics.",
+    id: "gamified-portfolio",
+    title: "Gamified Portfolio",
+    period: { start: "15.02.2026" },
+    link: "https://gamified-portfolio.netlify.app/",
+    skills: [
+      "React",
+      "Vite",
+      "TypeScript",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Gamification UI/UX",
+    ],
+    shortDescription:
+      "Experimental gamified developer portfolio with interactive UI and playful mechanics.",
 
-  "description": `
+    description: `
 Gamified portfolio project built as an experimental and fun UI concept.
 
 Note: This project is under active development. The data and metrics displayed are intentionally non-realistic and purely for creative demonstration purposes.
@@ -287,10 +387,12 @@ Note: This project is under active development. The data and metrics displayed a
 - 💻 GitHub — https://github.com/ajardeen/PortfolioV3
 - 🎥 Demo Video — https://youtu.be/ukeToi3DlRY
 `,
-  "imageUrls": ["https://res.cloudinary.com/di2vg4ur3/image/upload/v1772480950/gamified_porfolio_en5wtt.webp"],
-  "videoUrl": "https://youtu.be/ukeToi3DlRY",
-  isUnderDevelopment: true,
-},
+    imageUrls: [
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772480950/gamified_porfolio_en5wtt.webp",
+    ],
+    videoUrl: "https://youtu.be/ukeToi3DlRY",
+    isUnderDevelopment: true,
+  },
   {
     id: "realtime-chat-application",
     title: "Real-Time Chat Application",

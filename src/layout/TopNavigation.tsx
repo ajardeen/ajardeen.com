@@ -91,7 +91,7 @@ function TopNavigation() {
             className="hidden md:block decoration-background cursor-pointer px-0"
             onClick={() => scrollToSection("profile")}
           >
-            Portfolio
+            About
           </Button>
           <Button
             variant="link"
@@ -117,7 +117,7 @@ function TopNavigation() {
             <DropdownMenuContent align="center" className="w-50 h-30 py-3 mt-2">
               <DropdownMenuGroup>
                 <DropdownMenuItem onClick={() => scrollToSection("profile")}>
-                  Portfolio
+                  About
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => scrollToSection("tech-stack")}>
                   Skills
