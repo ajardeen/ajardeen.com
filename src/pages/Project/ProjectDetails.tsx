@@ -106,19 +106,51 @@ function ProjectDetails() {
     }
   }, [id]); // 👈 depend ONLY on id
 
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft" && prevProjectId) {
-        navigate(`/project/${prevProjectId}`);
-      }
-      if (e.key === "ArrowRight" && nextProjectId) {
-        navigate(`/project/${nextProjectId}`);
-      }
-    };
+useEffect(() => {
+  const handler = (e: KeyboardEvent) => {
+    if (!selected) return;
 
-    window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
-  }, [prevProjectId, nextProjectId, navigate]);
+    const currentMediaIndex = mediaList.findIndex(
+      (m) => m.src === selected.src,
+    );
+
+    // 🔥 SHIFT + ARROWS → MEDIA NAVIGATION
+    if (e.shiftKey) {
+      if (e.key === "ArrowLeft" && currentMediaIndex > 0) {
+        e.preventDefault();
+        setSelected(mediaList[currentMediaIndex - 1]);
+      }
+
+      if (
+        e.key === "ArrowRight" &&
+        currentMediaIndex < mediaList.length - 1
+      ) {
+        e.preventDefault();
+        setSelected(mediaList[currentMediaIndex + 1]);
+      }
+
+      return; // stop here — don't trigger project navigation
+    }
+
+    // 🔹 NORMAL ARROWS → PROJECT NAVIGATION (unchanged behavior)
+    if (e.key === "ArrowLeft" && prevProjectId) {
+      navigate(`/project/${prevProjectId}`);
+    }
+
+    if (e.key === "ArrowRight" && nextProjectId) {
+      navigate(`/project/${nextProjectId}`);
+    }
+  };
+
+  window.addEventListener("keydown", handler);
+  return () => window.removeEventListener("keydown", handler);
+}, [
+  selected,
+  mediaList,
+  prevProjectId,
+  nextProjectId,
+  navigate,
+]);
 
   const handleShareProject = async () => {
     const fullUrl = window.location.href;
@@ -249,7 +281,7 @@ function ProjectDetails() {
             )}
 
             {selected?.type === "image" && (
-              <Zoom>
+              <Zoom >
                 <img
                   src={selected.src}
                   alt={project.title}
