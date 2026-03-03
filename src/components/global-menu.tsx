@@ -70,6 +70,18 @@ function GlobalMenu({
     navigate(link);
   };
 
+  useEffect(() => {
+  if (open) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "";
+  }
+
+  return () => {
+    document.body.style.overflow = "";
+  };
+}, [open]);
+
   return (
     <>
       {/* Trigger */}
@@ -98,7 +110,9 @@ function GlobalMenu({
         <Command className="flex h-full justify-between flex-col ">
           <CommandInput placeholder={placeholder} />
 
-          <CommandList className="flex-1 overflow-y-auto">
+          <CommandList
+          onWheel={(e) => e.stopPropagation()}
+          >
             <CommandEmpty>No results found.</CommandEmpty>
 
             {suggestedSearch.length > 0 && (
