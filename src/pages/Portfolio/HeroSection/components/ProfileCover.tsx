@@ -2,10 +2,12 @@ import { cn } from "@/lib/utils";
 import { useTheme } from "@/components/theme-provider";
 import lightIcon from "@/assets/icons/maicon.png";
 import darkIcon from "@/assets/icons/maicondark.png";
+import { BrandContextMenu } from "@/components/brand-context-menu";
 
 function ProfileCover() {
   const { theme } = useTheme();
   return (
+       <BrandContextMenu>
     <div
       data-header-container
       id="profile"
@@ -24,6 +26,7 @@ function ProfileCover() {
         className={cn("absolute w-39 -translate-y-0.5 transition-colors ")}
       />
     </div>
+       </BrandContextMenu>
   );
 }
 

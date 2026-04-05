@@ -60,7 +60,7 @@ function ProfileData() {
             >
               {decodeBase64(USER.phoneNumber)}
             </a>{" "}
-            or
+            || 
             <a
               className="underline-offset-4 hover:underline tracking-wider"
               href={`https://wa.me/${decodeBase64(USER.phoneNumber).replace(
@@ -70,7 +70,7 @@ function ProfileData() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              &nbsp;WhatsApp
+              &nbsp; WhatsApp
             </a>
           </p>
         </div>

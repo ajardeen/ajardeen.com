@@ -17,7 +17,7 @@ export function ProjectCard({
     <Link
       to={"/project/" + project.id}
       className={cn(
-        "group flex flex-col gap-3   border-edge p-3 transition hover:bg-muted/40",
+        "group flex flex-col gap-3 border-edge p-3 transition hover:bg-muted/40",
         "max-sm:screen-line-before max-sm:screen-line-after",
         "sm:nth-[2n+1]:screen-line-before sm:nth-[2n+1]:screen-line-after",
       )}
@@ -28,13 +28,23 @@ export function ProjectCard({
           <img
             src={image}
             alt={project.title}
-            className="aspect-video! w-full object-contain"
+            className="aspect-video! w-full object-contain transition duration-300 group-hover:blur-sm group-hover:scale-105"
           />
-          <div className="pointer-events-none absolute inset-0 ring-1 ring-black/10 dark:ring-white/10" />
-          <p className="absolute bottom-0 right-0 p-1 bg-zinc-100 rounded-tl-md text-xs text-muted-foreground">
-            {project.period.start}
-            {project.period.end ? ` – ${project.period.end}` : " – Present"}
-          </p>
+
+          <div className="pointer-events-none absolute inset-0 ring-1 ring-black/10 dark:ring-white/10 " />
+
+          {/* Period Component: hidden by default, shown on group hover */}
+          <img
+            src={project.logo}
+            alt="logo"
+            className="w-8 rounded-sm  absolute bottom-1 left-1 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+          />
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            <p className="bg-zinc-900/80 text-zinc-100 px-3 py-1.5 rounded-full text-xs font-medium backdrop-blur-md border border-white/10">
+              {project.period.start}
+              {project.period.end ? ` – ${project.period.end}` : " – Present"}
+            </p>
+          </div>
         </div>
       )}
 
@@ -56,15 +66,21 @@ export function ProjectCard({
         </p>
 
         {project.skills?.length > 0 && (
-          <div className="flex flex-wrap gap-2 pt-2">
-            {project.skills.map((skill) => (
+          <div className="flex flex-wrap items-center gap-2 pt-4">
+            {project.skills.slice(0, 6).map((skill) => (
               <span
                 key={skill}
-                className="rounded-md bg-secondary px-2 py-0.5 text-xs text-secondary-foreground"
+                className="rounded-md bg-secondary px-2 py-1 text-xs font-medium text-zinc-300 border border-zinc-700/50"
               >
                 {skill}
               </span>
             ))}
+
+            {project.skills.length > 6 && (
+              <span className="text-zinc-500 text-xs font-bold ml-1">
+                more ...
+              </span>
+            )}
           </div>
         )}
       </div>
