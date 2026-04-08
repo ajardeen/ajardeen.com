@@ -21,7 +21,9 @@ export const USER = {
   website: "https://mohamed-ajardeen-portfolio.netlify.app/",
   resumeUrl:
     "https://drive.google.com/file/d/1pdun18h84jqa3eKSJ0gMeh3zBPEh9zl1/view?usp=sharing",
-  // https://drive.usercontent.google.com/u/0/uc?id=129BCxe3WNPqH2f56psCGFgHITHSNvvRy&export=download
+  resumeDownloadUrl:
+  "https://drive.google.com/uc?export=download&id=1pdun18h84jqa3eKSJ0gMeh3zBPEh9zl1",
+
   jobTitle: "Junior Full Stack Developer",
   jobs: [
     {

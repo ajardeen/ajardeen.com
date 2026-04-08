@@ -15,6 +15,7 @@ export type User = {
   /** General location for display */
   address: string;
   resumeUrl: string;
+  resumeDownloadUrl: string;
   /** E.164 format, base64 encoded (https://t.io.vn/base64-string-converter) */
   phoneNumber: string;
   /** base64 encoded (https://t.io.vn/base64-string-converter) */

@@ -1,8 +1,4 @@
-import {
-  DownloadIcon,
-  Share2Icon,
-  LinkIcon,
-} from "lucide-react";
+import { DownloadIcon, Share2Icon, LinkIcon } from "lucide-react";
 import { toast } from "sonner";
 import {
   ContextMenu,
@@ -10,36 +6,47 @@ import {
   ContextMenuItem,
   ContextMenuTrigger,
 } from "./ui/context-menu";
+import { USER } from "@/data/user";
+const user = USER;
 
-export function BrandContextMenu({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const shareText = "Share with friends";
+export function BrandContextMenu({ children }: { children: React.ReactNode }) {
   const currentUrl = window.location.href;
 
-  const encodedText = encodeURIComponent(
-    `${shareText}\n${currentUrl}`
-  );
+  const shareMessage = `Check out ${user.fullName}'s portfolio — ${user.jobTitle} specializing in React, React Native, and MERN stack development.\n\n${currentUrl}`;
+
+  const encodedText = encodeURIComponent(shareMessage);
   const encodedUrl = encodeURIComponent(currentUrl);
 
   const handleCopyLink = async () => {
     await navigator.clipboard.writeText(currentUrl);
-    toast.success("Link copied to clipboard");
+
+    toast.success("Portfolio link copied", {
+      description: "You can now share the portfolio URL anywhere.",
+    });
+  };
+
+  const handleCopyShareText = async () => {
+    await navigator.clipboard.writeText(shareMessage);
+
+    toast.success("Share message copied", {
+      description: "Paste it directly into WhatsApp, LinkedIn, or email.",
+    });
   };
 
   return (
     <ContextMenu>
       <ContextMenuTrigger asChild>{children}</ContextMenuTrigger>
 
-      <ContextMenuContent className="w-64">
-        {/* SHARE HEADER */}
-        <div className="px-2 py-1 text-xs text-muted-foreground">
-          Share with friends
+      <ContextMenuContent className="w-72">
+        <div className="px-2 py-1.5 text-xs text-muted-foreground leading-relaxed">
+          Share 
         </div>
 
-        {/* WhatsApp */}
+        <ContextMenuItem onClick={handleCopyShareText}>
+          <Share2Icon className="mr-2 h-4 w-4" />
+          Copy to clipboard
+        </ContextMenuItem>
+
         <ContextMenuItem asChild>
           <a
             href={`https://wa.me/?text=${encodedText}`}
@@ -51,7 +58,6 @@ export function BrandContextMenu({
           </a>
         </ContextMenuItem>
 
-        {/* Facebook */}
         <ContextMenuItem asChild>
           <a
             href={`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`}
@@ -63,20 +69,19 @@ export function BrandContextMenu({
           </a>
         </ContextMenuItem>
 
-        {/* Copy Link */}
         <ContextMenuItem onClick={handleCopyLink}>
           <LinkIcon className="mr-2 h-4 w-4" />
-          Copy link
+          Copy portfolio link
         </ContextMenuItem>
 
         <hr className="my-1" />
 
-   
-
         <ContextMenuItem asChild>
           <a
-            href={"https://drive.usercontent.google.com/u/0/uc?id=129BCxe3WNPqH2f56psCGFgHITHSNvvRy&export=download"}
+            href={user.resumeDownloadUrl}
             download
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <DownloadIcon className="mr-2 h-4 w-4" />
             Download Resume
