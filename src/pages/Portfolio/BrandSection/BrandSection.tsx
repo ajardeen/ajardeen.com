@@ -38,7 +38,7 @@ function BrandSection() {
           </div>
 
           <div className="screen-line-after flex items-center justify-center after:z-1">
-            {/* <ChanhDaiWordmark className="h-6 w-auto sm:h-10" /> */}
+    
             <img
               src={theme === "light" ? lightSign : darkSign}
               alt="icon"

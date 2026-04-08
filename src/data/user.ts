@@ -20,7 +20,7 @@ export const USER = {
   email: "bW5hemFyODc1NDBAZ21haWwuY29t", // base64 encoded
   website: "https://mohamed-ajardeen-portfolio.netlify.app/",
   resumeUrl:
-    "https://drive.google.com/file/d/11UGqB3ACp-Qk7NogBkuKZtS05tKNoN_R/view?usp=sharing",
+    "https://drive.google.com/file/d/1pdun18h84jqa3eKSJ0gMeh3zBPEh9zl1/view?usp=sharing",
   // https://drive.usercontent.google.com/u/0/uc?id=129BCxe3WNPqH2f56psCGFgHITHSNvvRy&export=download
   jobTitle: "Junior Full Stack Developer",
   jobs: [

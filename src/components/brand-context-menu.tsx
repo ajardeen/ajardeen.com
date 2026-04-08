@@ -71,26 +71,7 @@ export function BrandContextMenu({
 
         <hr className="my-1" />
 
-        {/* EXISTING ITEMS */}
-        {/* <ContextMenuItem
-          onClick={() => toast.success("Copied Mark as SVG")}
-        >
-          Copy Mark as SVG
-        </ContextMenuItem>
-
-        <ContextMenuItem
-          onClick={() => toast.success("Copied Logotype as SVG")}
-        >
-          <TypeIcon className="mr-2 h-4 w-4" />
-          Copy Logotype as SVG
-        </ContextMenuItem>
-
-        <ContextMenuItem asChild>
-          <Link to="/blog/chanhdai-brand">
-            <TriangleDashedIcon className="mr-2 h-4 w-4" />
-            Brand Guidelines
-          </Link>
-        </ContextMenuItem> */}
+   
 
         <ContextMenuItem asChild>
           <a

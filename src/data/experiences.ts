@@ -17,26 +17,26 @@ export const EXPERIENCES: Experience[] = [
         employmentType: "Full-time",
         icon: "code",
         description: `
-- **Lead POS Architecture:** Spearheaded full-stack development for KJB POS, managing project initialization, folder structure design, and cross-team coordination[cite: 1].
-- **Enterprise Dashboards:** Engineered high-performance Channel Manager and Admin portals to monitor reservations, revenue, and multi-platform OTA data[cite: 1].
-- **Data Optimization:** Integrated **TanStack Query (v5)** and **Zustand** for advanced state management, automatic cache invalidation, and background fetching[cite: 1].
-- **Hardware Integration:** Developed a specialized Node.js backend using **Puppeteer** and **pdf-to-printer** for automated thermal printing and PDF billing[cite: 1].
-- **Design Systems:** Built a scalable design system and high-fidelity prototypes using **Shadcn/ui** and **Tailwind CSS V4**[cite: 1].
-- **Business Logic:** Implemented complex modules for KOT, inventory logistics, stock audits, and multi-platform bulk-edit tools[cite: 1].
+- Lead POS Architecture: Spearheaded full-stack development for KJB POS, managing project initialization, folder structure design, and cross-team coordination.
+- Enterprise Dashboards: Engineered high-performance Channel Manager and Admin portals to monitor reservations, revenue, and multi-platform OTA data.
+- Data Optimization: Integrated TanStack Query (v5) and Zustand for advanced state management, automatic cache invalidation, and background fetching.
+- Hardware Integration: Developed a specialized Node.js backend using Puppeteer and pdf-to-printer for automated thermal printing and PDF billing.
+- Design Systems: Built a scalable design system and high-fidelity prototypes using Shadcn/ui and Tailwind CSS V4.
+- Business Logic: Implemented complex modules for KOT, inventory logistics, stock audits, and multi-platform bulk-edit tools.
 `,
         skills: [
           "React 18.3.1",
-          "Vite [cite: 1]",
-          "TanStack Query (v5) [cite: 1]",
-          "Zustand [cite: 1]",
-          "Shadcn/ui [cite: 1]",
-          "Tailwind CSS V4 [cite: 1]",
-          "Material UI (MUI) [cite: 1]",
-          "Node.js [cite: 1]",
-          "Express [cite: 1]",
-          "Puppeteer [cite: 1]",
-          "REST API Integration [cite: 1]",
-          "Chart.js [cite: 1]",
+          "Vite ",
+          "TanStack Query (v5) ",
+          "Zustand ",
+          "Shadcn/ui ",
+          "Tailwind CSS V4 ",
+          "Material UI (MUI) ",
+          "Node.js ",
+          "Express ",
+          "Puppeteer ",
+          "REST API Integration ",
+          "Chart.js ",
         ],
       },
     ],
