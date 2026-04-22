@@ -5,6 +5,32 @@ import { CodeXml, FileUser, Mail, MapPin, PhoneCall } from "lucide-react";
 
 function ProfileData() {
   const playClick = useSound("/audio/ui-sounds/redirectUiSound.wav");
+  const email = decodeBase64(USER.email);
+  const subject = encodeURIComponent("Professional Opportunity");
+  const body = encodeURIComponent(`Dear Mohamed,
+  
+  I came across your profile and believe you'd be a great fit for our team.
+  
+  FROM:
+  Name: [YOUR_NAME]
+  Company: [COMPANY_NAME]
+  Role: [YOUR_ROLE]
+  
+  POSITION:
+  Title: [JOB_TITLE]
+  Skills Required: [REQUIRED_SKILLS]
+  Type: [FULL_TIME/REMOTE/CONTRACT]
+  Location: [LOCATION]
+  
+  WHY YOU:
+  [WHY_YOU_ARE_A_FIT]
+  
+  NEXT STEPS:
+  I'd love to discuss this opportunity with you. Please let me know your availability.
+  
+  Best regards,
+  [YOUR_NAME]
+  [CONTACT_INFO]`);
   return (
     <div className="screen-line-after screen-line-before border-x border-t-0 p-4 space-y-2.5 ">
       <div className="flex gap-3.5  py-1">
@@ -20,12 +46,12 @@ function ProfileData() {
           <IconWrapper>
             <MapPin />
           </IconWrapper>
-          <p className="text-balance" onClick={()=>playClick()}>
+          <p className="text-balance" onClick={() => playClick()}>
             <a
               className="underline-offset-4 hover:underline tracking-wider"
               // Encodes the address and opens it in Google Maps
               href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                USER.address
+                USER.address,
               )}`}
               target="_blank"
               rel="noopener noreferrer"
@@ -39,10 +65,10 @@ function ProfileData() {
           <IconWrapper>
             <Mail />
           </IconWrapper>
-          <p className="text-balance" onClick={()=>playClick()}>
+          <p className="text-balance" onClick={() => playClick()}>
             <a
               className="underline-offset-4 hover:underline tracking-wider"
-              href={`mailto:${decodeBase64(USER.email)}`}
+              href={`mailto:${decodeBase64(USER.email)}?subject=${subject}&body=${body}`}
             >
               {decodeBase64(USER.email)}
             </a>
@@ -53,19 +79,19 @@ function ProfileData() {
           <IconWrapper>
             <PhoneCall />
           </IconWrapper>
-          <p className="text-balance" onClick={()=>playClick()}>
+          <p className="text-balance" onClick={() => playClick()}>
             <a
               className="underline-offset-4 hover:underline tracking-wider"
               href={`tel:${decodeBase64(USER.phoneNumber)}`}
             >
               {decodeBase64(USER.phoneNumber)}
             </a>{" "}
-            || 
+            ||
             <a
               className="underline-offset-4 hover:underline tracking-wider"
               href={`https://wa.me/${decodeBase64(USER.phoneNumber).replace(
                 /\D/g,
-                ""
+                "",
               )}`}
               target="_blank"
               rel="noopener noreferrer"
@@ -78,7 +104,7 @@ function ProfileData() {
           <IconWrapper>
             <FileUser />
           </IconWrapper>
-          <p className="text-balance" onClick={()=>playClick()}>
+          <p className="text-balance" onClick={() => playClick()}>
             <a
               className="underline-offset-4 hover:underline tracking-wider"
               href={USER.resumeUrl}

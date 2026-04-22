@@ -45,6 +45,14 @@ export function ProjectCard({
               {project.period.end ? ` – ${project.period.end}` : " – Present"}
             </p>
           </div>
+          {project.recentWork && (
+            <div className="absolute top-2 right-2">
+              <Badge variant="success" className="text-[10px] p-1! text-green-400">
+                Recent Work
+              </Badge>
+            </div>
+          )}
+          <span></span>
         </div>
       )}
 
@@ -70,7 +78,7 @@ export function ProjectCard({
             {project.skills.slice(0, 6).map((skill) => (
               <span
                 key={skill}
-                className="rounded-md bg-secondary px-2 py-1 text-xs font-medium text-zinc-300 border border-zinc-700/50"
+                className="rounded-md bg-secondary px-2 py-1 text-[10px] font-medium text-zinc-500 dark:text-zinc-300 border border-zinc-700/20"
               >
                 {skill}
               </span>

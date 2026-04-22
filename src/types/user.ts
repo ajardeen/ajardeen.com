@@ -6,6 +6,7 @@ export type User = {
   displayName: string;
   /** Handle/username used in links or mentions */
   username: string;
+  openToWork: boolean;
   gender: "male" | "female" | "non-binary";
   /** e.g. "he/him", "she/her", "they/them" */
   pronouns: string;

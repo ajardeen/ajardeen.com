@@ -68,7 +68,7 @@ export function AiChat({ onStatusChange }: AiChatProps) {
   const [aiDisabled, setAiDisabled] = useState(false);
 
   /* 🔹 Model state */
-  const [selectedModel, setSelectedModel] = useState("gemma-3-1b-it");
+  const [selectedModel, setSelectedModel] = useState("gemini-2.5-flash");
   const [modelDisabled, setModelDisabled] = useState<Record<string, boolean>>(
     {},
   );

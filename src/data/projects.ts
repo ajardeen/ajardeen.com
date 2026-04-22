@@ -2,6 +2,60 @@ import type { Project } from "../types/projects";
 
 export const PROJECTS: Project[] = [
   {
+    id: "semantic-search",
+    title: "Ai Semantic Search",
+    period: { start: "21.04.2026" },
+    link: "https://ai-semanthic-search.netlify.app/",
+    logo: "https://res.cloudinary.com/di2vg4ur3/image/upload/v1776853155/ai-semanthic-search-logo_ubooij.webp",
+    skills: [
+      "Next.js 16",
+      "React 19",
+      "MongoDB Atlas Vector Search",
+      "HuggingFace AI",
+      "Node.js",
+      "Express",
+      "Tailwind CSS 4",
+      "TanStack Query",
+    ],
+    shortDescription:
+      "A hybrid search engine comparing traditional Regex-based matching with AI-powered Vector Search using MongoDB and HuggingFace.",
+
+    description: `
+This project explores the power of **Semantic Search** by allowing users to toggle between traditional search and AI-driven results. It leverages high-dimensional vector embeddings to understand context beyond simple keywords.
+
+### How it Works (Dual-Mode Search)
+ 
+
+**AI Semantic Mode**
+- **Vectorization:** Converts queries into 384d embeddings using **HuggingFace (all-MiniLM-L6-v2)** to capture intent.
+- **Neural Search:** Performs nearest-neighbor calculations via **MongoDB Atlas Vector Search**.
+- **Contextual Match:** Bridges intent and description. For example, a query for **"Outdoor security cameras with night vision"** surfaces a *"Weatherproof Guardian with Infrared Sensors"* by mathematically linking concepts.
+- **Ranking:** Uses **vectorSearchScore** to prioritize results based on semantic "vibe" and utility.
+
+**Regular Mode**
+- **Lexical Search:** Uses **Regex** pattern matching across titles, tags, and categories.
+- **Precision:** Best for finding exact product names or specific model numbers.
+
+### Technical Implementation
+- **Backend:** Node.js/Express with Mongoose, implementing complex aggregation pipelines for vector indexing.
+- **Frontend:** Next.js 16 and React 19 for a lightning-fast search experience with TanStack Query for efficient API fetching.
+- **Styling:** Modern, responsive UI built with Tailwind CSS 4.
+
+**Quick Links**
+- 🌐 **Live Demo** — [ai-semanthic-search.netlify.app](https://ai-semanthic-search.netlify.app/)
+- 💻 **GitHub (Frontend)** — [ajardeen/ai-powered-semantic-search](https://github.com/ajardeen/ai-powered-semantic-search)
+- 💻 **GitHub (Backend)** — [ajardeen/Semitic-Search-backend](https://github.com/ajardeen/Semitic-Search-backend)
+`,
+    imageUrls: [
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1776852389/ai_semanthic_search_1_fgrin1.webp",
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1776852389/ai_semanthic_search_3_urfc7s.webp",
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1776852389/ai_semanthic_search_2_mhynq2.webp",
+    ],
+    videoUrl: "",
+    cardUi: true,
+    recentWork: true,
+  },
+  {
     id: "portfolio-v3",
     title: "Personal Portfolio Website (V3 + AI Powered)",
     period: { start: "20.01.2026" },
@@ -217,7 +271,7 @@ A full-stack hostel management system focused on workflow automation and structu
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1768325754/hostel5_w2wbfn.webp",
     ],
     videoUrl: "",
-    cardUi: true,
+    // cardUi: true,
   },
 
   {

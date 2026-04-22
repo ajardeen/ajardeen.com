@@ -54,4 +54,18 @@ export const CERTIFICATIONS: Certification[] = [
     previewCredentialUrl:
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1768155545/GuviCertification_-_Mx9Ysjpo26bWJThx_mmaf8j.webp",
   },
+  {
+    title:
+      "Programing Certification - Python , Java ,MySql, HTML, CSS, JavaScript",
+    issuer: "CSC Computer Education",
+    issuerIconName: "csc",
+    issuerLogoURL:
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1776850858/csc_logo_sc43ja.webp",
+    issueDate: "2024-04-12",
+    credentialID: "randomID123456",
+    credentialURL:
+      "https://drive.google.com/file/d/1yOswn8LwCRvsYGSi_6WGLV57FSeUvarT/view",
+    previewCredentialUrl:
+      "",
+  },
 ];

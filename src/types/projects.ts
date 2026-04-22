@@ -22,6 +22,7 @@ export type Project = {
   /** Logo image URL (absolute or path under /public). */
   logo?: string;
   imageUrls?: string[];
+  recentWork?: boolean;
   videoUrl?: string;
   cardUi?: boolean;
   /** Whether the project card is expanded by default in the UI. */

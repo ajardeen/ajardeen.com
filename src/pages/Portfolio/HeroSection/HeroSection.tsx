@@ -1,3 +1,4 @@
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { useSound } from "@/hooks/use-sounds";
 import { cn } from "@/lib/utils";
@@ -7,15 +8,18 @@ import SeparatorUi from "@/components/SeparatorUi";
 import ProfileData from "./components/ProfileData";
 import ProfileCover from "./components/ProfileCover";
 import verified from "@/assets/icons/verified.svg";
+import OpenToWorkUI from "./components/OpenToWorkUI";
 
 function HeroSection() {
   const playClick = useSound("/audio/mohamedajardeen.mp3");
+
   return (
     <>
       {/* logo container  */}
       <ProfileCover />
       <div className="screen-line-after flex border-x border-edge ">
-        <div className="shrink-0 border-r border-edge">
+        <div className="relative shrink-0 border-r border-edge">
+          {USER.openToWork && <OpenToWorkUI />}
           <div className="mx-0.5 my-0.75">
             <img
               src={USER.avatar}

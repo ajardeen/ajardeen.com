@@ -21,10 +21,7 @@ const INITIAL_STATUS: AiStatus = {
   variant: "secondary",
 };
 
-export function FloatingAiChat({
-  className,
-  ...props
-}: React.ComponentProps<"button">) {
+export function FloatingAiChat({ className, ...props }: React.ComponentProps<"button">) {
   const playChatOpen = useSound("/audio/ui-sounds/chatuiopen.wav");
   const playChatClose = useSound("/audio/ui-sounds/chatuiclose.wav");
   const [open, setOpen] = useState(false);
@@ -38,62 +35,21 @@ export function FloatingAiChat({
       document.body.style.overflow = "";
       playChatClose();
     }
-
-    return () => {
-      document.body.style.overflow = "";
-    };
+    return () => { document.body.style.overflow = ""; };
   }, [open]);
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button
-          className={cn(
-            "fixed right-4 bottom-4 z-50 lg:right-8 lg:bottom-8",
-            "pointer-events-auto p-0!",
-            "transition-all duration-500 ease-out",
-            "shadow-lg",
-            open
-              ? [
-                  // 🔥 fancy open state
-                  "animate-gradient",
-                  "bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500",
-                  "text-white",
-                  "shadow-[0_0_30px_rgba(168,85,247,0.7)]",
-                  "scale-105",
-                ]
-              : [
-                  // 😌 normal state
-                  "bg-secondary",
-                  "hover:scale-105",
-                ],
-            className
-          )}
-          variant="secondary"
-          size="icon-lg"
-          {...props}
-        >
-          <BotMessageSquareIcon
-            className={cn(
-              "p-4 transition-transform duration-300",
-              open && "rotate-12"
-            )}
-          />
-          <span className="sr-only">Open AI Chat</span>
-        </Button>
-      </PopoverTrigger>
-
-      <PopoverContent
-        align="end"
-        side="top"
-        onInteractOutside={(e) => e.preventDefault()}
-        onEscapeKeyDown={(e) => e.preventDefault()}
+    <>
+      {/* ✅ AiChat always mounted — state survives open/close */}
+      <div
         className={cn(
-          "p-0 overflow-hidden",
-          "w-[95vw] h-[85vh]",
-          "sm:w-[480px] sm:h-[620px]",
-          "rounded-xl border shadow-xl",
-          "touch-pan-y" // mobile
+          "fixed right-4 bottom-20 z-60 lg:right-8 lg:bottom-24 ",
+          "w-[95vw] h-[85vh] sm:w-[480px] sm:h-[620px]",
+          "rounded-xl border shadow-xl bg-popover overflow-hidden",
+          "transition-all duration-200 ease-out origin-bottom-right",
+          open
+            ? "opacity-100 scale-100 pointer-events-auto"
+            : "opacity-0 scale-95 pointer-events-none"  // hidden but mounted
         )}
       >
         {/* Header */}
@@ -105,7 +61,6 @@ export function FloatingAiChat({
               {aiStatus.text}
             </Badge>
           </div>
-
           <Button
             size="icon"
             variant="ghost"
@@ -116,12 +71,34 @@ export function FloatingAiChat({
           </Button>
         </div>
 
-        {/* Chat body */}
+        {/* Chat body — never unmounts */}
         <div className="h-[calc(100%-3.25rem)] overflow-y-auto">
-          {/* <Example /> */}
           <AiChat onStatusChange={setAiStatus} />
         </div>
-      </PopoverContent>
-    </Popover>
+      </div>
+
+      {/* Trigger button */}
+      <Button
+        className={cn(
+          "fixed right-4 bottom-4 z-50 lg:right-8 lg:bottom-8",
+          "pointer-events-auto p-0!",
+          "transition-all duration-500 ease-out shadow-lg",
+          open
+            ? ["animate-gradient", "bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500",
+               "text-white", "shadow-[0_0_30px_rgba(168,85,247,0.7)]", "scale-105"]
+            : ["bg-secondary", "hover:scale-105"],
+          className
+        )}
+        variant="secondary"
+        size="icon-lg"
+        onClick={() => setOpen((prev) => !prev)}
+        {...props}
+      >
+        <BotMessageSquareIcon
+          className={cn("p-4 transition-transform duration-300", open && "rotate-12")}
+        />
+        <span className="sr-only">Open AI Chat</span>
+      </Button>
+    </>
   );
 }
