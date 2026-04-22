@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Variants } from "framer-motion";
-import { CircleArrowOutUpRight, X, Menu, ArrowRight, ChevronRight } from "lucide-react";
+import { CircleArrowOutUpRight, X, Menu,  ChevronRight } from "lucide-react";
 import { USER } from "@/data/user";
 import { useSound } from "@/hooks/use-sounds";
 import GlobalMenu from "@/components/global-menu";
