@@ -101,7 +101,7 @@ export function FloatingAiChat({
         onClick={() => setOpen((prev) => !prev)}
         {...props}
       >
-        <div className="bg-secondary drop-shadow-2xl rounded-[inherit] ">
+        <div className="bg-secondary rounded-[inherit] ">
 
         <BotMessageSquareIcon
           className={cn(

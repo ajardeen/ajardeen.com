@@ -14,7 +14,7 @@ export function Markdown({ className, children }: MarkdownProps) {
         prose-ul:list-disc prose-ul:pl-5
         prose-ol:list-decimal prose-ol:pl-5
         prose-li:my-1
-        ${className}
+        ${className && className}
       `}
     >
       <MarkdownAsync

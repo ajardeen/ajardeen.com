@@ -5,7 +5,6 @@ import { CodeXml, FileUser, Mail, MapPin, PhoneCall } from "lucide-react";
 
 function ProfileData() {
   const playClick = useSound("/audio/ui-sounds/redirectUiSound.wav");
-  const email = decodeBase64(USER.email);
   const subject = encodeURIComponent("Professional Opportunity");
   const body = encodeURIComponent(`Dear Mohamed,
   
