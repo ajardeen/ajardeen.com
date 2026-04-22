@@ -3,17 +3,12 @@ import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-// import Example from "@/components/demo-chatgpt";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import { BotMessageSquareIcon } from "./ui/bot-message-square";
 import { useSound } from "@/hooks/use-sounds";
 import { AiChat } from "./ui/ai-chat";
 import { Badge } from "./ui/badge";
 import type { AiStatus } from "@/types/ai-status";
+import videobg from "@/assets/videos/ai-bg.webm";
 
 const INITIAL_STATUS: AiStatus = {
   state: "loading",
@@ -21,7 +16,10 @@ const INITIAL_STATUS: AiStatus = {
   variant: "secondary",
 };
 
-export function FloatingAiChat({ className, ...props }: React.ComponentProps<"button">) {
+export function FloatingAiChat({
+  className,
+  ...props
+}: React.ComponentProps<"button">) {
   const playChatOpen = useSound("/audio/ui-sounds/chatuiopen.wav");
   const playChatClose = useSound("/audio/ui-sounds/chatuiclose.wav");
   const [open, setOpen] = useState(false);
@@ -35,7 +33,9 @@ export function FloatingAiChat({ className, ...props }: React.ComponentProps<"bu
       document.body.style.overflow = "";
       playChatClose();
     }
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [open]);
 
   return (
@@ -49,9 +49,11 @@ export function FloatingAiChat({ className, ...props }: React.ComponentProps<"bu
           "transition-all duration-200 ease-out origin-bottom-right",
           open
             ? "opacity-100 scale-100 pointer-events-auto"
-            : "opacity-0 scale-95 pointer-events-none"  // hidden but mounted
+            : "opacity-0 scale-95 pointer-events-none", // hidden but mounted
         )}
       >
+       
+
         {/* Header */}
         <div className="flex items-center justify-between border-b px-4 py-3">
           <div className="flex items-center gap-2">
@@ -82,21 +84,43 @@ export function FloatingAiChat({ className, ...props }: React.ComponentProps<"bu
         className={cn(
           "fixed right-4 bottom-4 z-50 lg:right-8 lg:bottom-8",
           "pointer-events-auto p-0!",
-          "transition-all duration-500 ease-out shadow-lg",
+          "transition-all duration-500 ease-out shadow-lg overflow-hidden p-5",
           open
-            ? ["animate-gradient", "bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500",
-               "text-white", "shadow-[0_0_30px_rgba(168,85,247,0.7)]", "scale-105"]
+            ? [
+                "animate-gradient",
+                "bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500",
+                "",
+                "shadow-[0_0_30px_#91bce6]",
+                "scale-105",
+              ]
             : ["bg-secondary", "hover:scale-105"],
-          className
+          className,
         )}
         variant="secondary"
         size="icon-lg"
         onClick={() => setOpen((prev) => !prev)}
         {...props}
       >
+        <div className="bg-secondary drop-shadow-2xl rounded-[inherit] ">
+
         <BotMessageSquareIcon
-          className={cn("p-4 transition-transform duration-300", open && "rotate-12")}
-        />
+          className={cn(
+            "p-2 transition-transform duration-300 ",
+            open && "rotate-12 ",
+          )}
+          />
+          </div>
+         {/* Video Background */}
+        {open && (
+          <video
+            autoPlay
+            muted
+            loop
+            className="absolute inset-0 w-full h-full object-cover scale-250 -z-10"
+          >
+            <source src={videobg} type="video/webm" />
+          </video>
+        )}
         <span className="sr-only">Open AI Chat</span>
       </Button>
     </>

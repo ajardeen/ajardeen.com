@@ -3,6 +3,7 @@ import {Markdown}  from "@/components/markdown";
 import { USER } from "@/data/user";
 
 import { Panel, PanelContent, PanelHeader, PanelTitle } from "@/components/panel";
+import { Prose } from "@/components/ui/typography";
 
  function AboutSection() {
   return (
@@ -12,8 +13,10 @@ import { Panel, PanelContent, PanelHeader, PanelTitle } from "@/components/panel
       </PanelHeader>
 
       <PanelContent>
-        {/* <ProseMono> */}
+        <Prose>
+
           <Markdown>{USER.about}</Markdown>
+        </Prose>
         {/* </ProseMono> */}
       </PanelContent>
     </Panel>
