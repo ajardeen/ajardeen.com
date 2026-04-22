@@ -21,25 +21,25 @@ export const PROJECTS: Project[] = [
       "A hybrid search engine comparing traditional Regex-based matching with AI-powered Vector Search using MongoDB and HuggingFace.",
 
     description: `
-This project explores the power of **Semantic Search** by allowing users to toggle between traditional search and AI-driven results. It leverages high-dimensional vector embeddings to understand context beyond simple keywords.
+This project explores the power of Semantic Search by allowing users to toggle between traditional search and AI-driven results. It leverages high-dimensional vector embeddings to understand context beyond simple keywords.
 
-### How it Works (Dual-Mode Search)
+#### How it Works (Dual-Mode Search)
  
 
 **AI Semantic Mode**
-- **Vectorization:** Converts queries into 384d embeddings using **HuggingFace (all-MiniLM-L6-v2)** to capture intent.
-- **Neural Search:** Performs nearest-neighbor calculations via **MongoDB Atlas Vector Search**.
-- **Contextual Match:** Bridges intent and description. For example, a query for **"Outdoor security cameras with night vision"** surfaces a *"Weatherproof Guardian with Infrared Sensors"* by mathematically linking concepts.
-- **Ranking:** Uses **vectorSearchScore** to prioritize results based on semantic "vibe" and utility.
+- Vectorization: Converts queries into 384d embeddings using **HuggingFace (all-MiniLM-L6-v2)** to capture intent.
+- Neural Search: Performs nearest-neighbor calculations via **MongoDB Atlas Vector Search**.
+- Contextual Match:Bridges intent and description. For example, a query for "Outdoor security cameras with night vision" surfaces a "Weatherproof Guardian with Infrared Sensors" by mathematically linking concepts.
+- Ranking: Uses **vectorSearchScore** to prioritize results based on semantic "vibe" and utility.
 
 **Regular Mode**
-- **Lexical Search:** Uses **Regex** pattern matching across titles, tags, and categories.
-- **Precision:** Best for finding exact product names or specific model numbers.
+- Lexical Search: Uses **Regex** pattern matching across titles, tags, and categories.
+- Precision: Best for finding exact product names or specific model numbers.
 
 ### Technical Implementation
-- **Backend:** Node.js/Express with Mongoose, implementing complex aggregation pipelines for vector indexing.
-- **Frontend:** Next.js 16 and React 19 for a lightning-fast search experience with TanStack Query for efficient API fetching.
-- **Styling:** Modern, responsive UI built with Tailwind CSS 4.
+- Backend: Node.js/Express with Mongoose, implementing complex aggregation pipelines for vector indexing.
+- Frontend: Next.js 16 and React 19 for a lightning-fast search experience with TanStack Query for efficient API fetching.
+- Styling: Modern, responsive UI built with Tailwind CSS 4.
 
 **Quick Links**
 - 🌐 **Live Demo** — [ai-semanthic-search.netlify.app](https://ai-semanthic-search.netlify.app/)
@@ -394,9 +394,10 @@ Key highlights:
 
 The project demonstrates how to build a maintainable design system foundation rather than isolated UI components, making it suitable for scalable production applications.
 
-Quick Links:
-• 🌐 Live Demo — https://va-reusable-components.netlify.app/
-• ⚙️ GitHub — https://github.com/ajardeen/va-reusable-components
+**Quick Links**
+
+- 🌐 Live Demo — https://va-reusable-components.netlify.app/ 
+- ⚙️ GitHub — https://github.com/ajardeen/va-reusable-components
 `,
     logo: "",
     imageUrls: [

@@ -15,7 +15,7 @@ import { Prose } from "@/components/ui/typography";
       <PanelContent>
         <Prose>
 
-          <Markdown>{USER.about}</Markdown>
+          <Markdown className="prose-md">{USER.about}</Markdown>
         </Prose>
         {/* </ProseMono> */}
       </PanelContent>

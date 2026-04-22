@@ -37,18 +37,9 @@ export const USER = {
   avatar: avatar,
 
   about: `
-- **Front-End Developer** with **1+ year of professional experience** focused on building modern, responsive, and scalable web applications using **React 18.3.1**, **TypeScript**, and **Vite**.
-- Proven track record of leading **full-stack architecture** from the ground up  , including folder structure design and coordinating development workflows .
-- Expert in delivering **real-world enterprise projects** including Channel Managers, POS systems , and user-focused management platforms.
-- Specialized in **high-performance state management** using **TanStack Query (v5)** and **Zustand** to optimize data caching and CRUD synchronization .
-- Skilled in building **comprehensive design systems** and reusable component libraries using **Tailwind CSS V4**, **shadcn/ui**, and **Material UI** .
-- Experienced in **hardware and backend integration**, specifically developing Node.js modules for automated thermal printing and PDF generation .
-- Built multiple **end-to-end MERN applications** including:
-  - **KJB POS:** A retail/restaurant system with KOT, billing, and inventory modules .
-  - **LBL Business Portal:** A food delivery subscription brand and administrative suite.
-  - **Hostel Management System:** Featuring responsive layouts, dark/light themes, and modern visualizations.
-- Strong focus on translating business requirements into clean, maintainable code with a deep commitment to **UX, performance, and accessibility**.
-- Passionate about integrating **AI models (Gemini/LLMs)** and automation into web ecosystems to create meaningful user experiences.
+-  Frontend developer with 1+ years of experience, known for pixel-perfect execution and strong attention to small details.
+- Passionate about exploring modern technologies, AI integration, and turning complex business requirements into polished, production-ready products.
+- Built multiple real-world platforms including POS, inventory, and food delivery systems, along with an AI-enabled developer portfolio and reusable design systems like  [TemplateUI](https://template-uii.netlify.app/)  for enterprise applications.
 `,
   timeZone: "Asia/Chennai",
   keywords: ["ajardeen", "mohamed"],
