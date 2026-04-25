@@ -50,7 +50,7 @@ function HeroSection() {
             </div>
           </div>
           <div className="h-12.5 border-t border-edge py-1 pl-4 sm:h-9 text-sm text-muted-foreground flex items-center">
-            Making ui which engage others
+            {USER.bio}
           </div>
         </div>
       </div>

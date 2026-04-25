@@ -9,14 +9,15 @@ import {
 import { ProjectCard } from "../Portfolio/ProjectsSection/project-card";
 import SeparatorUi from "@/components/SeparatorUi";
 import { Input } from "@/components/ui/input";
-import { SearchIcon } from "lucide-react";
+import { ListFilterPlus, SearchIcon } from "lucide-react";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 function ProjectsSection() {
   const [value, setValue] = useState("");
 
   const filteredProjects = PROJECTS.filter((project) =>
-    project.title.toLowerCase().includes(value.toLowerCase())
+    project.title.toLowerCase().includes(value.toLowerCase()),
   );
   return (
     <>
@@ -33,7 +34,7 @@ function ProjectsSection() {
           A collection of Project on development, design, and ideas which i have
           done.
         </div>
-        <div className="min-w-full screen-line-after screen-line-before p-4 tracking-wider text-muted-foreground font-serif flex items-center">
+        <div className="min-w-full screen-line-after screen-line-before p-4 tracking-wider text-muted-foreground font-serif flex items-center gap-1">
           <div className="relative w-full">
             <div className="text-muted-foreground pointer-events-none absolute inset-y-0 left-0 flex items-center justify-center pl-3 peer-disabled:opacity-50">
               <SearchIcon className="size-4" />
@@ -47,6 +48,14 @@ function ProjectsSection() {
               className="border-border   px-9 [&::-webkit-search-cancel-button]:appearance-none [&::-webkit-search-decoration]:appearance-none [&::-webkit-search-results-button]:appearance-none [&::-webkit-search-results-decoration]:appearance-none"
             />
           </div>
+          {/* <span>
+            <Button
+              variant={"outline"}
+    
+            >
+              <ListFilterPlus className="size-4" />
+            </Button>
+          </span> */}
         </div>
         {/* Card UI projects */}
         {PROJECTS.length > 0 && (

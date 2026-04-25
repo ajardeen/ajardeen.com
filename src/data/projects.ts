@@ -57,7 +57,7 @@ This project explores the power of Semantic Search by allowing users to toggle b
   },
   {
     id: "portfolio-v3",
-    title: "Personal Portfolio Website (V3 + AI Powered)",
+    title: "Personal Portfolio V3 + AI",
     period: { start: "20.01.2026" },
     link: "https://ajardeen.netlify.app/",
     logo: "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772495046/maicon_ji1nag.webp",

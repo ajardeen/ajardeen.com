@@ -6,7 +6,7 @@ import { CertificationItem } from "./certification-item";
 
 function CertificationsSection() {
   return (
-    <Panel id="certs">
+    <Panel id="certifications">
       <PanelHeader>
         <PanelTitle>
           Certifications

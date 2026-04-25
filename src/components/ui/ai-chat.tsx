@@ -387,7 +387,7 @@ export function AiChat({ onStatusChange }: AiChatProps) {
                   </Button>
                 </ModelSelectorTrigger>
 
-                <ModelSelectorContent>
+                <ModelSelectorContent className="z-70">
                   <ModelSelectorInput placeholder="Search models..." />
                   <ModelSelectorList>
                     <ModelSelectorGroup heading="Google Models">

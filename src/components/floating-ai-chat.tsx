@@ -43,7 +43,7 @@ export function FloatingAiChat({
       {/* ✅ AiChat always mounted — state survives open/close */}
       <div
         className={cn(
-          "fixed right-4 bottom-20 z-60 lg:right-8 lg:bottom-24 ",
+          "fixed right-0 top-[2%] m-2 bottom-20 z-60 lg:right-8 lg:bottom-24 ",
           "w-[95vw] h-[85vh] sm:w-[480px] sm:h-[620px]",
           "rounded-xl border shadow-xl bg-popover overflow-hidden",
           "transition-all duration-200 ease-out origin-bottom-right",
@@ -82,14 +82,13 @@ export function FloatingAiChat({
       {/* Trigger button */}
       <Button
         className={cn(
-          "fixed right-4 bottom-4 z-50 lg:right-8 lg:bottom-8",
+          "fixed right-4 bottom-4 z-50 lg:right-8 lg:bottom-8 cursor-pointer border border-transparent",
           "pointer-events-auto p-0!",
-          "transition-all duration-500 ease-out shadow-lg overflow-hidden p-5",
+          "transition-all duration-500 ease-out shadow-lg overflow-hidden ",
           open
             ? [
-                "animate-gradient",
-                "bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500",
-                "",
+                
+                "border-white",
                 "shadow-[0_0_30px_#91bce6]",
                 "scale-105",
               ]
@@ -101,7 +100,7 @@ export function FloatingAiChat({
         onClick={() => setOpen((prev) => !prev)}
         {...props}
       >
-        <div className="bg-secondary rounded-[inherit] ">
+        <div className="bg-secondary m-1 rounded-[inherit] rounded-full ">
 
         <BotMessageSquareIcon
           className={cn(
@@ -111,16 +110,21 @@ export function FloatingAiChat({
           />
           </div>
          {/* Video Background */}
-        {open && (
+       
           <video
             autoPlay
             muted
+
             loop
-            className="absolute inset-0 w-full h-full object-cover scale-250 -z-10"
+            className={cn(
+              "absolute inset-0 w-full h-full object-cover scale-300 -z-10   ",
+              "pointer-events-none transition-opacity duration-1000",
+              open ? ("opacity-100" ) : ("opacity-0"),
+            )}
           >
             <source src={videobg} type="video/webm" />
           </video>
-        )}
+      
         <span className="sr-only">Open AI Chat</span>
       </Button>
     </>

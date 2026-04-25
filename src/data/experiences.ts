@@ -6,8 +6,10 @@ export const EXPERIENCES: Experience[] = [
     companyName: "KJB Trip",
     companyLogo:
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1768236586/kjbSolution_thvn3k.webp",
+      
     positions: [
       {
+        isExpanded: true,
         id: "20f8bfe5-b6a3-4b0d-ac2f-6fccd50d417e",
         title: "Front-End Developer",
         employmentPeriod: {
@@ -39,8 +41,10 @@ export const EXPERIENCES: Experience[] = [
           "Chart.js ",
         ],
       },
+     
     ],
     isCurrentEmployer: true,
+    
   },
   {
     id: "freelancer",

@@ -3,6 +3,7 @@
 
 html {
   scroll-behavior: auto !important;
+  scrollbar-gutter: stable;
 }
 section {
   will-change: transform;
