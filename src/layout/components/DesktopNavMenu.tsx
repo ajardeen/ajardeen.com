@@ -169,7 +169,7 @@ function DesktopNavMenu({
       <div className="flex">
         <Button
           variant="link"
-          className="hidden md:block decoration-background cursor-pointer px-4 text-accent-foreground hover:text-muted-foreground"
+          className="hidden md:block decoration-background cursor-pointer px-2.5 text-muted-foreground hover:text-accent-foreground"
           onMouseEnter={() => handleMouseEnter("about")}
           onMouseLeave={scheduleClose}
           onClick={() => {
@@ -182,7 +182,7 @@ function DesktopNavMenu({
 
         <Button
           variant="link"
-          className="hidden md:block decoration-background cursor-pointer px-4 text-accent-foreground hover:text-muted-foreground"
+          className="hidden md:block decoration-background cursor-pointer px-2.5 text-muted-foreground hover:text-accent-foreground"
           onMouseEnter={() => handleMouseEnter("projects")}
           onMouseLeave={scheduleClose}
           onClick={() => {

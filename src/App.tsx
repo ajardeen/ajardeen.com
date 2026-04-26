@@ -20,7 +20,6 @@ import { Page_Not_Found } from "./pages/NotFound/Page_Not_Found";
 import ScrollToTopAuto from "./utils/ScrollToTopAuto";
 
 export function App() {
-  
   return (
     <ThemeProvider>
       <Router>
@@ -40,10 +39,11 @@ export function App() {
             <Route
               element={
                 <>
-                <RootLayout>
+                  <RootLayout>
                     <div className="mx-auto md:max-w-3xl *:[[id]]:scroll-mt-22">
-                    <Outlet /> {/* This renders the Portfolio, Project, etc. */}
-                </div>
+                      {/* This renders the Portfolio, Project, etc. */}
+                      <Outlet />
+                    </div>
                   </RootLayout>
                   <FooterSection />
                 </>
@@ -64,4 +64,3 @@ export function App() {
 }
 
 export default App;
-

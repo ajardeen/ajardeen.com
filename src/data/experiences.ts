@@ -27,20 +27,20 @@ export const EXPERIENCES: Experience[] = [
 - Business Logic: Implemented complex modules for KOT, inventory logistics, stock audits, and multi-platform bulk-edit tools.
 `,
         skills: [
-          "React 18.3.1",
+          "React",
           "Vite ",
-          "TanStack Query (v5) ",
+          "TanStack Query  ",
           "Zustand ",
           "Shadcn/ui ",
           "Tailwind CSS V4 ",
           "Material UI (MUI) ",
-          "Node.js ",
-          "Express ",
-          "Puppeteer ",
+          "Node.js",
+          "Express",
+          "Puppeteer",
           "REST API Integration ",
-          "Chart.js ",
         ],
       },
+      
      
     ],
     isCurrentEmployer: true,
@@ -96,8 +96,30 @@ export const EXPERIENCES: Experience[] = [
         },
         icon: "education",
         description: `- Mechanical Engineering Graduated  `,
-        skills: ["C++", "Self-learning", "Teamwork", "Presentation"],
+        skills: ["Html","Css","JavaScript","C++", "Self-learning", "Teamwork", "Presentation"],
       },
+      {
+        id: "c47f5903-88ae-4512-8a50",
+        title: "Seventh-day Adventist Matriculation Higher Secondary Schools",
+        employmentPeriod: {
+          start: "2010",
+          end: "2017",
+        },
+        icon: "education",
+        description: ` Completed Higher Secondary `,
+        skills: [],
+      },
+      // {
+      //   id: "c47f59",
+      //   title: "RENGAKRISHNAN MIDDLE SCHOOL,PERIYAKULAM",
+      //   employmentPeriod: {
+      //     start: "2010",
+      //     end: "2017",
+      //   },
+      //   icon: "education",
+      //   description: `  `,
+      //   skills: [],
+      // },
     ],
   },
 ];

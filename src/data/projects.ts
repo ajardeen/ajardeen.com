@@ -1,6 +1,7 @@
 import type { Project } from "../types/projects";
 
 export const PROJECTS: Project[] = [
+  // 1
   {
     id: "semantic-search",
     title: "Ai Semantic Search",
@@ -8,13 +9,16 @@ export const PROJECTS: Project[] = [
     link: "https://ai-semanthic-search.netlify.app/",
     logo: "https://res.cloudinary.com/di2vg4ur3/image/upload/v1776853155/ai-semanthic-search-logo_ubooij.webp",
     skills: [
-      "Next.js 16",
-      "React 19",
+      "Next.js",
+      "React",
+      "MongoDB",
+      "TypeScript",
       "MongoDB Atlas Vector Search",
       "HuggingFace AI",
+      "Semantic Search",
       "Node.js",
-      "Express",
-      "Tailwind CSS 4",
+      "Express.js",
+      "Tailwind CSS",
       "TanStack Query",
     ],
     shortDescription:
@@ -55,6 +59,7 @@ This project explores the power of Semantic Search by allowing users to toggle b
     cardUi: true,
     recentWork: true,
   },
+  // 2
   {
     id: "portfolio-v3",
     title: "Personal Portfolio V3 + AI",
@@ -62,19 +67,18 @@ This project explores the power of Semantic Search by allowing users to toggle b
     link: "https://ajardeen.netlify.app/",
     logo: "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772495046/maicon_ji1nag.webp",
     skills: [
-      "React 19",
+      "React",
       "TypeScript",
       "Vite",
-      "Tailwind CSS v4",
+      "Tailwind CSS",
       "shadcn/ui",
       "AI SDK",
-      "Google Gemini API",
+      "AI Chat",
+      "Gemini API",
       "Framer Motion",
       "Lenis Smooth Scroll",
-      "CMDK Global Search",
       "Cloudinary Image Optimization",
-      "React Router v7",
-      "Zod Validation",
+      "React Router Dom",
     ],
     shortDescription:
       "AI-powered personal portfolio with global search, optimized media delivery, and interactive micro-experiences.",
@@ -114,6 +118,7 @@ Third iteration of my personal portfolio, architected as a performance-focused a
     cardUi: true,
     // isUnderDevelopment: true,
   },
+  // 3
   {
     id: "lunchbox-legends",
     title: "Lunchbox Legends",
@@ -123,12 +128,16 @@ Third iteration of my personal portfolio, architected as a performance-focused a
     link: "https://lunchboxlegends.netlify.app/",
     skills: [
       "React Native",
-      "React (Vite)",
+      "React",
+      "Vite",
+      "JavaScript",
+      "Figma",
+      "shadcn/ui",
+      "Expo",
       "Node.js",
       "Express.js",
       "WebSockets",
       "REST API",
-      "UPI Integration",
       "Firebase",
       "Role-Based Access",
       "Realtime Systems",
@@ -171,6 +180,7 @@ Third iteration of my personal portfolio, architected as a performance-focused a
     isExpanded: true,
     isUnderDevelopment: true,
   },
+  // 4
   {
     id: "template-ui",
     title: "Template UI",
@@ -183,7 +193,7 @@ Third iteration of my personal portfolio, architected as a performance-focused a
       "TypeScript",
       "Vite",
       "Tailwind CSS",
-      "ShadCN UI",
+      "shadcn/ui",
       "Component Library Architecture",
       "Theme System Design",
       "Dark/Light Mode",
@@ -231,7 +241,7 @@ The demo application showcases how the components can be composed into real-worl
     cardUi: true,
     isExpanded: true,
   },
-  // 1️⃣ CARD UI
+  // 5
   {
     id: "hostel-management-system",
     title: "Hostel Management System",
@@ -242,7 +252,7 @@ The demo application showcases how the components can be composed into real-worl
       "React",
       "TailwindCSS",
       "Node.js",
-      "Express",
+      "Express.js",
       "MongoDB",
       "PayPal",
       "NodeMailer",
@@ -273,7 +283,7 @@ A full-stack hostel management system focused on workflow automation and structu
     videoUrl: "",
     // cardUi: true,
   },
-
+  // 6
   {
     id: "placement-management-system",
     title: "Placement Management System",
@@ -284,7 +294,7 @@ A full-stack hostel management system focused on workflow automation and structu
       "React",
       "TailwindCSS",
       "Node.js",
-      "Express",
+      "Express.js",
       "MongoDB",
       "Zoom API",
       "Framer Motion",
@@ -315,6 +325,7 @@ A recruitment workflow system built using MERN stack to streamline student place
     videoUrl: "",
     // cardUi: true,
   },
+  // 7
   {
     id: "portfolio-v2",
     title: "Personal Portfolio Website (V2)",
@@ -356,7 +367,7 @@ Second iteration of my personal portfolio website, now deprecated but preserved 
     ],
     videoUrl: "",
   },
-
+  // 8
   {
     id: "vision-action-toolkit",
     title: "Vision Action Toolkit",
@@ -408,6 +419,7 @@ The project demonstrates how to build a maintainable design system foundation ra
     ],
     // isExpanded: true,
   },
+  // 9
   {
     id: "gamified-portfolio",
     title: "Gamified Portfolio",
@@ -448,6 +460,7 @@ Note: This project is under active development. The data and metrics displayed a
     videoUrl: "https://youtu.be/ukeToi3DlRY",
     isUnderDevelopment: true,
   },
+  // 10
   {
     id: "realtime-chat-application",
     title: "Real-Time Chat Application",
@@ -480,13 +493,14 @@ Real-time messaging platform focused on secure communication and responsive UX.
     videoUrl: "https://youtu.be/WoK7NfpDR8k",
     cardUi: false,
   },
+  // 11
   {
     id: "project-your-database",
     title: "Project Your Database",
     period: { start: "01.02.2026", end: "" },
     link: "https://yourdatabase.netlify.app/",
     skills: [
-      "React 19",
+      "React",
       "Node.js",
       "Express.js",
       "MongoDB",
@@ -537,6 +551,7 @@ All updates instantly reflect on connected websites via the exposed API.
     videoUrl: "",
     isUnderDevelopment: true,
   },
+  // 12
   {
     id: "recipe-app",
     title: "Recipe App",
@@ -566,6 +581,7 @@ Recipe discovery application focused on search-driven UX and dynamic API data re
     videoUrl: "",
     cardUi: false,
   },
+  // 13
   {
     id: "movie-search-app",
     title: "Movie Search App",
@@ -603,6 +619,7 @@ Movie search application built with modern frontend tooling and external API int
     ],
     videoUrl: "",
   },
+  // 14
   {
     id: "google-oauth-implementation",
     title: "Google OAuth Implementation",
@@ -629,12 +646,13 @@ Authentication module implementing secure Google OAuth workflow.
     ],
     videoUrl: "https://www.youtube.com/watch?v=3PkpTDMQ_Mc",
   },
+  // 15
   {
     id: "password-reset-flow",
     title: "Password Reset Flow",
     period: { start: "12.12.2024", end: "03.03.2025" },
     link: "https://password-resetflow-ajar.netlify.app/",
-    skills: ["React", "Node.js", "Express", "MongoDB", "Nodemailer", "JWT"],
+    skills: ["React", "Node.js", "Express.js", "MongoDB", "Nodemailer", "JWT"],
     shortDescription:
       "Secure password recovery module using token-based email verification.",
 
@@ -659,13 +677,13 @@ Authentication module implementing secure password reset workflow.
     ],
     videoUrl: "",
   },
-
+  // 16
   {
     id: "trabook-landing-page",
     title: "Trabook Landing Page",
     period: { start: "03.03.2023", end: "03.03.2023" },
     link: "https://trabook-landingpage-ajar.netlify.app/",
-    skills: ["HTML", "TailwindCSS"],
+    skills: ["HTML", "TailwindCSS","Figma"],
     shortDescription:
       "Pixel-perfect responsive landing page built from Figma using TailwindCSS.",
 

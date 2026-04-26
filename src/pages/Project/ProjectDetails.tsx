@@ -240,7 +240,7 @@ function ProjectDetails() {
 
       <Panel>
         <PanelHeader>
-          <PanelTitle>
+          <PanelTitle className="flex items-center">
             <span className="flex items-center">
               {project.logo && (
                 <img

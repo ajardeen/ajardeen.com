@@ -10,7 +10,7 @@ function RootLayout({ children }: { children: React.ReactNode }) {
       <TopNavigation />
 
       {/* Page container */}
-      <main className="max-w-screen overflow-x-hidden px-2 ">{children}</main>
+      <main className="relative z-10 bg-background max-w-screen overflow-x-hidden px-2  ">{children}</main>
       <FloatingAiChat />
       <ScrollToTop />
     </>

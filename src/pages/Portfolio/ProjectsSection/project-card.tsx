@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { ExternalLink } from "lucide-react";
+import { BoxIcon, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { Project } from "@/types/projects";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -34,11 +34,21 @@ export function ProjectCard({
           <div className="pointer-events-none absolute inset-0 ring-1 ring-black/10 dark:ring-white/10 " />
 
           {/* Period Component: hidden by default, shown on group hover */}
-          <img
-            src={project.logo}
-            alt="logo"
-            className="w-8 rounded-sm  absolute bottom-1 left-1 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-          />
+          {project.logo ? (
+            <img
+              src={project.logo}
+              alt="logo"
+              className="w-8 rounded-sm  absolute bottom-1 left-1 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+            />
+          ) : (
+            <div
+              className="absolute bottom-1 left-1 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex size-6 shrink-0 items-center justify-center rounded-lg border border-muted-foreground/15 bg-muted text-muted-foreground ring-1 ring-edge ring-offset-1 ring-offset-background select-none "
+              aria-hidden="true"
+            >
+              <BoxIcon className="size-4" />
+            </div>
+          )}
+
           <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
             <p className="bg-zinc-900/80 text-zinc-100 px-3 py-1.5 rounded-full text-xs font-medium backdrop-blur-md border border-white/10">
               {project.period.start}
@@ -47,7 +57,10 @@ export function ProjectCard({
           </div>
           {project.recentWork && (
             <div className="absolute top-2 right-2">
-              <Badge variant="success" className="text-[10px] p-1! text-green-400">
+              <Badge
+                variant="success"
+                className="text-[10px] p-1! text-green-400"
+              >
                 Recent Work
               </Badge>
             </div>
@@ -75,7 +88,7 @@ export function ProjectCard({
 
         {project.skills?.length > 0 && (
           <div className="flex flex-wrap items-center gap-2 pt-4">
-            {project.skills.slice(0, 6).map((skill,idx) => (
+            {project.skills.slice(0, 6).map((skill, idx) => (
               <span
                 key={idx}
                 className="rounded-md bg-secondary px-2 py-1 text-[10px] font-medium text-zinc-500 dark:text-zinc-300 border border-zinc-700/20"

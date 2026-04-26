@@ -57,7 +57,6 @@ Best regards,
           paddingRight: isHovered ? "4px" : "0px",
         }}
       >
-        <img src={Live} alt="icon" className="size-6 flex-shrink-0" />
         <span
           className="text-xs font-medium text-foreground whitespace-nowrap overflow-hidden"
           style={{
@@ -71,6 +70,7 @@ Best regards,
         >
           Open to Work
         </span>
+        <img src={Live} alt="icon" className="size-6 flex-shrink-0" />
       </div>
     </motion.div>
   );

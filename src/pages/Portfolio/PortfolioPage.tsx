@@ -4,7 +4,7 @@ import TechStackSection from "@/pages/Portfolio/TechStackSection/TechStackSectio
 import ExperiencesSection from "@/pages/Portfolio/ExperiencesSection/ExperiencesSection";
 import ProjectsSection from "@/pages/Portfolio/ProjectsSection/ProjectsSection";
 import CertificationsSection from "@/pages/Portfolio/CertificationsSection/CertificationsSection";
-import BrandSection from "@/pages/Portfolio/BrandSection/BrandSection";
+// import BrandSection from "@/pages/Portfolio/BrandSection/BrandSection";
 import HeroSection from "@/pages/Portfolio/HeroSection/HeroSection";
 import SeparatorUi from "@/components/SeparatorUi";
 
@@ -26,8 +26,8 @@ function PortfolioPage() {
       <SeparatorUi />
       <CertificationsSection />
       <SeparatorUi />
-      <BrandSection />
-      <SeparatorUi />
+    {/* <BrandSection /> */}
+      {/* <SeparatorUi />  */}
     
     </>
   );

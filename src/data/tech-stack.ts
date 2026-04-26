@@ -19,7 +19,13 @@ export const TECH_STACK: TechStack[] = [
     href: "https://www.python.org/",
     categories: ["Language"],
   },
-
+ {
+    key: "nextjs2",
+    title: "Next.js",
+    href: "https://nextjs.org/",
+    categories: ["Frontend","Framework"],
+    theme: true,
+  },
   {
     key: "java",
     title: "Java",
@@ -70,7 +76,7 @@ export const TECH_STACK: TechStack[] = [
     key: "tanstack",
     title: "TanStack",
     href: "https://tanstack.com/",
-    categories: ["Library"],
+    categories: ["State Management","Library"],
     theme: true,
   },
  
@@ -113,6 +119,19 @@ export const TECH_STACK: TechStack[] = [
     title: "ChatGPT",
     href: "https://chatgpt.com/",
     categories: ["Tools", "AI"],
+    theme: true,
+  },
+  {
+    key: "claude",
+    title: "Claude",
+    href: "https://claude.ai/",
+    categories: ["Dev Tools"],
+  },
+  {
+    key: "cursor",
+    title: "Cursor",
+    href: "https://cursor.com/",
+    categories: ["Dev Tools"],
     theme: true,
   },
 ];

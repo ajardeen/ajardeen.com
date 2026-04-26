@@ -88,13 +88,13 @@ export function FullScreenMenu({
         onClose();
       },
     },
-    {
-      label: "Skills",
-      action: () => {
-        scrollToSection("tech-stack");
-        onClose();
-      },
-    },
+    // {
+    //   label: "Skills",
+    //   action: () => {
+    //     scrollToSection("tech-stack");
+    //     onClose();
+    //   },
+    // },
     {
       label: "Projects",
       action: () => {
