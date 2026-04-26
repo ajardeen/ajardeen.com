@@ -27,6 +27,7 @@ import { Kbd } from "@/components/ui/kbd";
 import { useTheme } from "@/components/theme-provider";
 import { useSound } from "@/hooks/use-sounds";
 import { Badge } from "@/components/ui/badge";
+import { Prose } from "@/components/ui/typography";
 
 /* ---------- helpers ---------- */
 function getYouTubeEmbedUrl(url: string) {
@@ -341,7 +342,13 @@ function ProjectDetails() {
           </div>
 
           {/* DESCRIPTION */}
-          {project.description && <Markdown>{project.description}</Markdown>}
+          {project.description && 
+          <Prose>
+
+          <Markdown>{project.description}</Markdown>
+          </Prose>
+          
+          }
         </PanelContent>
       </Panel>
     </div>

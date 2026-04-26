@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { useSound } from "@/hooks/use-sounds";
 import { cn } from "@/lib/utils";
@@ -50,6 +49,7 @@ function HeroSection() {
             </div>
           </div>
           <div className="h-12.5 border-t border-edge py-1 pl-4 sm:h-9 text-sm text-muted-foreground flex items-center">
+            <p className="text-brand font-bold mr-1">/</p>
             {USER.bio}
           </div>
         </div>

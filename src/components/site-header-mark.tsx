@@ -2,8 +2,8 @@ import { useMotionValueEvent, useScroll } from "framer-motion";
 import { useLocation } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 
-import lightIcon from "@/assets/icons/maicon.png";
-import darkIcon from "@/assets/icons/maicondark.png";
+import lightIcon from "@/assets/icons/ajlight.svg";
+import darkIcon from "@/assets/icons/aj.svg";
 import { useTheme } from "@/components/theme-provider";
 import { useLenis } from "lenis/react";
 

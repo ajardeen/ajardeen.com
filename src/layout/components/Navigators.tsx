@@ -1,3 +1,4 @@
+import { Slash } from "@/components/brand-slash";
 import { motion, type Variants } from "framer-motion";
 
 const slideDownBlur: Variants = {
@@ -58,7 +59,7 @@ const MacLinkList = ({
 }) => {
   return (
     <div className="space-y-4">
-      <motion.p variants={slideDownBlur} className="text-sm font-medium text-muted-foreground tracking-tight">
+      <motion.p variants={slideDownBlur} className="text-sm font-medium text-muted-foreground tracking-tight ml-2">
         {category}
       </motion.p>
       <motion.ul 
@@ -72,8 +73,9 @@ const MacLinkList = ({
           <motion.li key={idx} variants={slideDownBlur}>
             <button
               onClick={() => onItemClick(link)}
-              className="text-sm font-semibold hover:opacity-60 transition-opacity text-left block w-full cursor-pointer"
+              className="text-sm font-semibold hover:opacity-60 transition-opacity text-left  w-full cursor-pointer flex gap-1 group"
             >
+               <Slash />
               {link.label}
             </button>
           </motion.li>

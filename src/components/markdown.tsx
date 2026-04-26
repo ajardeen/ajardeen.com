@@ -5,26 +5,24 @@ type MarkdownProps = {
   children: string;
 };
 
-export function Markdown({  children }: MarkdownProps) {
+export function Markdown({ children }: MarkdownProps) {
   return (
-
-      <MarkdownAsync
-        remarkPlugins={[remarkGfm]}
-        components={{
-          a: ({ href, children }) => (
-            <a
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer nofollow"
-              className="text-primary underline underline-offset-4"
-            >
-              {children}
-            </a>
-          ),
-        }}
-      >
-        {children}
-      </MarkdownAsync>
- 
+    <MarkdownAsync
+      remarkPlugins={[remarkGfm]}
+      components={{
+        a: ({ href, children }) => (
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer nofollow"
+            className="text-primary underline underline-offset-4"
+          >
+            {children}
+          </a>
+        ),
+      }}
+    >
+      {children}
+    </MarkdownAsync>
   );
 }

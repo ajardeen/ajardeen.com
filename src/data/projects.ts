@@ -213,14 +213,14 @@ The library includes a structured collection of reusable UI components built wit
 
 Key Highlights:
 
-• Built with Vite for fast development and optimized builds  
-• Strongly typed components using TypeScript  
-• Dark and Light mode support  
-• Custom theme configuration system  
-• Reusable, composable component architecture  
-• Custom-built responsive sidebar layout  
-• Dedicated demo UI to preview and test components in real-time  
-• Clean folder structure for scalability  
+- Built with Vite for fast development and optimized builds  
+- Strongly typed components using TypeScript  
+- Dark and Light mode support  
+- Custom theme configuration system  
+- Reusable, composable component architecture  
+- Custom-built responsive sidebar layout  
+- Dedicated demo UI to preview and test components in real-time  
+- Clean folder structure for scalability  
 
 The demo application showcases how the components can be composed into real-world layouts, making it easy to evaluate design consistency and usability.
 

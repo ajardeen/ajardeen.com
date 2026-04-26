@@ -11,6 +11,7 @@ import { USER } from "@/data/user";
 import { PROJECTS } from "@/data/projects";
 import { Search } from "lucide-react";
 import SearchPanel from "./SearchPanel";
+import { Slash } from "@/components/brand-slash";
 
 const MIN_NAVBAR_HEIGHT = 200; // Increased slightly for more links
 const TOP_POSITION = 53;
@@ -24,12 +25,10 @@ function DesktopNavMenu({
   panelStayOpen: boolean;
   setPanelStayOpen: (value: boolean) => void;
 }) {
-
   const [open, setOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState<
     "about" | "projects" | "search" | null
   >(null);
- 
 
   const handleReset = () => {
     cancelClose();
@@ -155,7 +154,6 @@ function DesktopNavMenu({
     if (closeTimer.current) clearTimeout(closeTimer.current);
   };
 
-
   useEffect(() => {
     // Only schedule a close if the panel isn't supposed to stay open
     // and we are currently in an 'open' state.
@@ -169,7 +167,7 @@ function DesktopNavMenu({
       <div className="flex">
         <Button
           variant="link"
-          className="hidden md:block decoration-background cursor-pointer px-2.5 text-muted-foreground hover:text-accent-foreground"
+          className="hidden md:flex decoration-background cursor-pointer px-2.5 text-muted-foreground hover:text-accent-foreground group "
           onMouseEnter={() => handleMouseEnter("about")}
           onMouseLeave={scheduleClose}
           onClick={() => {
@@ -177,12 +175,13 @@ function DesktopNavMenu({
             handleReset();
           }}
         >
+          <Slash />
           About
         </Button>
 
         <Button
           variant="link"
-          className="hidden md:block decoration-background cursor-pointer px-2.5 text-muted-foreground hover:text-accent-foreground"
+          className="hidden md:flex decoration-background cursor-pointer px-2.5 text-muted-foreground hover:text-accent-foreground group"
           onMouseEnter={() => handleMouseEnter("projects")}
           onMouseLeave={scheduleClose}
           onClick={() => {
@@ -190,6 +189,7 @@ function DesktopNavMenu({
             handleReset();
           }}
         >
+          <Slash />
           Projects
         </Button>
         <Button
@@ -219,9 +219,9 @@ function DesktopNavMenu({
 
             <motion.div
               key="panel"
-              initial={{ opacity: 0, scaleY: 0,height:0 }}
-              animate={{ opacity: 1, scaleY: 1,height:400 }}
-              exit={{ opacity: 0, scaleY: 0,height:0 }}
+              initial={{ opacity: 0, scaleY: 0, height: 0 }}
+              animate={{ opacity: 1, scaleY: 1, height: 400 }}
+              exit={{ opacity: 0, scaleY: 0, height: 0 }}
               transition={{
                 duration: 0.5,
                 ease: [0.32, 0.72, 0, 1],

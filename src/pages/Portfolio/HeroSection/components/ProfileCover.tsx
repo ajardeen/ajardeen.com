@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/components/theme-provider";
-import lightIcon from "@/assets/icons/maicon.png";
-import darkIcon from "@/assets/icons/maicondark.png";
+import lightIcon from "@/assets/icons/ajlight.svg";
+import darkIcon from "@/assets/icons/aj.svg";
 import { BrandContextMenu } from "@/components/brand-context-menu";
 
 function ProfileCover() {
@@ -18,12 +18,12 @@ function ProfileCover() {
         "bg-black/0.75 bg-[radial-gradient(var(--pattern-foreground)_1px,transparent_0)] bg-size-[10px_10px] bg-center [--pattern-foreground:var(--color-zinc-950)]/5 dark:bg-white/0.75 dark:[--pattern-foreground:var(--color-white)]/5"
       )}
     >
-      <div className="w-35 h-35 rounded-full border-14 border-muted" />
+      {/* <div className="w-35 h-35 rounded-full border-14 border-muted" /> */}
 
       <img
         src={theme === "light" ? darkIcon : lightIcon}
         alt="icon"
-        className={cn("absolute w-39 -translate-y-0.5 transition-colors ")}
+        className={cn("absolute w-25 -translate-y-0.5 transition-colors ")}
       />
     </div>
        </BrandContextMenu>

@@ -121,7 +121,7 @@ function TopNavigation() {
               className="block md:hidden "
               onClick={() => handleMenu("search")}
             >
-              <Search className="  text-accent-foreground" />
+              <Search className="text-accent-foreground" />
             </Button>
             
             <ThemeSwitcher />
