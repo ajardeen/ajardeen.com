@@ -18,23 +18,11 @@ export const buildProjectSearch = (): SearchGroup[] => {
   }));
 
 
-  // SKILLS SEARCH
-  const skillItems: SearchItem[] = PROJECTS.flatMap((p) =>
-    p.skills.map((skill) => ({
-      searchName: `${skill} — ${p.title}`,
-      link: `/project/${p.id}`,
-      icon: Box,
-    }))
-  );
 
   return [
     {
       group: "Projects",
       items: projectNames,
-    },
-    {
-      group: "Skills",
-      items: skillItems,
     },
   ];
 };

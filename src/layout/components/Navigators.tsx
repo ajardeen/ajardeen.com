@@ -68,8 +68,8 @@ const MacLinkList = ({
         }}
         className="space-y-3"
       >
-        {links.map((link) => (
-          <motion.li key={link.label} variants={slideDownBlur}>
+        {links.map((link,idx) => (
+          <motion.li key={idx} variants={slideDownBlur}>
             <button
               onClick={() => onItemClick(link)}
               className="text-sm font-semibold hover:opacity-60 transition-opacity text-left block w-full cursor-pointer"

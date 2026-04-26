@@ -85,10 +85,10 @@ export function ProjectItem({
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Link to={"/project/" + project.id}>
-                    <a className="relative flex size-6 shrink-0 items-center justify-center text-muted-foreground after:absolute after:-inset-2 hover:text-foreground">
+                    <span className="relative flex size-6 shrink-0 items-center justify-center text-muted-foreground after:absolute after:-inset-2 hover:text-foreground">
                       <FileText className="pointer-events-none size-4" />
                       <span className="sr-only">Open Doc</span>
-                    </a>
+                    </span>
                   </Link>
                 </TooltipTrigger>
 

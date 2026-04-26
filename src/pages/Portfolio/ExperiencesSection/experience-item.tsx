@@ -4,7 +4,7 @@ import type { Experience } from "@/types/experiences";
 import { ExperiencePositionItem } from "./experience-position-item";
 
 export function ExperienceItem({ experience }: { experience: Experience }) {
-  console.log("isCurrentEmployer",experience.isCurrentEmployer);
+  // console.log("isCurrentEmployer",experience.isCurrentEmployer);
   
   return (
     <div className="screen-line-after space-y-4 py-4">

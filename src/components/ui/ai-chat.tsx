@@ -378,7 +378,7 @@ export function AiChat({ onStatusChange }: AiChatProps) {
                 open={modelSelectorOpen}
                 onOpenChange={setModelSelectorOpen}
               >
-                <ModelSelectorTrigger className="text-xs">
+                <ModelSelectorTrigger asChild className="text-xs">
                   <Button
                     variant={"secondary"}
                     disabled={isCheckingAI || aiDisabled || !serverOnline}

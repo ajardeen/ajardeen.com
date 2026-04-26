@@ -75,9 +75,9 @@ export function ProjectCard({
 
         {project.skills?.length > 0 && (
           <div className="flex flex-wrap items-center gap-2 pt-4">
-            {project.skills.slice(0, 6).map((skill) => (
+            {project.skills.slice(0, 6).map((skill,idx) => (
               <span
-                key={skill}
+                key={idx}
                 className="rounded-md bg-secondary px-2 py-1 text-[10px] font-medium text-zinc-500 dark:text-zinc-300 border border-zinc-700/20"
               >
                 {skill}

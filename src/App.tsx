@@ -17,11 +17,14 @@ import PortfolioPage from "./pages/Portfolio/PortfolioPage";
 import FooterSection from "./pages/Portfolio/FooterSection/FooterSection";
 import Project from "./pages/Project/Project";
 import { Page_Not_Found } from "./pages/NotFound/Page_Not_Found";
+import ScrollToTopAuto from "./utils/ScrollToTopAuto";
 
 export function App() {
+  
   return (
     <ThemeProvider>
       <Router>
+        <ScrollToTopAuto />
         <ReactLenis
           root
           options={{
@@ -61,3 +64,4 @@ export function App() {
 }
 
 export default App;
+

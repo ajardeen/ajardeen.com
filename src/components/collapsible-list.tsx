@@ -24,7 +24,7 @@ export function CollapsibleList<T>({
   keyExtractor?: (item: T) => string;
   renderItem: (item: T) => React.ReactNode;
 }) {
-  console.log(items.length > max);
+
 
   return (
     <Collapsible>

@@ -4,12 +4,15 @@ import { useEffect, useRef, useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { MacHeader, MacLinkList } from "./Navigators";
 import { useScroll, useMotionValueEvent } from "framer-motion";
+import { useHotkey } from "@tanstack/react-hotkeys";
 
 // Import your data
 import { USER } from "@/data/user";
 import { PROJECTS } from "@/data/projects";
+import { Search } from "lucide-react";
+import SearchPanel from "./SearchPanel";
 
-const NAVBAR_HEIGHT = 350; // Increased slightly for more links
+const MIN_NAVBAR_HEIGHT = 200; // Increased slightly for more links
 const TOP_POSITION = 53;
 
 function DesktopNavMenu({
@@ -21,10 +24,58 @@ function DesktopNavMenu({
   panelStayOpen: boolean;
   setPanelStayOpen: (value: boolean) => void;
 }) {
+
   const [open, setOpen] = useState(false);
-  const [activeMenu, setActiveMenu] = useState<"about" | "projects" | null>(
-    null,
-  );
+  const [activeMenu, setActiveMenu] = useState<
+    "about" | "projects" | "search" | null
+  >(null);
+ 
+
+  const handleReset = () => {
+    cancelClose();
+    setOpen(false);
+    setActiveMenu(null);
+    setPanelStayOpen(false);
+  };
+  // 1. Memoize the toggle/open logic
+  // Inside DesktopNavMenu
+  // const toggleMenu = useCallback(
+  //   (menu: "about" | "projects" | "search") => {
+  //     setOpen((prevOpen) => {
+  //       const isClosing = prevOpen && activeMenu === menu;
+
+  //       if (isClosing) {
+  //         handleReset();
+  //         return false;
+  //       }
+
+  //       // FIX: Move parent state update out of the render phase
+  //       setTimeout(() => {
+  //         setPanelStayOpen(true);
+  //       }, 0);
+
+  //       setActiveMenu(menu);
+  //       return true;
+  //     });
+  //   },
+  //   [activeMenu, setPanelStayOpen],
+  // );
+  // Keyboard shortcut support
+
+  // useHotkey("Mod+K", () => {
+  //   toggleMenu("search");
+  // });
+  // useHotkey("Mod+A", () => {
+  //   console.log("called");
+
+  //   toggleMenu("about");
+  // });
+  // useHotkey("Mod+P", () => {
+  //   toggleMenu("projects");
+  // });
+  useHotkey("Escape", () => {
+    handleReset();
+  });
 
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const navigate = useNavigate();
@@ -79,18 +130,12 @@ function DesktopNavMenu({
     handleReset();
   };
 
-  const handleReset = () => {
-    cancelClose();
-    setOpen(false);
-    setActiveMenu(null);
-    setPanelStayOpen(false);
-  };
-
   useMotionValueEvent(scrollY, "change", () => {
     if (open) handleReset();
   });
 
-  const handleMouseEnter = (menu: "about" | "projects") => {
+  // Logic to handle "search" alongside about/projects
+  const handleMouseEnter = (menu: "about" | "projects" | "search") => {
     cancelClose();
     setActiveMenu(menu);
     setOpen(true);
@@ -110,23 +155,14 @@ function DesktopNavMenu({
     if (closeTimer.current) clearTimeout(closeTimer.current);
   };
 
-  // const handleLinkClick = (link: {
-  //   label: string;
-  //   href: string;
-  //   isScroll: boolean;
-  // }) => {
-  //   if (link.isScroll) {
-  //     // Remove the '#' and scroll
-  //     scrollToSection(link.href.replace("#", ""));
-  //   } else {
-  //     navigate(link.href);
-  //   }
-  //   handleReset();
-  // };
 
   useEffect(() => {
-    if (!panelStayOpen) scheduleClose();
-  }, [panelStayOpen]);
+    // Only schedule a close if the panel isn't supposed to stay open
+    // and we are currently in an 'open' state.
+    if (!panelStayOpen && open) {
+      scheduleClose();
+    }
+  }, [panelStayOpen, open]);
 
   return (
     <>
@@ -156,6 +192,15 @@ function DesktopNavMenu({
         >
           Projects
         </Button>
+        <Button
+          variant="ghost"
+          className="hidden md:block"
+          onMouseEnter={() => handleMouseEnter("search")}
+          onMouseLeave={scheduleClose}
+          onClick={() => handleMouseEnter("search")}
+        >
+          <Search className=" text-accent-foreground" />
+        </Button>
       </div>
 
       <AnimatePresence>
@@ -174,9 +219,9 @@ function DesktopNavMenu({
 
             <motion.div
               key="panel"
-              initial={{ opacity: 0, scaleY: 0 }}
-              animate={{ opacity: 1, scaleY: 1 }}
-              exit={{ opacity: 0, scaleY: 0 }}
+              initial={{ opacity: 0, scaleY: 0,height:0 }}
+              animate={{ opacity: 1, scaleY: 1,height:400 }}
+              exit={{ opacity: 0, scaleY: 0,height:0 }}
               transition={{
                 duration: 0.5,
                 ease: [0.32, 0.72, 0, 1],
@@ -188,32 +233,40 @@ function DesktopNavMenu({
                 left: 0,
                 right: 0,
                 transformOrigin: "top center",
-                height: NAVBAR_HEIGHT,
+                minHeight: MIN_NAVBAR_HEIGHT,
               }}
               className="z-50 bg-background/95 backdrop-blur-2xl "
               onMouseEnter={cancelClose}
               onMouseLeave={scheduleClose}
             >
               <div className="container mx-auto h-full flex justify-center items-center px-12">
-                <motion.div
-                  exit="exit"
-                  key={activeMenu}
-                  initial="hidden"
-                  animate="visible"
-                  className="grid grid-cols-1 md:grid-cols-2 gap-30 items-start w-full px-5 max-w-3xl mx-auto"
-                >
-                  <MacHeader
-                    label={menuData[activeMenu].header.label}
-                    title={menuData[activeMenu].header.title}
-                  />
-
-                  {/* Custom MacLinkList usage to handle internal clicks */}
-                  <MacLinkList
-                    category={menuData[activeMenu].category}
-                    links={menuData[activeMenu].links}
+                {activeMenu === "search" ? (
+                  <SearchPanel
+                    onClose={handleReset}
+                    // results={searchResults} // Pass results here
                     onItemClick={handleItemClick}
                   />
-                </motion.div>
+                ) : (
+                  <motion.div
+                    exit="exit"
+                    key={activeMenu}
+                    initial="hidden"
+                    animate="visible"
+                    className="grid grid-cols-1 md:grid-cols-2 gap-30 items-start w-full px-5 max-w-3xl mx-auto  py-20"
+                  >
+                    <MacHeader
+                      label={menuData[activeMenu].header.label}
+                      title={menuData[activeMenu].header.title}
+                    />
+
+                    {/* Custom MacLinkList usage to handle internal clicks */}
+                    <MacLinkList
+                      category={menuData[activeMenu].category}
+                      links={menuData[activeMenu].links}
+                      onItemClick={handleItemClick}
+                    />
+                  </motion.div>
+                )}
               </div>
             </motion.div>
           </>

@@ -87,7 +87,7 @@ export function CertificationItem({
             closeDelay={100}
             key={certification.credentialID}
           >
-            <HoverCardTrigger>
+            <HoverCardTrigger asChild>
               <Button
                 variant={"link"}
                 className="p-0 cursor-help tracking-widest text-muted-foreground"

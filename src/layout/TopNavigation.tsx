@@ -8,12 +8,12 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
-import { CircleArrowOutUpRight, Menu } from "lucide-react";
+import { CircleArrowOutUpRight, Menu, Search } from "lucide-react";
 import { USER } from "@/data/user";
 import { useSound } from "@/hooks/use-sounds";
-import GlobalMenu from "@/components/global-menu";
-import { pagesSearch } from "@/configs/globalSearchConfig";
-import { buildProjectSearch } from "@/utils/projectSearchBuilder";
+// import GlobalMenu from "@/components/global-menu";
+// import { pagesSearch } from "@/configs/globalSearchConfig";
+// import { buildProjectSearch } from "@/utils/projectSearchBuilder";
 import { useState } from "react";
 import { FullScreenMenu } from "./components/MobileScreenMenu";
 import DesktopNavMenu from "./components/DesktopNavMenu";
@@ -24,6 +24,8 @@ function TopNavigation() {
   const navigate = useNavigate();
   const playClick = useSound("/audio/ui-sounds/redirectUiSound.wav");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [menuContent, setMenuContent] = useState("");
+
   const [panelStayOpen, setPanelStayOpen] = useState(false);
 
   const getHeaderOffset = () => {
@@ -59,12 +61,26 @@ function TopNavigation() {
     },
   };
 
+  const handleMenu = (content: "search" | "links") => {
+    if (content === "links") {
+      setMenuContent("links");
+    } else if (content === "search") {
+      setMenuContent("search");
+    }
+    setMenuOpen(true);
+  };
+  const handleMenuClose = () => {
+    setMenuOpen(false);
+    setMenuContent("");
+  };
+
   return (
     <>
       <FullScreenMenu
         open={menuOpen}
-        onClose={() => setMenuOpen(false)}
+        onClose={() => handleMenuClose()}
         scrollToSection={scrollToSection}
+        menuContent={menuContent}
       />
 
       <SiteHeaderWrapper
@@ -91,7 +107,7 @@ function TopNavigation() {
             <SiteHeaderMark />
           </Link>
 
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-1 items-center">
             {/* Desktop nav links */}
 
             <DesktopNavMenu
@@ -99,10 +115,15 @@ function TopNavigation() {
               panelStayOpen={panelStayOpen}
               setPanelStayOpen={setPanelStayOpen}
             />
-            <GlobalMenu
-              pagesSearch={pagesSearch}
-              projectSearch={buildProjectSearch()}
-            />
+            <Button
+              variant="ghost"
+           
+              className="block md:hidden "
+              onClick={() => handleMenu("search")}
+            >
+              <Search className="  text-accent-foreground" />
+            </Button>
+            
             <ThemeSwitcher />
             <Separator
               orientation="vertical"
@@ -138,7 +159,7 @@ function TopNavigation() {
               className="block md:hidden my-2.5 bg-muted-foreground/60 md:mr-1"
             />
             <button
-              onClick={() => setMenuOpen(true)}
+              onClick={() => handleMenu("links")}
               aria-label="Open menu"
               className="block md:hidden p-1 rounded hover:bg-muted transition-colors"
             >

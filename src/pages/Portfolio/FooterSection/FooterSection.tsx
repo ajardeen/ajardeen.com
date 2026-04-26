@@ -21,14 +21,14 @@ function FooterSection() {
         </p>
 
         {/* Social Links */}
-        <div className="screen-line-before screen-line-after flex w-full before:z-1 after:z-1">
+        <div className="screen-line-before screen-line-after flex w-full before:z-1 after:z-1 ">
           <div className="mx-auto flex items-center justify-center gap-3 border-x border-edge bg-background px-4">
             <p className="flex font-mono text-xs font-medium text-muted-foreground">
               Social Connect
             </p>
 
-            {SOCIAL_LINKS.map((social) => (
-              <>
+            {SOCIAL_LINKS.map((social,idx) => (
+              <span key={idx} className="flex gap-3">
                 <Separator />
                 <a
                   key={social.title}
@@ -45,7 +45,7 @@ function FooterSection() {
                   />
                   <span className="sr-only">{social.title}</span>
                 </a>
-              </>
+              </span>
             ))}
           </div>
         </div>

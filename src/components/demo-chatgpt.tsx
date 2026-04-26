@@ -317,7 +317,8 @@ const [autoScroll, setAutoScroll] = useState(true);
     reasoningContent: string
   ) => {
     const words = reasoningContent.split(" ");
-    console.log("versionId", versionId);
+    console.log("versionId",versionId);
+    
 
     let currentContent = "";
 

@@ -106,51 +106,45 @@ function ProjectDetails() {
     }
   }, [id]); // 👈 depend ONLY on id
 
-useEffect(() => {
-  const handler = (e: KeyboardEvent) => {
-    if (!selected) return;
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (!selected) return;
 
-    const currentMediaIndex = mediaList.findIndex(
-      (m) => m.src === selected.src,
-    );
+      const currentMediaIndex = mediaList.findIndex(
+        (m) => m.src === selected.src,
+      );
 
-    // 🔥 SHIFT + ARROWS → MEDIA NAVIGATION
-    if (e.shiftKey) {
-      if (e.key === "ArrowLeft" && currentMediaIndex > 0) {
-        e.preventDefault();
-        setSelected(mediaList[currentMediaIndex - 1]);
+      // 🔥 SHIFT + ARROWS → MEDIA NAVIGATION
+      if (e.shiftKey) {
+        if (e.key === "ArrowLeft" && currentMediaIndex > 0) {
+          e.preventDefault();
+          setSelected(mediaList[currentMediaIndex - 1]);
+        }
+
+        if (
+          e.key === "ArrowRight" &&
+          currentMediaIndex < mediaList.length - 1
+        ) {
+          e.preventDefault();
+          setSelected(mediaList[currentMediaIndex + 1]);
+        }
+
+        return; // stop here — don't trigger project navigation
       }
 
-      if (
-        e.key === "ArrowRight" &&
-        currentMediaIndex < mediaList.length - 1
-      ) {
-        e.preventDefault();
-        setSelected(mediaList[currentMediaIndex + 1]);
+      // 🔹 NORMAL ARROWS → PROJECT NAVIGATION (unchanged behavior)
+      if (e.key === "ArrowLeft" && prevProjectId) {
+        navigate(`/project/${prevProjectId}`);
       }
 
-      return; // stop here — don't trigger project navigation
-    }
+      if (e.key === "ArrowRight" && nextProjectId) {
+        navigate(`/project/${nextProjectId}`);
+      }
+    };
 
-    // 🔹 NORMAL ARROWS → PROJECT NAVIGATION (unchanged behavior)
-    if (e.key === "ArrowLeft" && prevProjectId) {
-      navigate(`/project/${prevProjectId}`);
-    }
-
-    if (e.key === "ArrowRight" && nextProjectId) {
-      navigate(`/project/${nextProjectId}`);
-    }
-  };
-
-  window.addEventListener("keydown", handler);
-  return () => window.removeEventListener("keydown", handler);
-}, [
-  selected,
-  mediaList,
-  prevProjectId,
-  nextProjectId,
-  navigate,
-]);
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [selected, mediaList, prevProjectId, nextProjectId, navigate]);
 
   const handleShareProject = async () => {
     const fullUrl = window.location.href;
@@ -175,7 +169,7 @@ useEffect(() => {
         <Button
           onClick={() => navigate("/project")}
           variant="link"
-          className="gap-2 text-muted-foreground"
+          className="gap-2 text-muted-foreground cursor-pointer"
         >
           <ArrowLeft className="size-4" />
           Projects
@@ -184,23 +178,28 @@ useEffect(() => {
           <Button
             onClick={() => handleShareProject()}
             variant="secondary"
-            className="py-2 h-fit"
+            className="py-2 h-fit cursor-pointer"
           >
             <Share className="size-4" />
           </Button>
 
           <Tooltip>
-            <TooltipTrigger>
-              <Button
-                onClick={() => handleProjectNavigaion("prev")}
-                variant="secondary"
-                className="p-0 flex h-fit"
-                disabled={!prevProjectId}
-              >
-                <motion.span whileTap={{ x: -2 }} className="p-2">
-                  <ArrowLeft className="size-4" />
-                </motion.span>
-              </Button>
+            <TooltipTrigger asChild>
+              {prevProjectId && (
+                <Button
+                  onClick={() => handleProjectNavigaion("prev")}
+                  variant="secondary"
+                  className="p-0 flex h-fit"
+                  disabled={!prevProjectId}
+                >
+                  <motion.span
+                    whileTap={{ x: -2 }}
+                    className="p-2 cursor-pointer"
+                  >
+                    <ArrowLeft className="size-4" />
+                  </motion.span>
+                </Button>
+              )}
             </TooltipTrigger>
             <TooltipContent className="text-base flex gap-2 p-2 justify-between items-center">
               Previous Project
@@ -210,17 +209,22 @@ useEffect(() => {
             </TooltipContent>
           </Tooltip>
           <Tooltip>
-            <TooltipTrigger>
-              <Button
-                onClick={() => handleProjectNavigaion("next")}
-                variant="secondary"
-                className="p-0 flex h-fit"
-                disabled={!nextProjectId}
-              >
-                <motion.span whileTap={{ x: 2 }} className="p-2">
-                  <ArrowRight className="size-4" />
-                </motion.span>
-              </Button>
+            <TooltipTrigger asChild>
+              {nextProjectId && (
+                <Button
+                  onClick={() => handleProjectNavigaion("next")}
+                  variant="secondary"
+                  className="p-0 flex h-fit"
+                  disabled={!nextProjectId}
+                >
+                  <motion.span
+                    whileTap={{ x: 2 }}
+                    className="p-2 cursor-pointer"
+                  >
+                    <ArrowRight className="size-4" />
+                  </motion.span>
+                </Button>
+              )}
             </TooltipTrigger>
             <TooltipContent className="text-base flex gap-2 p-2 justify-between items-center">
               Next Project
@@ -238,18 +242,17 @@ useEffect(() => {
         <PanelHeader>
           <PanelTitle>
             <span className="flex items-center">
-
-            {project.logo && (
-              <img
-              src={project.logo}
-              alt={project.title}
-              width={32}
-              height={32}
-              className="mr-2 flex size-6 shrink-0 select-none"
-              aria-hidden
-              />
-            )}
-            {project.title}{" "}
+              {project.logo && (
+                <img
+                  src={project.logo}
+                  alt={project.title}
+                  width={32}
+                  height={32}
+                  className="mr-2 flex size-6 shrink-0 select-none"
+                  aria-hidden
+                />
+              )}
+              {project.title}{" "}
             </span>
             {project.isUnderDevelopment && (
               <Badge variant="destructive" className="ml-2">
@@ -281,7 +284,7 @@ useEffect(() => {
             )}
 
             {selected?.type === "image" && (
-              <Zoom >
+              <Zoom>
                 <img
                   src={selected.src}
                   alt={project.title}
@@ -327,9 +330,9 @@ useEffect(() => {
 
           {/* META */}
           <div className="flex flex-wrap gap-2">
-            {project.skills.map((skill) => (
+            {project.skills.map((skill, idx) => (
               <span
-                key={skill}
+                key={idx}
                 className="rounded-md bg-secondary px-2 py-1 text-xs text-secondary-foreground"
               >
                 {skill}

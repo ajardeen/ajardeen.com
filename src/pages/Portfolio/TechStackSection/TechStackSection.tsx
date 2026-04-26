@@ -1,6 +1,3 @@
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { cn } from "@/lib/utils";
-
 import { TECH_STACK } from "@/data/tech-stack";
 import {
   Panel,
@@ -8,7 +5,7 @@ import {
   PanelHeader,
   PanelTitle,
 } from "@/components/panel";
-import { TooltipUi } from "@/components/TooltipUi";
+
 
 function TechStackSection() {
   return (
@@ -17,60 +14,49 @@ function TechStackSection() {
         <PanelTitle>Tech Stack</PanelTitle>
       </PanelHeader>
 
-      <PanelContent
-        className={cn(
-          "[--pattern-foreground:var(--color-zinc-950)]/5 dark:[--pattern-foreground:var(--color-white)]/5",
-          "bg-[radial-gradient(var(--pattern-foreground)_1px,transparent_0)] bg-size-[10px_10px] bg-center",
-          "bg-zinc-950/0.75 dark:bg-white/0.75"
-        )}
-      >
-        <TooltipProvider>
-          <ul className="flex flex-wrap gap-4 select-none">
-            {TECH_STACK.map((tech) => (
+       <PanelContent>
+        <ul className="flex flex-wrap gap-2">
+          {TECH_STACK.map((tech) => {
+            return (
               <li key={tech.key} className="flex">
-                <TooltipUi
-                  content={tech.title}
-                  side="top"
-                  trigger={
-                    <a
-                      href={tech.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={tech.title}
-                      className="inline-flex"
-                    >
-                      {tech.theme ? (
-                        <>
-                          <img
-                            src={`https://assets.chanhdai.com/images/tech-stack-icons/${tech.key}-light.svg`}
-                            alt={`${tech.title} light icon`}
-                            width={32}
-                            height={32}
-                            className="hidden [html.light_&]:block"
-                          />
-                          <img
-                            src={`https://assets.chanhdai.com/images/tech-stack-icons/${tech.key}-dark.svg`}
-                            alt={`${tech.title} dark icon`}
-                            width={32}
-                            height={32}
-                            className="hidden [html.dark_&]:block"
-                          />
-                        </>
-                      ) : (
-                        <img
-                          src={`https://assets.chanhdai.com/images/tech-stack-icons/${tech.key}.svg`}
-                          alt={`${tech.title} icon`}
-                          width={32}
-                          height={32}
-                        />
-                      )}
-                    </a>
-                  }
-                />
+                <a
+                  href={tech.href}
+                  target="_blank"
+                  rel="noopener"
+                  aria-label={tech.title}
+                  className="flex items-center gap-1.5 rounded-full border bg-zinc-50 px-1.5 py-0.5 text-xs tracking-wide text-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 [&_img]:size-3.5 [&_img]:select-none"
+                >
+                  {tech.theme ? (
+                    <>
+                      <img
+                        className="hidden [html.light_&]:block"
+                        src={`https://assets.chanhdai.com/images/tech-stack-icons/${tech.key}-light.svg`}
+                        alt={`${tech.title} light icon`}
+                        width={14}
+                        height={14}
+                      />
+                      <img
+                        className="hidden [html.dark_&]:block"
+                        src={`https://assets.chanhdai.com/images/tech-stack-icons/${tech.key}-dark.svg`}
+                        alt={`${tech.title} dark icon`}
+                        width={14}
+                        height={14}
+                      />
+                    </>
+                  ) : (
+                    <img
+                      src={`https://assets.chanhdai.com/images/tech-stack-icons/${tech.key}.svg`}
+                      alt={`${tech.title} icon`}
+                      width={14}
+                      height={14}
+                    />
+                  )}
+                  {tech.title}
+                </a>
               </li>
-            ))}
-          </ul>
-        </TooltipProvider>
+            )
+          })}
+        </ul>
       </PanelContent>
     </Panel>
   );

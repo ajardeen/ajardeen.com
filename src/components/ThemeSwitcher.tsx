@@ -37,9 +37,9 @@ function ThemeSwitcher() {
       animate={{ opacity: 1 }}
     >
       <Tooltip>
-        <TooltipTrigger>
-          <Button variant="outline" onClick={toggleTheme} className="p-0 h-fit">
-            <Icon className="p-[9px]" />
+        <TooltipTrigger asChild>
+          <Button variant="ghost" onClick={toggleTheme} className="p-0 h-fit">
+            <Icon className="p-2.25" />
           </Button>
         </TooltipTrigger>
         <TooltipContent className="text-base flex gap-2 p-2 justify-between items-center">

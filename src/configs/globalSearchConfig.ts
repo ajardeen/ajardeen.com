@@ -1,6 +1,4 @@
 import {
-  Home,
-  FileText,
   HomeIcon,
   FolderGit2,
 } from "lucide-react";
@@ -12,24 +10,6 @@ export interface SearchItem {
   link: string;
   icon?: LucideIcon;
 }
-
-export const suggestedSearch: SearchItem[] = [
-  {
-    searchName: "Home",
-    link: "/",
-    icon: Home,
-  },
-  {
-    searchName: "Report",
-    link: "/reports",
-    icon: FileText,
-  },
-  //   {
-  //     searchName: "Settings",
-  //     link: "/settings",
-  //     icon: Settings,
-  //   },
-];
 
 export const pagesSearch: SearchItem[] = [
   {
