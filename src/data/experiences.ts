@@ -2,8 +2,8 @@ import type { Experience } from "../types/experiences";
 
 export const EXPERIENCES: Experience[] = [
   {
-    id: "kjb-trip",
-    companyName: "KJB Trip",
+    id: "kjb-info-trip",
+    companyName: "KJB Info Trip",
     companyLogo:
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1768236586/kjbSolution_thvn3k.webp",
       

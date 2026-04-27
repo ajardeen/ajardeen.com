@@ -2,7 +2,7 @@ import type { Certification } from "../types/certifications";
 
 export const CERTIFICATIONS: Certification[] = [
   {
-    title: "Build a free website with WordPress",
+    title: "Figma Essential for User Interface and User Experience UI UX",
     issuer: "Udemy",
     issuerIconName: "udemy",
     issuerLogoURL:
@@ -56,7 +56,7 @@ export const CERTIFICATIONS: Certification[] = [
   },
   {
     title:
-      "Programing Certification - Python , Java ,MySql, HTML, CSS, JavaScript",
+      "Programming Certification - Python , Java ,MySql, HTML, CSS, JavaScript",
     issuer: "CSC Computer Education",
     issuerIconName: "csc",
     issuerLogoURL:

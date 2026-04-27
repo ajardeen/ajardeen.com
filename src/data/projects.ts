@@ -5,7 +5,7 @@ export const PROJECTS: Project[] = [
   {
     id: "semantic-search",
     title: "Ai Semantic Search",
-    period: { start: "21.04.2026" },
+    period: { start: "21.04.2026", end: "22.04.2026"},
     link: "https://ai-semanthic-search.netlify.app/",
     logo: "https://res.cloudinary.com/di2vg4ur3/image/upload/v1776853155/ai-semanthic-search-logo_ubooij.webp",
     skills: [
@@ -63,9 +63,9 @@ This project explores the power of Semantic Search by allowing users to toggle b
   {
     id: "portfolio-v3",
     title: "Personal Portfolio V3 + AI",
-    period: { start: "20.01.2026" },
+    period: { start: "20.01.2026", end: "27.04.2026"},
     link: "https://ajardeen.netlify.app/",
-    logo: "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772495046/maicon_ji1nag.webp",
+    logo: "https://res.cloudinary.com/di2vg4ur3/image/upload/v1777289713/aj-title_md6rdz.svg",
     skills: [
       "React",
       "TypeScript",
@@ -143,7 +143,7 @@ Third iteration of my personal portfolio, architected as a performance-focused a
       "Realtime Systems",
     ],
     shortDescription:
-      "Full-stack food ordering and delivery platform with real-time kitchen, rider, and admin workflows powered by React Native and Node.js.",
+      "Full-stack subscription based food ordering and delivery platform with real-time kitchen, rider, and admin workflows powered by React Native and Node.js.",
 
     description: `
 - Designed and developed a complete food ordering ecosystem including a React Native mobile app, a role-based admin platform ([Admin Dashboard](https://vabook.netlify.app/)), and a Node.js/Express backend supporting real-time workflows via WebSockets.
@@ -164,8 +164,12 @@ Third iteration of my personal portfolio, architected as a performance-focused a
 
 **Quick Links**
 
-* 🌐 Landing Page — https://lunchboxlegends.netlify.app/
-* 🧑‍💻 Admin / Kitchen / Rider Dashboard — https://vabook.netlify.app/
+*  Landing Page — https://lunchboxlegends.netlify.app/
+*  Admin / Kitchen / Rider Dashboard — https://vabook.netlify.app/
+*  Github landing— https://github.com/ajardeen/LunchBox
+*  Github Mobile https://github.com/ajardeen/LunchboxLegendsMobile
+*  Github admin Portal https://github.com/ajardeen/lbl_business_portal
+*  Github admin backend https://github.com/ajardeen/vabook_backend
 
 `,
 
@@ -186,6 +190,7 @@ Third iteration of my personal portfolio, architected as a performance-focused a
     title: "Template UI",
     period: {
       start: "20.12.2025",
+      end: "1.01.2026",
     },
     link: "https://template-uii.netlify.app/",
     skills: [
