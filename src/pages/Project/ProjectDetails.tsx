@@ -8,16 +8,20 @@ import {
   PanelTitle,
 } from "@/components/panel";
 import SeparatorUi from "@/components/SeparatorUi";
-import { ArrowLeft, ArrowRight, Play, Share } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+  Share,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Markdown } from "@/components/markdown";
 import Zoom from "react-medium-image-zoom";
 import { useMemo, useState } from "react";
 import { toast, Toaster } from "sonner";
-import { motion } from "framer-motion";
-
+import { motion, AnimatePresence } from "framer-motion";
 import "react-medium-image-zoom/dist/styles.css";
-import { cn } from "@/lib/utils";
 import {
   Tooltip,
   TooltipContent,
@@ -28,6 +32,7 @@ import { useTheme } from "@/components/theme-provider";
 import { useSound } from "@/hooks/use-sounds";
 import { Badge } from "@/components/ui/badge";
 import { Prose } from "@/components/ui/typography";
+import ImageCarousel from "./components/ImageCarousel";
 
 /* ---------- helpers ---------- */
 function getYouTubeEmbedUrl(url: string) {
@@ -43,6 +48,8 @@ type MediaItem =
   | { type: "video"; src: string };
 
 function ProjectDetails() {
+  const [direction, setDirection] = useState(0);
+  // const [[page, direction], setPage] = useState([0, 0]);
   const playNotification = useSound("/audio/ui-sounds/notification.mp3");
   const { theme } = useTheme();
   const { id } = useParams<{ id: string }>();
@@ -86,7 +93,7 @@ function ProjectDetails() {
   const nextProjectId =
     currentIndex < projectIds.length - 1 ? projectIds[currentIndex + 1] : null;
 
-  const handleProjectNavigaion = (direction: "prev" | "next") => {
+  const handleProjectNavigation = (direction: "prev" | "next") => {
     if (direction === "prev" && prevProjectId) {
       navigate(`/project/${prevProjectId}`);
     }
@@ -160,6 +167,34 @@ function ProjectDetails() {
     }
   };
 
+  const currentMediaIndex = mediaList.findIndex((m) => m.src === selected?.src);
+
+  // 2. Unified selection handler
+  const handleSelectMedia = (newIndex: number) => {
+    if (newIndex === currentMediaIndex) return;
+
+    // If new index is greater, we are moving "forward" (slide from right)
+    // If new index is smaller, we are moving "backward" (slide from left)
+    const newDirection = newIndex > currentMediaIndex ? 1 : -1;
+
+    setDirection(newDirection);
+    setSelected(mediaList[newIndex]);
+  };
+
+  // 3. Simple variants (pure slide, no opacity)
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? "100%" : "-100%",
+    }),
+    center: {
+      x: 0,
+      zIndex: 1,
+    },
+    exit: (direction: number) => ({
+      x: direction < 0 ? "100%" : "-100%",
+      zIndex: 0,
+    }),
+  };
   return (
     <div className="">
       <Toaster position="top-center" theme={theme} />
@@ -188,7 +223,7 @@ function ProjectDetails() {
             <TooltipTrigger asChild>
               {prevProjectId && (
                 <Button
-                  onClick={() => handleProjectNavigaion("prev")}
+                  onClick={() => handleProjectNavigation("prev")}
                   variant="secondary"
                   className="p-0 flex h-fit"
                   disabled={!prevProjectId}
@@ -213,7 +248,7 @@ function ProjectDetails() {
             <TooltipTrigger asChild>
               {nextProjectId && (
                 <Button
-                  onClick={() => handleProjectNavigaion("next")}
+                  onClick={() => handleProjectNavigation("next")}
                   variant="secondary"
                   className="p-0 flex h-fit"
                   disabled={!nextProjectId}
@@ -264,70 +299,84 @@ function ProjectDetails() {
         </PanelHeader>
 
         <PanelContent className="space-y-5">
-          {/* MAIN PREVIEW */}
-
-          <div
-            key={id}
-            className={cn(
-              "relative w-full overflow-hidden rounded-xl border border-edge bg-white",
-              !selected ? "hidden" : "block",
-            )}
-          >
-            {selected?.type === "video" && (
-              <iframe
-                src={getYouTubeEmbedUrl(selected.src)}
-                title="Project video"
-                allow="autoplay; fullscreen; picture-in-picture"
-                allowFullScreen
-                className="aspect-video w-full"
-                // onLoad={() => setLoading(false)}
-              />
+          <div className="group relative aspect-video w-full overflow-hidden rounded-xl border border-edge bg-white">
+            {/* Overlay Buttons */}
+            {currentMediaIndex > 0 && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleSelectMedia(currentMediaIndex - 1);
+                }}
+                className="absolute left-0 top-0 z-20 flex h-full w-20 items-center cursor-pointer bg-gradient-to-r from-black/20 to-transparent p-4 opacity-0 transition-opacity group-hover:opacity-100"
+              >
+                  <div className="p-1 text-black">
+                  <ChevronLeft size={30}/>
+                </div>
+              </button>
             )}
 
-            {selected?.type === "image" && (
-              <Zoom>
-                <img
-                  src={selected.src}
-                  alt={project.title}
-                  className="aspect-video w-full object-contain"
-                  // onLoad={() => setLoading(false)}
-                />
-              </Zoom>
+            {currentMediaIndex < mediaList.length - 1 && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleSelectMedia(currentMediaIndex + 1);
+                }}
+                className="absolute right-0 top-0 z-20 flex h-full w-20 items-center justify-end cursor-pointer bg-gradient-to-l from-black/20 to-transparent p-4 opacity-0 transition-opacity group-hover:opacity-100"
+              >
+                <div className="p-1 text-black">
+                  <ChevronRight size={30} />
+                </div>
+              </button>
             )}
-          </div>
 
-          {/* THUMBNAILS */}
-          <div className="grid grid-cols-4 gap-3 sm:grid-cols-6">
-            {mediaList.map((item, idx) => (
-              <>
-                {item.src == "" ? null : (
-                  <button
-                    key={idx}
-                    onClick={() => {
-                      // setLoading(true);
-                      setSelected(item);
-                    }}
-                    className={cn(
-                      "group relative overflow-hidden rounded-md border border-edge",
-                      selected?.src === item.src && "ring-2 ring-primary",
-                    )}
-                  >
-                    {item.type === "image" ? (
-                      <img
-                        src={item.src}
-                        alt=""
-                        className="aspect-video w-full object-cover"
-                      />
-                    ) : (
-                      <div className="flex aspect-video w-full items-center justify-center bg-[#FF0033]">
-                        <Play className="size-6 text-white fill-white" />
-                      </div>
-                    )}
-                  </button>
+            {/* Animated Image/Video */}
+            <AnimatePresence
+              initial={false}
+              custom={direction}
+              mode="popLayout"
+            >
+              <motion.div
+                key={selected?.src}
+                custom={direction}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{
+                  x: { type: "spring", stiffness: 300, damping: 32 },
+                }}
+                className="absolute inset-0 h-full w-full"
+              >
+                {selected?.type === "video" ? (
+                  <iframe
+                    src={getYouTubeEmbedUrl(selected.src)}
+                    className="h-full w-full"
+                  />
+                ) : (
+                  <Zoom>
+                    <img
+                      src={selected?.src}
+                      className="aspect-video w-full object-contain"
+                      alt=""
+                    />
+                  </Zoom>
                 )}
-              </>
-            ))}
+              </motion.div>
+            </AnimatePresence>
           </div>
+
+          {/* Update your Carousel to use the same logic if needed */}
+          <ImageCarousel
+            mediaList={mediaList}
+            selected={selected}
+            setSelected={(item) => {
+              // Check if item exists before processing
+              if (!item) return;
+
+              const index = mediaList.findIndex((m) => m.src === item.src);
+              handleSelectMedia(index);
+            }}
+          />
 
           {/* META */}
           <div className="flex flex-wrap gap-2">
@@ -342,13 +391,11 @@ function ProjectDetails() {
           </div>
 
           {/* DESCRIPTION */}
-          {project.description && 
-          <Prose>
-
-          <Markdown>{project.description}</Markdown>
-          </Prose>
-          
-          }
+          {project.description && (
+            <Prose>
+              <Markdown>{project.description}</Markdown>
+            </Prose>
+          )}
         </PanelContent>
       </Panel>
     </div>

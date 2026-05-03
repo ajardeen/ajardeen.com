@@ -5,7 +5,7 @@ export const PROJECTS: Project[] = [
   {
     id: "semantic-search",
     title: "Ai Semantic Search",
-    period: { start: "21.04.2026", end: "22.04.2026"},
+    period: { start: "21.04.2026", end: "22.04.2026" },
     link: "https://ai-semanthic-search.netlify.app/",
     logo: "https://res.cloudinary.com/di2vg4ur3/image/upload/v1776853155/ai-semanthic-search-logo_ubooij.webp",
     skills: [
@@ -63,7 +63,7 @@ This project explores the power of Semantic Search by allowing users to toggle b
   {
     id: "portfolio-v3",
     title: "Personal Portfolio V3 + AI",
-    period: { start: "20.01.2026", end: "27.04.2026"},
+    period: { start: "20.01.2026", end: "27.04.2026" },
     link: "https://ajardeen.netlify.app/",
     logo: "https://res.cloudinary.com/di2vg4ur3/image/upload/v1777289713/aj-title_md6rdz.svg",
     skills: [
@@ -179,7 +179,17 @@ Third iteration of my personal portfolio, architected as a performance-focused a
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1768228344/lbl_3_rn7yho.webp",
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1768228345/lbl_1_a9pr2z.webp",
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1768228343/lbl_2_jejpij.webp",
+      // vabook imgs
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1777808319/vabook_8_gejebk.webp",
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1777808276/vabook_7_jizhhl.webp",
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1777808276/vabook_6_ezge5o.webp",
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1777808276/vabook_5_e4e7pz.webp",
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1777808275/vabook_3_gevwwx.webp",
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1777808276/vabook_4_ncmwkl.webp",
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1777808275/vabook_2_yq4vzk.webp",
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1777808319/vabook_1_we5vvh.webp",
     ],
+    videoUrl:"https://youtu.be/mXBCGCDovXM",
     cardUi: true,
     isExpanded: true,
     isUnderDevelopment: true,
@@ -688,7 +698,7 @@ Authentication module implementing secure password reset workflow.
     title: "Trabook Landing Page",
     period: { start: "03.03.2023", end: "03.03.2023" },
     link: "https://trabook-landingpage-ajar.netlify.app/",
-    skills: ["HTML", "TailwindCSS","Figma"],
+    skills: ["HTML", "TailwindCSS", "Figma"],
     shortDescription:
       "Pixel-perfect responsive landing page built from Figma using TailwindCSS.",
 
