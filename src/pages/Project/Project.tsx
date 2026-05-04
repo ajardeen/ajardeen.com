@@ -205,7 +205,7 @@ function ProjectsSection() {
               ))}
             </div>
           ) : (
-            <div className="flex flex-col items-center justify-center py-20 text-muted-foreground">
+            <div className="flex flex-col items-center justify-center min-h-96 py-20 text-muted-foreground">
               <p>No projects found matching your filters.</p>
             </div>
           )}

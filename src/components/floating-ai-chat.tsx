@@ -43,8 +43,8 @@ export function FloatingAiChat({
       {/* ✅ AiChat always mounted — state survives open/close */}
       <div
         className={cn(
-          "fixed right-0 top-[2%] m-2 bottom-20 z-60 lg:right-8 lg:bottom-24 ",
-          "w-[95vw] h-[85vh] sm:w-[480px] sm:h-[620px]",
+          "fixed right-0 m-2 bottom-[8%] z-60 lg:right-8 lg:bottom-24 ",
+          "w-[95vw] h-[85vh] sm:w-[480px] sm:h-[600px]",
           "rounded-xl border shadow-xl bg-popover overflow-hidden",
           "transition-all duration-200 ease-out origin-bottom-right",
           open

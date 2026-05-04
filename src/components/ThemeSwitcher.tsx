@@ -3,27 +3,32 @@ import { MoonIcon } from "./ui/moon";
 import { Button } from "./ui/button";
 import { useTheme } from "./theme-provider";
 import { motion } from "framer-motion";
-import { useSound } from "@/hooks/use-sounds";
+// import { useSound } from "@/hooks/use-sounds";
 import { useHotkey } from "@tanstack/react-hotkeys";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { Kbd } from "./ui/kbd";
+import { useSound } from "@/hooks/use-sound";
+import { click003Sound } from "@/lib/click-003";
+
 function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();
-  const playClick = useSound("/audio/ui-sounds/click.wav");
+  // const playClick = useSound("/audio/ui-sounds/click.wav");
+  const [play] = useSound(click003Sound);
 
   const isLight = theme === "light";
   const nextTheme = isLight ? "dark" : "light";
   const Icon = isLight ? MoonIcon : SunIcon;
 
   const toggleTheme = () => {
-    playClick();
+    play();
 
-    if (!document.startViewTransition) {
-      setTheme(nextTheme);
-      return;
-    }
+    // if (!document.startViewTransition) {
+    //   setTheme(nextTheme);
+    //   return;
+    // }
+    setTheme(nextTheme);
 
-    document.startViewTransition(() => setTheme(nextTheme));
+    // document.startViewTransition(() => setTheme(nextTheme));
   };
 
   // 🔑 Press "D" to toggle theme

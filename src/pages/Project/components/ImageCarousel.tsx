@@ -44,10 +44,10 @@ function ImageCarousel({
       <Button
         variant="secondary"
         size="icon"
-        className="z-30 rounded-full p-5 mr-10"
+        className="z-30 rounded-full p-1 md:p-5 md:mr-10"
         onClick={() => scroll("left")}
       >
-        <ChevronLeft className="size-8" />
+        <ChevronLeft className="size-4 md:size-8" />
       </Button>
 
       {/* Container: snap-x forces items to align perfectly when scrolling */}
@@ -63,7 +63,7 @@ function ImageCarousel({
           // common logic for both buttons
           // basis-1/5 ensures exactly 5 items fill 100% of the container width
           const containerClasses = cn(
-            "relative flex-none basis-1/5 snap-start p-1 transition-all cursor-pointer",
+            "relative flex-none basis-1/3 md:basis-1/5 snap-start p-1 transition-all cursor-pointer",
             isSelected ? "" : "",
           );
 
@@ -147,9 +147,9 @@ function ImageCarousel({
         variant="secondary"
         size="icon"
         onClick={() => scroll("right")}
-        className="z-30 rounded-full p-5 ml-10"
+        className="z-30 rounded-full p-1 md:p-5 md:ml-10"
       >
-        <ChevronRight className="size-8" />
+        <ChevronRight className="size-4 md:size-8" />
       </Button>
     </div>
   );

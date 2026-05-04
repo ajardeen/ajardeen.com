@@ -1,8 +1,10 @@
 export const Icons = () => "/";
 
-export const Slash = () => {
+export const Slash = ({ className }: { className?: string }) => {
   return (
-    <p className="text-brand opacity-0 -translate-x-1 transition-all group-hover:opacity-100 group-hover:translate-x-0.5">
+    <p
+      className={`text-brand opacity-0  transition-all group-hover:opacity-100 ${className}`}
+    >
       <Icons />
     </p>
   );

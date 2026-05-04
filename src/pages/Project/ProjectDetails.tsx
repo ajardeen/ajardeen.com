@@ -14,6 +14,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Share,
+  TriangleAlert,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Markdown } from "@/components/markdown";
@@ -30,7 +31,6 @@ import {
 import { Kbd } from "@/components/ui/kbd";
 import { useTheme } from "@/components/theme-provider";
 import { useSound } from "@/hooks/use-sounds";
-import { Badge } from "@/components/ui/badge";
 import { Prose } from "@/components/ui/typography";
 import ImageCarousel from "./components/ImageCarousel";
 
@@ -276,7 +276,7 @@ function ProjectDetails() {
 
       <Panel>
         <PanelHeader>
-          <PanelTitle className="flex items-center">
+          <PanelTitle className="flex items-center text-2xl md:text-3xl">
             <span className="flex items-center">
               {project.logo && (
                 <img
@@ -290,15 +290,16 @@ function ProjectDetails() {
               )}
               {project.title}{" "}
             </span>
-            {project.isUnderDevelopment && (
-              <Badge variant="destructive" className="ml-2">
-                Under Development
-              </Badge>
-            )}
           </PanelTitle>
         </PanelHeader>
 
         <PanelContent className="space-y-5">
+            {project.isUnderDevelopment && (
+              <div className=" border-l-destructive border-4 bg-red-500/10 px-2 py-1 flex gap-2">
+                <TriangleAlert className=""/>
+                Project Under Development Stage!
+              </div>
+            )}
           <div className="group relative aspect-video w-full overflow-hidden rounded-xl border border-edge bg-white">
             {/* Overlay Buttons */}
             {currentMediaIndex > 0 && (

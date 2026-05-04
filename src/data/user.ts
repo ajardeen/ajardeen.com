@@ -11,9 +11,12 @@ export const USER = {
   gender: "male",
   pronouns: "he/him",
   bio: "Creating with code. Small details matter.",
+
   flipSentences: [
     "Creating with code. Small details matter.",
-    "Design Engineer",
+    "Full Stack Developer (MERN)",
+    "React & React Native Specialist",
+    "AI Integration Enthusiast",
     "Open Source Contributor",
   ],
   address: "Thiruvamiyur Chennai",
@@ -23,7 +26,7 @@ export const USER = {
   resumeUrl:
     "https://drive.google.com/file/d/1Zl1ocPnJQesoqW8CrEh_GUTL0Un4LpFw/view?usp=sharing",
   resumeDownloadUrl:
-  "https://drive.google.com/uc?export=download&id=1Zl1ocPnJQesoqW8CrEh_GUTL0Un4LpFw",
+    "https://drive.google.com/uc?export=download&id=1Zl1ocPnJQesoqW8CrEh_GUTL0Un4LpFw",
 
   jobTitle: "Junior Full Stack Developer",
   jobs: [

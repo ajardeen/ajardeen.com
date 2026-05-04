@@ -24,11 +24,11 @@ export function SocialLinkItem({ icon, title, description, href }: SocialLink) {
           height={48}
           alt={title}
         />
-        <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-black/10 corner-squircle ring-inset dark:ring-white/15 supports-corner-shape:rounded-[50%]" />
+        <div className="pointer-events-none absolute inset-0 rounded-sm ring-1 ring-black/10 corner-squircle ring-inset dark:ring-white/15" />
       </div>
 
       <div className="flex-1">
-        <h3 className="flex items-center font-medium underline-offset-4 group-hover/link:underline">
+        <h3 className="flex items-center font-medium underline-offset-4">
           {title}
         </h3>
 

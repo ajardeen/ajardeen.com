@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import React from "react";
 import { USER } from "@/data/user";
 
-function OpenToWorkUI() {
-  const [isHovered, setIsHovered] = React.useState(false);
+function OpenToWorkUI({ isHovered, setIsHovered }: { isHovered: boolean; setIsHovered: React.Dispatch<React.SetStateAction<boolean>> }) {
+ 
   const waitTime = 2000; // Time in milliseconds to wait before showing the text
   React.useEffect(() => {
     const timeout = setTimeout(() => {
@@ -14,9 +14,8 @@ function OpenToWorkUI() {
   }, []);
   return (
     <motion.div
-      className="absolute top-0 right-0 translate-y-0.5 -translate-x-0.5 cursor-pointer z-10"
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
+      className="absolute bottom-1 right-1 translate-y-0.5 -translate-x-0.5 cursor-pointer z-10 w-fit"
+      
       title="Click to Email Me"
       onClick={() => {
         const email = decodeBase64(USER.email);
@@ -58,7 +57,7 @@ Best regards,
         }}
       >
         <span
-          className="text-xs font-medium text-foreground whitespace-nowrap overflow-hidden"
+          className="text-xs font-medium text-foreground whitespace-nowrap overflow-hidden "
           style={{
             maxWidth: isHovered ? "120px" : "0px",
             opacity: isHovered ? 1 : 0,

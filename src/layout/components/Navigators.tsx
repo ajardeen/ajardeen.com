@@ -48,35 +48,44 @@ const MacHeader = ({ label, title }: { label: string; title: string }) => {
   );
 };
 
-const MacLinkList = ({ 
-  category, 
-  links, 
-  onItemClick 
-}: { 
-  category: string; 
+const MacLinkList = ({
+  category,
+  links,
+  onItemClick,
+}: {
+  category: string;
   links: { label: string; href: string; isScroll?: boolean }[];
-  onItemClick: (link: { label: string; href: string; isScroll?: boolean }) => void;
+  onItemClick: (link: {
+    label: string;
+    href: string;
+    isScroll?: boolean;
+  }) => void;
 }) => {
   return (
     <div className="space-y-4">
-      <motion.p variants={slideDownBlur} className="text-sm font-medium text-muted-foreground tracking-tight ml-2">
+      <motion.p
+        variants={slideDownBlur}
+        className="text-sm font-medium text-muted-foreground tracking-tight ml-2"
+      >
         {category}
       </motion.p>
-      <motion.ul 
+      <motion.ul
         variants={{
           visible: { transition: { staggerChildren: 0.05 } },
-          exit: { transition: { staggerChildren: 0.02, staggerDirection: -1 } }
+          exit: { transition: { staggerChildren: 0.02, staggerDirection: -1 } },
         }}
         className="space-y-3"
       >
-        {links.map((link,idx) => (
+        {links.map((link, idx) => (
           <motion.li key={idx} variants={slideDownBlur}>
             <button
               onClick={() => onItemClick(link)}
-              className="text-sm font-semibold hover:opacity-60 transition-opacity text-left  w-full cursor-pointer flex gap-1 group"
+              className="text-sm font-semibold  transition-opacity text-left  w-full cursor-pointer group"
             >
-               <Slash />
-              {link.label}
+              <span className="flex gap-1">
+                <Slash className="translate-x-0 group-hover:translate-x-2 transition-all delay-100" />
+                <span className="translate-x-0 group-hover:translate-x-2 transition-all ">{link.label}</span>
+              </span>
             </button>
           </motion.li>
         ))}

@@ -55,16 +55,24 @@ export function ProjectCard({
               {project.period.end ? ` – ${project.period.end}` : " – Present"}
             </p>
           </div>
-          {project.recentWork && (
-            <div className="absolute top-2 right-2">
+          <div className="absolute top-2 right-2">
+            {project.recentWork && (
               <Badge
                 variant="success"
-                className="text-[10px] p-1! text-green-400"
+                className="text-[10px] p-1! text-white bg-green-500!"
               >
                 Recent Work
               </Badge>
-            </div>
-          )}
+            )}
+            {project.isUnderDevelopment && (
+              <Badge
+                variant="destructive"
+                className="text-[10px] p-1! text-white bg-red-500!"
+              >
+                Under Development
+              </Badge>
+            )}
+          </div>
           <span></span>
         </div>
       )}
@@ -72,11 +80,7 @@ export function ProjectCard({
       <div className="flex flex-col gap-1">
         <h3 className="text-lg font-medium group-hover:underline underline-offset-4">
           {project.title}
-          {project.isUnderDevelopment && (
-            <Badge variant="destructive" className="ml-2 text-[8px] p-1!">
-              Under Development
-            </Badge>
-          )}
+
           <span className="ml-2 mt-auto inline-flex items-center gap-1 text-sm text-primary">
             <ExternalLink className="size-4" />
           </span>

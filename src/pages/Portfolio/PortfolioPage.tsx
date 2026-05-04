@@ -26,6 +26,7 @@ function PortfolioPage() {
       <SeparatorUi />
       <CertificationsSection />
       <SeparatorUi />
+   
     {/* <BrandSection /> */}
       {/* <SeparatorUi />  */}
     

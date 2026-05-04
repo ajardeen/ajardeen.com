@@ -89,14 +89,11 @@ export default function FooterRevealSection() {
   return (
     <div
       ref={sceneRef}
-      className="w-full bg-background relative overflow-hidden"
+      className="w-full bg-background relative overflow-hidden "
       style={{ height: "300px" }}
     >
-      {/* Background gradient */}
-      <div className="absolute bottom-0 w-full h-full bg-linear-to-tl dark:from-emerald-400/20 from-10% to-55% to-transparent blur-md z-0" />
-
       {/* Main content */}
-      <div className="absolute  overflow-hidden left-0 inset-0 top-0  z-10 pointer-events-none w-[35%]  ">
+      <div className="absolute  overflow-hidden left-0 inset-0 top-0  z-10 pointer-events-none w-full  ">
         {targetX > 0 &&
           SQUARES.map((sq, i) => (
             <SparkleSquare
@@ -113,20 +110,36 @@ export default function FooterRevealSection() {
       <div className="flex h-full flex-col items-center justify-center border-t border-edge relative z-20">
         <div className="relative flex items-center justify-center">
           <motion.h2
-            animate={{
-              opacity: [1, 1, 0.85, 1, 0.92, 1, 0.78, 1],
-            }}
-            transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
-            className="backdrop-blur-3xl relative my-2 ml-1 border border-edge font-bold tracking-tighter text-edge text-6xl md:text-[200px] z-50 px-4
-             before:absolute before:-left-[7px] before:-top-[7px] before:h-3 before:w-3 before:border before:border-white/40 before:bg-accent before:content-['']
+            className="backdrop-blur-3xl relative my-2 ml-1 border border-edge border-l-emerald-400 font-bold tracking-tighter text-edge text-6xl md:text-[200px] z-50 px-4
+             before:absolute before:-left-[7px] before:-top-[7px] before:h-3 before:w-3 before:border before:border-emerald-400 before:bg-emerald-400 before:content-['']
              after:absolute after:-right-[7px] after:-top-[7px] after:h-3 after:w-3 after:border after:border-emerald-400/40 after:bg-emerald-400 after:content-['']"
           >
             {/* Inner span handles the bottom two corners */}
             <span
               className="relative flex items-center justify-center h-full w-full md:pl-4
                    before:absolute before:-bottom-[6px] before:-left-[22px] before:h-3 before:w-3 before:border before:border-emerald-400/40 before:bg-emerald-400 before:content-['']
-                   after:absolute after:-bottom-[6px] after:-right-[22px] after:h-3 after:w-3 after:border after:border-white/40 after:bg-accent after:content-['']"
+                   after:absolute after:-bottom-[6px] after:-right-[22px] after:h-3 after:w-3 after:border after:border-emerald-400 after:bg-accent after:content-['']"
             >
+              {/* Background gradient */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{
+                  opacity: [1, 1, 0.4, 0.9, 0.3, 1, 1, 0.4, 0.9, 0.3, 1],
+                  
+                }}
+                
+                transition={{
+                  opacity: {
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: "linear",
+                    times: [
+                      0, 0.4, 0.45, 0.5, 0.6, 0.7, 0.9, 0.92, 0.95, 0.98, 1,
+                    ],
+                  },
+                }}  
+                className="absolute -left-1 bottom-0 w-full h-full bg-linear-to-r dark:from-emerald-400/20 from-10% to-15% to-transparent blur-3xl z-0"
+              />
               {/* Glow bar */}
               <motion.div
                 ref={barRef}

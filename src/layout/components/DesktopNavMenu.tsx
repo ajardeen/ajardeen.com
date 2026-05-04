@@ -175,8 +175,10 @@ function DesktopNavMenu({
             handleReset();
           }}
         >
-          <Slash />
-          About
+           <span className="flex gap-1">
+                <Slash className="translate-x-0 group-hover:translate-x-2 transition-all delay-100" />
+                <span className="translate-x-0 group-hover:translate-x-2 transition-all ">About</span>
+              </span>
         </Button>
 
         <Button
@@ -189,8 +191,12 @@ function DesktopNavMenu({
             handleReset();
           }}
         >
-          <Slash />
-          Projects
+          <span className="flex gap-1">
+            <Slash className="translate-x-0 group-hover:translate-x-2 transition-all delay-100" />
+            <span className="translate-x-0 group-hover:translate-x-2 transition-all ">
+              Projects
+            </span>
+          </span>
         </Button>
         <Button
           variant="ghost"

@@ -8,22 +8,31 @@ import ProfileData from "./components/ProfileData";
 import ProfileCover from "./components/ProfileCover";
 import verified from "@/assets/icons/verified.svg";
 import OpenToWorkUI from "./components/OpenToWorkUI";
+import { TextFlip } from "@/components/text-flip";
+import { useState } from "react";
+import { motion } from "framer-motion";
 
 function HeroSection() {
   const playClick = useSound("/audio/mohamedajardeen.mp3");
-
+  const [isHovered, setIsHovered] = useState(false);
   return (
     <>
       {/* logo container  */}
       <ProfileCover />
-      <div className="screen-line-after flex border-x border-edge ">
-        <div className="relative shrink-0 border-r border-edge">
-          {USER.openToWork && <OpenToWorkUI />}
+      <motion.div
+        onHoverStart={() => setIsHovered(true)}
+        onHoverEnd={() => setIsHovered(false)}
+        className="screen-line-after flex border-x border-edge "
+      >
+        <div className="relative shrink-0 border-r border-edge group">
+          {USER.openToWork && (
+            <OpenToWorkUI isHovered={isHovered} setIsHovered={setIsHovered} />
+          )}
           <div className="mx-0.5 my-0.75">
             <img
               src={USER.avatar}
               alt="profile"
-              className="size-32 rounded-full ring-1 ring-border ring-offset-2 ring-offset-background select-none sm:size-40"
+              className="size-32 rounded-full ring-1 ring-border ring-offset-2 ring-offset-background group-hover:ring-brand transition-all duration-300 select-none sm:size-40"
             />
           </div>
         </div>
@@ -48,12 +57,16 @@ function HeroSection() {
               </Button>
             </div>
           </div>
-          <div className="h-12.5 border-t border-edge py-1 pl-4 sm:h-9 text-sm text-muted-foreground flex items-center">
+          <div className="h-12.5 border-t border-edge py-1 pl-4 sm:h-9 text-sm text-muted-foreground flex items-start">
             <p className="text-brand font-bold mr-1">/</p>
-            {USER.bio}
+            <TextFlip>
+              {USER.flipSentences.map((sentence, index) => (
+                <span key={index}>{sentence}</span>
+              ))}
+            </TextFlip>
           </div>
         </div>
-      </div>
+      </motion.div>
       <SeparatorUi />
       <ProfileData />
     </>
