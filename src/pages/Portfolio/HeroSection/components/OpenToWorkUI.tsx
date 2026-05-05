@@ -2,6 +2,7 @@ import Live from "@/assets/icons/live.svg";
 import { motion } from "framer-motion";
 import React from "react";
 import { USER } from "@/data/user";
+import { Mail } from "lucide-react";
 
 function OpenToWorkUI({ isHovered, setIsHovered }: { isHovered: boolean; setIsHovered: React.Dispatch<React.SetStateAction<boolean>> }) {
  
@@ -57,17 +58,18 @@ Best regards,
         }}
       >
         <span
-          className="text-xs font-medium text-foreground whitespace-nowrap overflow-hidden "
+          className="text-xs flex gap-1 font-medium text-foreground whitespace-nowrap overflow-hidden "
           style={{
             maxWidth: isHovered ? "120px" : "0px",
             opacity: isHovered ? 1 : 0,
             marginLeft: isHovered ? "4px" : "0px",
             transition: isHovered
-              ? "max-width 0.3s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s ease 0.05s, margin-left 0.3s cubic-bezier(0.34,1.56,0.64,1)"
-              : "max-width 0.2s ease-in, opacity 0.1s ease-in, margin-left 0.2s ease-in",
+            ? "max-width 0.3s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s ease 0.05s, margin-left 0.3s cubic-bezier(0.34,1.56,0.64,1)"
+            : "max-width 0.2s ease-in, opacity 0.1s ease-in, margin-left 0.2s ease-in",
           }}
-        >
-          Open to Work
+          >
+          <Mail size={15}/>
+          Email Me
         </span>
         <img src={Live} alt="icon" className="size-6 flex-shrink-0" />
       </div>

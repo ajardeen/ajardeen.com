@@ -7,6 +7,7 @@ import CertificationsSection from "@/pages/Portfolio/CertificationsSection/Certi
 // import BrandSection from "@/pages/Portfolio/BrandSection/BrandSection";
 import HeroSection from "@/pages/Portfolio/HeroSection/HeroSection";
 import SeparatorUi from "@/components/SeparatorUi";
+// import SecurityBanner from "./SecuritySection/SecurityBanner";
 
 
 function PortfolioPage() {
@@ -24,6 +25,8 @@ function PortfolioPage() {
       <SeparatorUi />
       <ProjectsSection />
       <SeparatorUi />
+      {/* <SecurityBanner/>
+      <SeparatorUi /> */}
       <CertificationsSection />
       <SeparatorUi />
    

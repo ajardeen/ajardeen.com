@@ -1,5 +1,6 @@
 import type { User } from "@/types/user";
 import avatar from "@/assets/images/profile.webp";
+import orgAvatar from "@/assets/images/org-profile.webp";
 
 export const USER = {
   firstName: "Mohamed",
@@ -38,6 +39,7 @@ export const USER = {
   ],
 
   avatar: avatar,
+  secondaryAvatar: orgAvatar,
 
   about: `
 -  Frontend developer with 1+ years of experience, known for pixel-perfect execution and strong attention to small details.

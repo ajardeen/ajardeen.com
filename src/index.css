@@ -186,7 +186,15 @@ body {
     collapsible-up var(--tw-duration, 200ms) ease-out,
     fade-out var(--tw-duration, 200ms) ease-out;
 }
-
+@layer utilities {
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  .backface-hidden {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+}
 @layer base {
   * {
     @apply border-border outline-ring/50;

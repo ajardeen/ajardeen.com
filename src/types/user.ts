@@ -35,6 +35,7 @@ export type User = {
   about: string;
   /** Public URL to avatar image */
   avatar: string;
+  secondaryAvatar?: string;
   /** Open Graph image URL for social sharing */
   
   keywords: string[];
