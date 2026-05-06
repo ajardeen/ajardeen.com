@@ -56,7 +56,7 @@ export function ProjectCard({
             </p>
           </div>
           <div className="absolute top-2 right-2">
-            {project.recentWork && (
+            {project.recentWork && project.isProjectStatus === "COMPLETED" && (
               <Badge
                 variant="success"
                 className="text-[10px] p-1! text-white bg-green-500!"
@@ -64,12 +64,20 @@ export function ProjectCard({
                 Recent Work
               </Badge>
             )}
-            {project.isUnderDevelopment && (
+            {project.isProjectStatus === "IN_PROGRESS" && (
               <Badge
                 variant="destructive"
                 className="text-[10px] p-1! text-white bg-red-500!"
               >
                 Under Development
+              </Badge>
+            )}
+            {project.isProjectStatus === "HOLD" && (
+              <Badge
+                variant="destructive"
+                className="text-[10px] p-1! text-white bg-gray-500!"
+              >
+                HOLD
               </Badge>
             )}
           </div>

@@ -58,6 +58,7 @@ This project explores the power of Semantic Search by allowing users to toggle b
     videoUrl: "",
     cardUi: true,
     recentWork: true,
+     isProjectStatus:"COMPLETED"
   },
   // 2
   {
@@ -166,6 +167,7 @@ Third iteration of my personal portfolio, architected as a performance-focused a
 
 *  Landing Page — https://lunchboxlegends.netlify.app/
 *  Admin / Kitchen / Rider Dashboard — https://vabook.netlify.app/
+*  Figma Design — [Mobile Prototype Link](https://www.figma.com/design/p4vfgv2i9Cxrj1EipHFBYG/Food-Service-App?node-id=0-1&t=0JNgyz2RGnckJxMt-1), [Brand Logo Design](https://www.figma.com/design/AM6imI2GRQvz2gXtf0NE5l/LunchBox-Logo-creation?node-id=0-1&t=46Mvk7tIR9FxuHtX-1), [Admin Logo Design](https://www.figma.com/design/5FJYDLR7vbV5woM5SHSTuO/va-studio?node-id=24-126&t=HeS5Yny6LMOjTDiu-1)
 *  Github landing— https://github.com/ajardeen/LunchBox
 *  Github Mobile https://github.com/ajardeen/LunchboxLegendsMobile
 *  Github admin Portal https://github.com/ajardeen/lbl_business_portal
@@ -193,6 +195,8 @@ Third iteration of my personal portfolio, architected as a performance-focused a
     cardUi: true,
     isExpanded: true,
     isUnderDevelopment: true,
+    isProjectStatus:"IN_PROGRESS",
+    projectStatusMsg :"Working on Some Minor Bug fix",
   },
   // 4
   {
@@ -473,7 +477,7 @@ Note: This project is under active development. The data and metrics displayed a
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772480950/gamified_porfolio_en5wtt.webp",
     ],
     videoUrl: "https://youtu.be/ukeToi3DlRY",
-    isUnderDevelopment: true,
+    isProjectStatus:"HOLD"
   },
   // 10
   {
@@ -564,7 +568,7 @@ All updates instantly reflect on connected websites via the exposed API.
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772389758/device-mockup_1.5x_postspark_2026-03-01_23-53-20_keewal.webp",
     ],
     videoUrl: "",
-    isUnderDevelopment: true,
+    isProjectStatus:"HOLD"
   },
   // 12
   {

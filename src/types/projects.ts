@@ -17,7 +17,7 @@ export type Project = {
   /** Tags/technologies for chips or filtering. */
   skills: string[];
   /** Optional rich description; Markdown and line breaks supported. */
-  shortDescription?:string;
+  shortDescription?: string;
   description?: string;
   /** Logo image URL (absolute or path under /public). */
   logo?: string;
@@ -28,4 +28,11 @@ export type Project = {
   /** Whether the project card is expanded by default in the UI. */
   isExpanded?: boolean;
   isUnderDevelopment?: boolean;
+  isProjectStatus?:
+    | "COMPLETED"
+    | "IN_PROGRESS"
+    | "NOT_STARTED"
+    | "CANCELLED"
+    | "HOLD";
+  projectStatusMsg?: string;
 };

@@ -13,6 +13,7 @@ import {
   ArrowRight,
   ChevronLeft,
   ChevronRight,
+  Pause,
   Share,
   TriangleAlert,
 } from "lucide-react";
@@ -288,18 +289,26 @@ function ProjectDetails() {
                   aria-hidden
                 />
               )}
-              {project.title}{" "}
+              {project.title}
             </span>
           </PanelTitle>
         </PanelHeader>
 
         <PanelContent className="space-y-5">
-            {project.isUnderDevelopment && (
-              <div className=" border-l-destructive border-4 bg-red-500/10 px-2 py-1 flex gap-2">
-                <TriangleAlert className=""/>
-                Project Under Development Stage!
-              </div>
-            )}
+          {project.isProjectStatus === "IN_PROGRESS" && (
+            <div className=" border-l-destructive border-4 bg-red-500/10 px-2 py-1 flex gap-2">
+              <TriangleAlert className="" />
+              {project.projectStatusMsg
+                ? project.projectStatusMsg
+                : "Project Under Development Stage!"}
+            </div>
+          )}
+          {project.isProjectStatus === "HOLD" && (
+            <div className=" border-l-secondary border-4 bg-gray-500/10 px-2 py-1 flex gap-2">
+              <Pause className="" />
+              Development Paused!
+            </div>
+          )}
           <div className="group relative aspect-video w-full overflow-hidden rounded-xl border border-edge bg-white">
             {/* Overlay Buttons */}
             {currentMediaIndex > 0 && (
@@ -310,8 +319,8 @@ function ProjectDetails() {
                 }}
                 className="absolute left-0 top-0 z-20 flex h-full w-20 items-center cursor-pointer bg-gradient-to-r from-black/20 to-transparent p-4 opacity-0 transition-opacity group-hover:opacity-100"
               >
-                  <div className="p-1 text-black">
-                  <ChevronLeft size={30}/>
+                <div className="p-1 text-black">
+                  <ChevronLeft size={30} />
                 </div>
               </button>
             )}
