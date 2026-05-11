@@ -7,7 +7,7 @@ import SeparatorUi from "@/components/SeparatorUi";
 import ProfileData from "./components/ProfileData";
 import ProfileCover from "./components/ProfileCover";
 import verified from "@/assets/icons/verified.svg";
-import OpenToWorkUI from "./components/OpenToWorkUI";
+// import OpenToWorkUI from "./components/OpenToWorkUI";
 import { TextFlip } from "@/components/text-flip";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -16,6 +16,7 @@ import { switch003Sound } from "@/lib/switch-003";
 import { FlippingAvatar } from "./components/FlippingAvatar";
 
 import { click003Sound } from "@/lib/click-003";
+import StatusIndicator from "./components/StatusIndicator";
 
 function HeroSection() {
   const [playClick3] = useSoundCN(click003Sound);
@@ -39,9 +40,12 @@ function HeroSection() {
         onHoverEnd={() => setIsHovered(false)}
         className="screen-line-after flex border-x border-edge "
       >
-        <div className="relative shrink-0 border-r border-edge group">
+        <div className="relative shrink-0 border-r border-edge group ">
           {USER.openToWork && (
-            <OpenToWorkUI isHovered={isHovered} setIsHovered={setIsHovered} />
+            // <OpenToWorkUI isHovered={isHovered} setIsHovered={setIsHovered} />
+            <div className="absolute bottom-0 right-0 -translate-y-0.5 -translate-x-0.3 cursor-pointer z-10 w-fit">
+              <StatusIndicator variant={"red"} isHovered={isHovered} />
+            </div>
           )}
           <div className="mx-0.5 my-0.75">
             <FlippingAvatar
