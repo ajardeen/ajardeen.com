@@ -35,17 +35,33 @@ import { cn } from "@/lib/utils";
 import { BrandContextMenu } from "@/components/brand-context-menu";
 import { LEDMatrix } from "./LEDMatrix";
 import { useEffect, useState } from "react";
+// import { useTheme } from "@/components/theme-provider";
+import lightIcon from "@/assets/icons/ajlight.svg";
+import darkIcon from "@/assets/icons/aj.svg";
+import {  motion } from "framer-motion";
 
 function ProfileCover() {
-  const ledShapes = ["default", "aj", "heart", "watchtime"];
-  const [randomShape, setRandomShape] = useState("aj");
+  // const { theme } = useTheme();
+  const ledShapes = [
+    "hello",
+    "default",
+    "heart",
+    "clock",
+    "shine",
+    "indiaGate",
+  ];
+  const [randomShape, setRandomShape] = useState("hello");
   const changeLedShape = () => {
-    setRandomShape(ledShapes[Math.floor(Math.random() * ledShapes.length)]);
+    setRandomShape((currentShape) => {
+      const currentIndex = ledShapes.indexOf(currentShape);
+      const nextIndex = (currentIndex + 1) % ledShapes.length;
+      return ledShapes[nextIndex];
+    });
   };
   useEffect(() => {
     const interval = setInterval(() => {
       changeLedShape();
-    }, 10000);
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
@@ -65,6 +81,27 @@ function ProfileCover() {
       >
         {/* Full Grid Background / Foreground LED Unit */}
         <div className="absolute inset-0 flex items-center justify-center ">
+         
+            {randomShape === "shine" && (
+              <motion.img
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+               
+                transition={{
+                  type: "spring",
+                  stiffness: 200,
+                  damping: 20,
+                  delay: 0.1,
+                }}
+                src={lightIcon || darkIcon}
+                alt="icon"
+                className={cn(
+                  "absolute w-20 sm:w-25 -translate-y-0.5 z-10 transition-colors ",
+                )}
+              />
+            )}
+       
+
           <LEDMatrix shape={randomShape} />
         </div>
 

@@ -1,7 +1,5 @@
+import { useEffect, useRef } from "react";
 
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-// 3x5 Pixel Font for Numbers and Colon
 const DIGITS: Record<string, number[][]> = {
   "0": [[1,1,1],[1,0,1],[1,0,1],[1,0,1],[1,1,1]],
   "1": [[0,1,0],[0,1,0],[0,1,0],[0,1,0],[0,1,0]],
@@ -16,145 +14,308 @@ const DIGITS: Record<string, number[][]> = {
   ":": [[0,0,0],[0,1,0],[0,0,0],[0,1,0],[0,0,0]],
 };
 
-const SHAPE_MAP: Record<string, number[][]> = {
-  default: [ // Smile
-    [0, 0, 1, 1,  1, 1, 1, 0,0, 0],
-    [0, 1, 1, 1,  1, 1, 1, 1,0, 0],
-    [1, 1, 0, 1,  1, 1, 1, 1,1, 0],
-    [1, 1, 0, 1,  1, 0, 0, 1,1, 0],
-    [1, 1, 1, 1,  1, 1, 1, 1,1, 0],
-    [1, 1, 1, 1,  1, 1, 0, 1,1, 0],
-    [1, 1, 0, 0,  0, 0, 1, 1,1, 0],
-    [0, 1, 1, 1,  1, 1, 1, 1,0, 0],
-    [0, 0, 1, 1,  1, 1, 1, 0,0, 0],
-  ],
-  cry: [
-    [0, 0, 1, 1, 1, 1, 1, 1, 0, 0],
-    [0, 1, 0, 0, 0, 0, 0, 0, 1, 0],
-    [0, 1, 0, 1, 0, 0, 1, 0, 1, 0],
-    [0, 1, 0, 1, 0, 0, 1, 0, 1, 0],
-    [0, 1, 0, 0, 0, 0, 0, 0, 1, 0],
-    [0, 1, 0, 1, 1, 1, 1, 0, 1, 0],
-    [0, 1, 1, 0, 0, 0, 0, 1, 1, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  ],
-  aj: [ // "AJ" Initials
-    [0, 1, 1, 1, 0, 0, 1, 1, 1, 1],
-    [1, 0, 0, 0, 1, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 1, 0, 0, 0, 0, 1],
-    [1, 1, 1, 1, 1, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 1, 0, 1, 0, 0, 1],
-    [1, 0, 0, 0, 1, 0, 1, 0, 0, 1],
-    [1, 0, 0, 0, 1, 0, 1, 0, 0, 1],
-    [1, 0, 0, 0, 1, 0, 0, 1, 1, 0],
-  ],
-  shooting: [ // A techy charging/shooting bar
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 1, 1, 1, 1, 1, 1, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+const SHAPES: Record<string, number[][] | null> = {
+  smile: [
+    [0,0,1,1,1,1,1,0,0,0],
+    [0,1,1,1,1,1,1,1,0,0],
+    [1,1,0,1,1,1,1,1,1,0],
+    [1,1,0,1,1,0,0,1,1,0],
+    [1,1,1,1,1,1,1,1,1,0],
+    [1,1,1,1,1,1,0,1,1,0],
+    [1,1,0,0,0,0,1,1,1,0],
+    [0,1,1,1,1,1,1,1,0,0],
+    [0,0,1,1,1,1,1,0,0,0],
   ],
   heart: [
-    [0, 1, 1, 0, 0, 0, 0, 1, 1, 0],
-    [1, 1, 1, 1, 0, 0, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-    [0, 0, 1, 1, 1, 1, 1, 1, 0, 0],
-    [0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
-    [0, 0, 0, 0, 1, 1, 0, 0, 0, 0],
+    [0,1,1,0,0,0,0,1,1,0],
+    [1,1,1,1,0,0,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1],
+    [0,1,1,1,1,1,1,1,1,0],
+    [0,0,1,1,1,1,1,1,0,0],
+    [0,0,0,1,1,1,1,0,0,0],
+    [0,0,0,0,1,1,0,0,0,0],
   ],
   battery: [
-    [0, 0, 0, 0, 1, 1, 0, 0, 0, 0],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 1, 1, 1, 1, 1, 1, 0, 1],
-    [1, 0, 1, 1, 1, 1, 1, 1, 0, 1],
-    [1, 0, 1, 1, 1, 1, 1, 1, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  ]
+    [0,0,0,0,1,1,0,0,0,0],
+    [1,1,1,1,1,1,1,1,1,1],
+    [1,0,0,0,0,0,0,0,0,1],
+    [1,0,1,1,1,1,1,1,0,1],
+    [1,0,1,1,1,1,1,1,0,1],
+    [1,0,1,1,1,1,1,1,0,1],
+    [1,0,0,0,0,0,0,0,0,1],
+    [1,1,1,1,1,1,1,1,1,1],
+  ],
+  cry: [
+    [0,0,1,1,1,1,1,1,0,0],
+    [0,1,0,0,0,0,0,0,1,0],
+    [0,1,0,1,0,0,1,0,1,0],
+    [0,1,0,1,0,0,1,0,1,0],
+    [0,1,0,0,0,0,0,0,1,0],
+    [0,1,0,1,1,1,1,0,1,0],
+    [0,1,1,0,0,0,0,1,1,0],
+    [0,0,0,0,0,0,0,0,0,0],
+  ],
+  aj: [
+    [0,1,1,1,0,0,1,1,1,1],
+    [1,0,0,0,1,0,0,0,0,1],
+    [1,0,0,0,1,0,0,0,0,1],
+    [1,1,1,1,1,0,0,0,0,1],
+    [1,0,0,0,1,0,1,0,0,1],
+    [1,0,0,0,1,0,1,0,0,1],
+    [1,0,0,0,1,0,1,0,0,1],
+    [1,0,0,0,1,0,0,1,1,0],
+  ],
+  indiaGate: [
+    [0,0,0,1,1,1,1,0,0,0],
+    [0,0,1,1,1,1,1,1,0,0],
+    [0,1,1,1,1,1,1,1,1,0],
+    [1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,0,0,1,1,1,1],
+    [1,1,1,0,0,0,0,1,1,1],
+    [1,1,1,0,0,0,0,1,1,1],
+    [1,1,1,0,0,0,0,1,1,1],
+    [1,1,1,0,0,0,0,1,1,1],
+    [1,1,1,0,0,0,0,1,1,1],
+    [1,1,1,0,0,0,0,1,1,1],
+    [1,1,1,0,0,0,0,1,1,1],
+    [1,1,1,0,0,0,0,1,1,1],
+  ],
+  clock: null,
+  hello: null,
+  shine: null,
 };
 
+const HELLO_MAT = [
+  [1,0,1,0,1,1,1,0,1,0,0,0,1,0,0,0,1,1,1],
+  [1,0,1,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,1],
+  [1,1,1,0,1,1,1,0,1,0,0,0,1,0,0,0,1,0,1],
+  [1,0,1,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,1],
+  [1,0,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1],
+];
 
-export function LEDMatrix({ shape = "default" }: { shape?: string }) {
-  const isMobile = window.innerWidth <= 768;
-  const [time, setTime] = useState("");
-  const rows = isMobile ? 14:15;
-  const cols = isMobile ? 40: 50; // Increased cols to accommodate HH:mm:ss comfortably
+const ROWS = 15;
+const COLS = 50;
+const DOT = 8;
+const GAP = 3;
+const STEP = DOT + GAP;
+const W = COLS * STEP - GAP;
+const H = ROWS * STEP - GAP;
+const LERP_SPEED = 0.12;
+
+type State = Float32Array;
+
+function buildTarget(mat: number[][]): State {
+  const mR = mat.length;
+  const mC = mat[0].length;
+  const offR = Math.floor((ROWS - mR) / 2);
+  const offC = Math.floor((COLS - mC) / 2);
+  const t = new Float32Array(ROWS * COLS);
+  for (let r = 0; r < ROWS; r++) {
+    for (let c = 0; c < COLS; c++) {
+      const mr = r - offR;
+      const mc = c - offC;
+      t[r * COLS + c] =
+        mr >= 0 && mr < mR && mc >= 0 && mc < mC && mat[mr][mc] === 1 ? 1 : 0;
+    }
+  }
+  return t;
+}
+
+function getClockMatrix(timeStr: string): number[][] {
+  const mat: number[][] = [[], [], [], [], []];
+  for (const ch of timeStr) {
+    const d = DIGITS[ch] ?? DIGITS[":"];
+    for (let r = 0; r < 5; r++) {
+      mat[r].push(...d[r], 0);
+    }
+  }
+  return mat;
+}
+
+export function LEDMatrix({ shape = "smile" }: { shape?: string }) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const stateRef = useRef<State>(new Float32Array(ROWS * COLS));
+  const targetRef = useRef<State>(new Float32Array(ROWS * COLS));
+  const rafRef = useRef<number>(0);
+  const isAnimatingRef = useRef(false);
+  const scrollXRef = useRef(0);
+  const waveRef = useRef(-ROWS);
+  const timersRef = useRef<{ scroll?: ReturnType<typeof setInterval>; clock?: ReturnType<typeof setInterval>; shine?: number }>({});
+
+  const shapeRef = useRef(shape);
+  shapeRef.current = shape;
+
+  // Scale the fixed-size canvas to always fit its container width
+  useEffect(() => {
+    const wrapper = wrapperRef.current;
+    const canvas = canvasRef.current;
+    if (!wrapper || !canvas) return;
+
+    function applyScale() {
+      const availW = wrapper!.clientWidth;
+      const scale = Math.min(1, availW / W);
+      canvas!.style.transformOrigin = "top left";
+      canvas!.style.transform = `scale(${scale})`;
+      // Shrink wrapper height to match scaled canvas so no dead space
+      wrapper!.style.height = `${Math.round(H * scale)}px`;
+    }
+
+    applyScale();
+    const ro = new ResizeObserver(applyScale);
+    ro.observe(wrapper);
+    return () => ro.disconnect();
+  }, []);
+
+  function drawFrame(ctx: CanvasRenderingContext2D, state: State) {
+    ctx.clearRect(0, 0, W, H);
+    for (let r = 0; r < ROWS; r++) {
+      for (let c = 0; c < COLS; c++) {
+        const v = state[r * COLS + c];
+        const x = c * STEP;
+        const y = r * STEP;
+        if (v > 0.5) {
+          ctx.fillStyle = `rgba(240,240,240,${(0.1 + v * 0.9).toFixed(3)})`;
+        } else {
+          ctx.fillStyle = `rgba(255,255,255,${(0.04 + v * 0.06).toFixed(3)})`;
+        }
+        ctx.beginPath();
+        ctx.roundRect(x, y, DOT, DOT, 1.5);
+        ctx.fill();
+      }
+    }
+  }
+
+  function startLerpLoop(ctx: CanvasRenderingContext2D) {
+    if (isAnimatingRef.current) return;
+    isAnimatingRef.current = true;
+
+    function tick() {
+      const cur = stateRef.current;
+      const tgt = targetRef.current;
+      let done = true;
+      for (let i = 0; i < cur.length; i++) {
+        const next = cur[i] + (tgt[i] - cur[i]) * LERP_SPEED;
+        cur[i] = Math.abs(next - tgt[i]) < 0.005 ? tgt[i] : next;
+        if (cur[i] !== tgt[i]) done = false;
+      }
+      drawFrame(ctx, cur);
+      if (done) {
+        isAnimatingRef.current = false;
+      } else {
+        rafRef.current = requestAnimationFrame(tick);
+      }
+    }
+
+    rafRef.current = requestAnimationFrame(tick);
+  }
+
+  function transitionTo(mat: number[][], ctx: CanvasRenderingContext2D, immediate = false) {
+    const t = buildTarget(mat);
+    targetRef.current = t;
+    if (immediate) {
+      stateRef.current = new Float32Array(t);
+      drawFrame(ctx, stateRef.current);
+      return;
+    }
+    startLerpLoop(ctx);
+  }
+
+  function stopAll() {
+    cancelAnimationFrame(rafRef.current);
+    clearInterval(timersRef.current.scroll);
+    clearInterval(timersRef.current.clock);
+    cancelAnimationFrame(timersRef.current.shine ?? 0);
+    isAnimatingRef.current = false;
+    scrollXRef.current = COLS;
+    waveRef.current = -ROWS;
+  }
 
   useEffect(() => {
-    if (shape !== "watchtime") return;
-    
-    const update = () => {
-      const now = new Date();
-      const hh = String(now.getHours()).padStart(2, "0");
-      const mm = String(now.getMinutes()).padStart(2, "0");
-      const ss = String(now.getSeconds()).padStart(2, "0");
-      setTime(`${hh}:${mm}:${ss}`);
-    };
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d")!;
 
-    update();
-    const interval = setInterval(update, 1000);
-    return () => clearInterval(interval);
+    stopAll();
+
+    if (shape === "clock") {
+      function tick() {
+        const ts = new Date().toTimeString().split(" ")[0];
+        transitionTo(getClockMatrix(ts), ctx);
+      }
+      tick();
+      timersRef.current.clock = setInterval(tick, 1000);
+      return () => stopAll();
+    }
+
+    if (shape === "hello") {
+      const patW = HELLO_MAT[0].length;
+      scrollXRef.current = COLS;
+
+      function scrollTick() {
+        const t = new Float32Array(ROWS * COLS);
+        const offR = Math.floor((ROWS - HELLO_MAT.length) / 2);
+        for (let r = 0; r < HELLO_MAT.length; r++) {
+          for (let c = 0; c < COLS; c++) {
+            const sc = c + Math.round(scrollXRef.current) - COLS;
+            if (sc >= 0 && sc < patW && HELLO_MAT[r][sc] === 1) {
+              t[(r + offR) * COLS + c] = 1;
+            }
+          }
+        }
+        targetRef.current = t;
+        startLerpLoop(ctx);
+        scrollXRef.current--;
+        if (scrollXRef.current < -patW) scrollXRef.current = COLS;
+      }
+
+      scrollTick();
+      timersRef.current.scroll = setInterval(scrollTick, 80);
+      return () => stopAll();
+    }
+
+    if (shape === "shine") {
+      const full = new Float32Array(ROWS * COLS).fill(1);
+      stateRef.current = full;
+      targetRef.current = new Float32Array(full);
+      drawFrame(ctx, full);
+
+      function shineStep() {
+        const wave = waveRef.current;
+        const state = stateRef.current;
+        for (let r = 0; r < ROWS; r++) {
+          for (let c = 0; c < COLS; c++) {
+            const d = r + c;
+            const t = Math.max(0, Math.min(1, 1 - Math.abs(d - wave) / 8));
+            state[r * COLS + c] = 0.08 + t * 0.92;
+          }
+        }
+        drawFrame(ctx, state);
+        waveRef.current += 0.5;
+        if (waveRef.current > ROWS + COLS + 20) waveRef.current = -ROWS;
+        timersRef.current.shine = requestAnimationFrame(shineStep);
+      }
+
+      timersRef.current.shine = requestAnimationFrame(shineStep);
+      return () => stopAll();
+    }
+
+    const mat = SHAPES[shape];
+    if (mat) {
+      transitionTo(mat, ctx);
+    }
+
+    return () => stopAll();
   }, [shape]);
 
-  // Generate Matrix for Clock (HH:mm:ss)
-  const getClockMatrix = () => {
-    const matrix = Array(5).fill(0).map(() => [] as number[]);
-    time.split("").forEach((char) => {
-      const digit = DIGITS[char] || DIGITS[":"];
-      for (let r = 0; r < 5; r++) {
-        // Add digit plus a small 1px gap between characters
-        matrix[r].push(...digit[r], 0);
-      }
-    });
-    return matrix;
-  };
-
-  const activeMatrix = shape === "watchtime" ? getClockMatrix() : (SHAPE_MAP[shape] || SHAPE_MAP.default);
-  const mRows = activeMatrix.length;
-  const mCols = activeMatrix[0] ? activeMatrix[0].length : 0;
-
   return (
-    <div className="w-full flex justify-center items-center overflow-hidden p-2">
-      <div
-        className="grid gap-1 sm:gap-1.5"
-        style={{
-          gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
-          width: "max-content" 
-        }}
-      >
-        {Array.from({ length: rows * cols }).map((_, i) => {
-          const r = Math.floor(i / cols);
-          const c = i % cols;
-
-          const sRow = r - Math.floor((rows - mRows) / 2);
-          const sCol = c - Math.floor((cols - mCols) / 2);
-
-          const isOn = activeMatrix[sRow] && activeMatrix[sRow][sCol] === 1;
-
-          return (
-            <motion.div
-              key={i}
-              initial={false}
-              animate={{
-                backgroundColor: isOn ? "var(--primary)" : "var(--secondary)",
-                opacity: isOn ? 1 : 0.3,
-                boxShadow: isOn 
-                  ? "0px 0px 8px 2px rgba(255, 255, 255, 0.3)" 
-                  : "none",
-                scale: isOn ? 1.05 : 1,
-              }}
-              transition={{ duration: 0.2, ease: "easeOut",delay: 0.1}}
-              className="size-1.5 sm:size-2 rounded-[0.5px] shrink-0"
-            />
-          );
-        })}
+    <div className="w-full sm:w-fit  flex justify-center items-center p-2">
+      <div className="rounded-xl overflow-hidden bg-[#0a0a0a] dark:bg-transparent p-3 w-full">
+        {/* wrapperRef measures available width; canvas scales inside it */}
+        <div ref={wrapperRef} className="w-full overflow-hidden relative ">
+          <canvas ref={canvasRef} width={W} height={H} style={{ display: "block" }} />
+        </div>
       </div>
     </div>
   );
