@@ -1,11 +1,7 @@
-
-
 import type { Experience } from "@/types/experiences";
 import { ExperiencePositionItem } from "./experience-position-item";
 
 export function ExperienceItem({ experience }: { experience: Experience }) {
-  // console.log("isCurrentEmployer",experience.isCurrentEmployer);
-  
   return (
     <div className="screen-line-after space-y-4 py-4">
       <div className="flex items-center gap-3">
@@ -16,9 +12,13 @@ export function ExperienceItem({ experience }: { experience: Experience }) {
               alt={experience.companyName}
               width={24}
               height={24}
-         
               className="rounded-full"
-             
+              aria-hidden
+            />
+          ) : experience.companyIcon ? (
+            <experience.companyIcon
+              size={22}
+              className="text-muted-foreground"
               aria-hidden
             />
           ) : (

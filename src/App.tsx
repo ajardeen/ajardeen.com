@@ -1,13 +1,13 @@
+import { useState } from "react";
 import { ThemeProvider } from "./components/theme-provider";
 import { ReactLenis } from "lenis/react";
-// Add Outlet to your imports
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Outlet,
 } from "react-router-dom";
-
+import { AnimatePresence } from "framer-motion";
 import RootLayout from "./layout/RootLayout";
 import "lenis/dist/lenis.css";
 import "./App.css";
@@ -18,10 +18,18 @@ import FooterSection from "./pages/Portfolio/FooterSection/FooterSection";
 import Project from "./pages/Project/Project";
 import { Page_Not_Found } from "./pages/NotFound/Page_Not_Found";
 import ScrollToTopAuto from "./utils/ScrollToTopAuto";
+import PageLoader from "./components/page-loader";
+import { Toaster } from "./components/ui/sonner";
 
 export function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
   return (
     <ThemeProvider>
+      <AnimatePresence mode="wait">
+        {isLoading && <PageLoader onComplete={() => setIsLoading(false)} />}
+      </AnimatePresence>
+
       <Router>
         <ScrollToTopAuto />
         <ReactLenis
@@ -35,13 +43,11 @@ export function App() {
           }}
         >
           <Routes>
-            {/* --- Wrapper Route for Pages WITH Footer --- */}
             <Route
               element={
                 <>
                   <RootLayout>
                     <div className="mx-auto md:max-w-3xl *:[[id]]:scroll-mt-22">
-                      {/* This renders the Portfolio, Project, etc. */}
                       <Outlet />
                     </div>
                   </RootLayout>
@@ -53,11 +59,10 @@ export function App() {
               <Route path="/project" element={<Project />} />
               <Route path="/project/:id" element={<ProjectDetails />} />
             </Route>
-
-            {/* --- Route WITHOUT Footer --- */}
             <Route path="*" element={<Page_Not_Found />} />
           </Routes>
         </ReactLenis>
+        <Toaster position="bottom-right" />
       </Router>
     </ThemeProvider>
   );

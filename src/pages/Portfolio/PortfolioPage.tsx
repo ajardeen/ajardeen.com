@@ -9,7 +9,6 @@ import HeroSection from "@/pages/Portfolio/HeroSection/HeroSection";
 import SeparatorUi from "@/components/SeparatorUi";
 // import SecurityBanner from "./SecuritySection/SecurityBanner";
 
-
 function PortfolioPage() {
   return (
     <>
@@ -29,10 +28,9 @@ function PortfolioPage() {
       <SeparatorUi /> */}
       <CertificationsSection />
       <SeparatorUi />
-   
-    {/* <BrandSection /> */}
+
+      {/* <BrandSection /> */}
       {/* <SeparatorUi />  */}
-    
     </>
   );
 }

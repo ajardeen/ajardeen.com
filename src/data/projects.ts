@@ -55,71 +55,12 @@ This project explores the power of Semantic Search by allowing users to toggle b
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1776852389/ai_semanthic_search_3_urfc7s.webp",
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1776852389/ai_semanthic_search_2_mhynq2.webp",
     ],
-    videoUrl: "",
+  
     cardUi: true,
     recentWork: true,
-     isProjectStatus:"COMPLETED"
+    isProjectStatus: "COMPLETED",
   },
   // 2
-  {
-    id: "portfolio-v3",
-    title: "Personal Portfolio V3 + AI",
-    period: { start: "20.01.2026", end: "27.04.2026" },
-    link: "https://ajardeen.netlify.app/",
-    logo: "https://res.cloudinary.com/di2vg4ur3/image/upload/v1777289713/aj-title_md6rdz.svg",
-    skills: [
-      "React",
-      "TypeScript",
-      "Vite",
-      "Tailwind CSS",
-      "shadcn/ui",
-      "AI SDK",
-      "AI Chat",
-      "Gemini API",
-      "Framer Motion",
-      "Lenis Smooth Scroll",
-      "Cloudinary Image Optimization",
-      "React Router Dom",
-    ],
-    shortDescription:
-      "AI-powered personal portfolio with global search, optimized media delivery, and interactive micro-experiences.",
-
-    description: `
-Third iteration of my personal portfolio, architected as a performance-focused and AI-enhanced developer platform.
-
-- Built with Vite + React 19 + TypeScript using a scalable modular structure.
-- Integrated AI SDK with Google Gemini API to power “Dexes”, my personal AI agent for recruiter/visitor interaction.
-- Implemented global command-based search (CMDK) to search projects, skills, and pages.
-- Created dedicated project listing and detailed project view screens.
-- Optimized images using Cloudinary (WebP format) with fast loading strategies.
-- Implemented skeleton loaders using shadcn/ui components.
-- Added micro-interactions and motion effects with Framer Motion.
-- Integrated smooth scrolling using Lenis.
-- Included interactive sound effects and image zoom modal functionality.
-- Structured routing with React Router v7.
-- Designed for performance, accessibility, and clean UI architecture.
-
-
-**Quick Links**
-- 🌐 Live Demo — https://ajardeen.netlify.app/
-- 💻 GitHub — https://github.com/ajardeen/ajardeen.com
-`,
-    imageUrls: [
-      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772495136/PortfokioV3_5_m27we6.webp",
-      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772495135/PortfokioV3_4_ztg8uh.webp",
-      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772495135/PortfokioV3_3_fgdxlx.webp",
-      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772495134/PortfokioV3_2_etlkbz.webp",
-      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772495133/PortfokioV3_1_durhic.webp",
-      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772495137/PortfokioV3_7_kgzzfz.webp",
-      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772495137/PortfokioV3_6_i5zhvk.webp",
-      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772495138/PortfokioV3_8_frtvpc.webp",
-      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772495139/PortfokioV3_9_vocxsb.webp",
-    ],
-    videoUrl: "",
-    cardUi: true,
-    // isUnderDevelopment: true,
-  },
-  // 3
   {
     id: "lunchbox-legends",
     title: "Lunchbox Legends",
@@ -191,13 +132,76 @@ Third iteration of my personal portfolio, architected as a performance-focused a
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1777808275/vabook_2_yq4vzk.webp",
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1777808319/vabook_1_we5vvh.webp",
     ],
-    videoUrl:"https://youtu.be/mXBCGCDovXM",
+    videoUrl: [
+      { url: "https://youtu.be/mXBCGCDovXM", position: 1 },
+      { url: "https://youtu.be/ByzmQDWNcNs", position: 3 },
+    ],
     cardUi: true,
     isExpanded: true,
     isUnderDevelopment: true,
-    isProjectStatus:"IN_PROGRESS",
-    projectStatusMsg :"Working on Some Minor Bug fix",
+    isProjectStatus: "COMPLETED",
+    projectStatusMsg: "Prototype development completed.",
   },
+  // 3
+  {
+    id: "portfolio-v3",
+    title: "Personal Portfolio V3 + AI",
+    period: { start: "20.01.2026", end: "27.04.2026" },
+    link: "https://ajardeen.netlify.app/",
+    logo: "https://res.cloudinary.com/di2vg4ur3/image/upload/v1777289713/aj-title_md6rdz.svg",
+    skills: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "shadcn/ui",
+      "AI SDK",
+      "AI Chat",
+      "Gemini API",
+      "Framer Motion",
+      "Lenis Smooth Scroll",
+      "Cloudinary Image Optimization",
+      "React Router Dom",
+    ],
+    shortDescription:
+      "AI-powered personal portfolio with global search, optimized media delivery, and interactive micro-experiences.",
+
+    description: `
+Third iteration of my personal portfolio, architected as a performance-focused and AI-enhanced developer platform.
+
+- Built with Vite + React 19 + TypeScript using a scalable modular structure.
+- Integrated AI SDK with Google Gemini API to power “Dexes”, my personal AI agent for recruiter/visitor interaction.
+- Implemented global command-based search (CMDK) to search projects, skills, and pages.
+- Created dedicated project listing and detailed project view screens.
+- Optimized images using Cloudinary (WebP format) with fast loading strategies.
+- Implemented skeleton loaders using shadcn/ui components.
+- Added micro-interactions and motion effects with Framer Motion.
+- Integrated smooth scrolling using Lenis.
+- Included interactive sound effects and image zoom modal functionality.
+- Structured routing with React Router v7.
+- Designed for performance, accessibility, and clean UI architecture.
+
+
+**Quick Links**
+- 🌐 Live Demo — https://ajardeen.netlify.app/
+- 💻 GitHub — https://github.com/ajardeen/ajardeen.com
+`,
+    imageUrls: [
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772495136/PortfokioV3_5_m27we6.webp",
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772495135/PortfokioV3_4_ztg8uh.webp",
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772495135/PortfokioV3_3_fgdxlx.webp",
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772495134/PortfokioV3_2_etlkbz.webp",
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772495133/PortfokioV3_1_durhic.webp",
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772495137/PortfokioV3_7_kgzzfz.webp",
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772495137/PortfokioV3_6_i5zhvk.webp",
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772495138/PortfokioV3_8_frtvpc.webp",
+      "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772495139/PortfokioV3_9_vocxsb.webp",
+    ],
+  
+    cardUi: true,
+    // isUnderDevelopment: true,
+  },
+
   // 4
   {
     id: "template-ui",
@@ -299,7 +303,7 @@ A full-stack hostel management system focused on workflow automation and structu
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1768325751/hostel4_e6vsjx.webp",
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1768325754/hostel5_w2wbfn.webp",
     ],
-    videoUrl: "",
+  
     // cardUi: true,
   },
   // 6
@@ -341,7 +345,7 @@ A recruitment workflow system built using MERN stack to streamline student place
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1768325714/college4_teggp6.webp",
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1768325712/college5_cloqmj.webp",
     ],
-    videoUrl: "",
+   
     // cardUi: true,
   },
   // 7
@@ -384,7 +388,7 @@ Second iteration of my personal portfolio website, now deprecated but preserved 
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772491144/portfoliov2_4_fvyxk7.webp",
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772491144/portfoliov2_1_y5pfpf.webp",
     ],
-    videoUrl: "",
+  
   },
   // 8
   {
@@ -476,8 +480,8 @@ Note: This project is under active development. The data and metrics displayed a
     imageUrls: [
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772480950/gamified_porfolio_en5wtt.webp",
     ],
-    videoUrl: "https://youtu.be/ukeToi3DlRY",
-    isProjectStatus:"HOLD"
+    videoUrl: [{ url: "https://youtu.be/ukeToi3DlRY" }],
+    isProjectStatus: "HOLD",
   },
   // 10
   {
@@ -509,7 +513,7 @@ Real-time messaging platform focused on secure communication and responsive UX.
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1768326423/realtimechat_3_tp36gv.webp",
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1768326420/realtimechat_2_q14kyj.webp",
     ],
-    videoUrl: "https://youtu.be/WoK7NfpDR8k",
+    videoUrl: [{ url: "https://youtu.be/WoK7NfpDR8k" }],
     cardUi: false,
   },
   // 11
@@ -567,8 +571,7 @@ All updates instantly reflect on connected websites via the exposed API.
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772389759/device-mockup_1.5x_postspark_2026-03-01_23-52-18_1_ftoxen.webp",
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772389758/device-mockup_1.5x_postspark_2026-03-01_23-53-20_keewal.webp",
     ],
-    videoUrl: "",
-    isProjectStatus:"HOLD"
+    isProjectStatus: "HOLD",
   },
   // 12
   {
@@ -597,7 +600,7 @@ Recipe discovery application focused on search-driven UX and dynamic API data re
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1768325835/receipe_1_ev2m5u.webp",
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1768325832/receipe_2_dnj6rk.webp",
     ],
-    videoUrl: "",
+   
     cardUi: false,
   },
   // 13
@@ -636,7 +639,7 @@ Movie search application built with modern frontend tooling and external API int
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772478479/movie_search_app_1_lssvwt.webp",
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772478479/movie_search_app_2_ihkr9x.webp",
     ],
-    videoUrl: "",
+   
   },
   // 14
   {
@@ -663,7 +666,7 @@ Authentication module implementing secure Google OAuth workflow.
     imageUrls: [
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772240138/oauth_bdcnob.webp",
     ],
-    videoUrl: "https://www.youtube.com/watch?v=3PkpTDMQ_Mc",
+    videoUrl: [{"url": "https://www.youtube.com/watch?v=3PkpTDMQ_Mc"}],
   },
   // 15
   {
@@ -694,7 +697,7 @@ Authentication module implementing secure password reset workflow.
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1768326745/passwordflow_2_tr8l72.webp",
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1768326741/passwordflow_1_ye19xj.webp",
     ],
-    videoUrl: "",
+   
   },
   // 16
   {
@@ -724,7 +727,6 @@ Responsive landing page built from Figma design with utility-first styling.
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1768325814/landing4_fzejkm.webp",
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1768325811/landing5_qqeivc.webp",
     ],
-    videoUrl: "",
   },
   {
     id: "askme-identity-landing-page",
@@ -754,6 +756,6 @@ Responsive landing page built from Figma design with utility-first styling.
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772223962/askme_landing_page_1_kxro2y.webp",
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1772223961/askme_landing_page_2_gnozje.webp",
     ],
-    videoUrl: "",
+
   },
 ];

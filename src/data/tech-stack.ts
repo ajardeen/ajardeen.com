@@ -1,137 +1,145 @@
 import type { TechStack } from "@/types/tech-stack";
 
 export const TECH_STACK: TechStack[] = [
+  // ==============================
+  // LANGUAGES
+  // ==============================
   {
     key: "typescript",
     title: "TypeScript",
     href: "https://www.typescriptlang.org/",
-    categories: ["Language"],
+    categories: ["Languages"],
   },
   {
     key: "js",
     title: "JavaScript",
     href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
-    categories: ["Language"],
+    categories: ["Languages"],
   },
   {
     key: "python",
     title: "Python",
     href: "https://www.python.org/",
-    categories: ["Language"],
-  },
- {
-    key: "nextjs2",
-    title: "Next.js",
-    href: "https://nextjs.org/",
-    categories: ["Frontend","Framework"],
-    theme: true,
+    categories: ["Languages"],
   },
   {
     key: "java",
     title: "Java",
     href: "https://www.java.com/",
-    categories: ["Language"],
-  },
-  {
-    key: "nodejs",
-    title: "Node.js",
-    href: "https://nodejs.org/",
-    categories: ["Runtime Environment"],
+    categories: ["Languages"],
   },
 
+  // ==============================
+  // FRONTEND
+  // ==============================
+  {
+    key: "nextjs2",
+    title: "Next.js",
+    href: "https://nextjs.org/",
+    categories: ["Frontend"],
+    theme: true,
+  },
   {
     key: "react",
     title: "React",
     href: "https://react.dev/",
-    categories: ["Library", "UI Library"],
+    categories: ["Frontend"],
   },
   {
     key: "tailwindcss",
     title: "Tailwind CSS",
     href: "https://tailwindcss.com/",
-    categories: ["Framework"],
+    categories: ["Frontend"],
   },
   {
     key: "shadcn-ui",
     title: "shadcn/ui",
     href: "https://ui.shadcn.com/",
-    categories: ["Library", "Component Library"],
+    categories: ["Frontend"],
     theme: true,
   },
   {
     key: "radixui",
     title: "Radix UI",
     href: "https://www.radix-ui.com/",
-    categories: ["Library", "Component Library"],
+    categories: ["Frontend"],
     theme: true,
   },
-
   {
     key: "motion",
     title: "Motion",
     href: "https://motion.dev/",
-    categories: ["Library", "Animation"],
+    categories: ["Frontend"],
   },
   {
     key: "tanstack",
     title: "TanStack",
     href: "https://tanstack.com/",
-    categories: ["State Management","Library"],
+    categories: ["Frontend"],
     theme: true,
   },
- 
   {
     key: "redux",
     title: "Redux",
     href: "https://redux.js.org/",
-    categories: ["State Management"],
-  },
-  
-  {
-    key: "git",
-    title: "Git",
-    href: "https://git-scm.com/",
-    categories: ["Version Control"],
+    categories: ["Frontend"],
   },
 
+  // ==============================
+  // BACKEND & DATABASES
+  // ==============================
   {
-    key: "mysql",
-    title: "MySQL",
-    href: "https://www.mysql.com/",
-    categories: ["Database"],
+    key: "nodejs",
+    title: "Node.js",
+    href: "https://nodejs.org/",
+    categories: ["Backend & Databases"],
   },
   {
     key: "mongodb",
     title: "MongoDB",
     href: "https://www.mongodb.com/",
-    categories: ["Database"],
+    categories: ["Backend & Databases"],
   },
-
   {
-    key: "figma",
-    title: "Figma",
-    href: "https://www.figma.com/",
-    categories: ["Tools", "Design"],
+    key: "mysql",
+    title: "MySQL",
+    href: "https://www.mysql.com/",
+    categories: ["Backend & Databases"],
   },
 
+  // ==============================
+  // TOOLS & UTILITIES
+  // ==============================
+  {
+    key: "git",
+    title: "Git",
+    href: "https://git-scm.com/",
+    categories: ["Tools & Utilities"],
+  },
+  {
+    key: "cursor",
+    title: "Cursor",
+    href: "https://cursor.com/",
+    categories: ["Tools & Utilities"],
+    theme: true,
+  },
   {
     key: "chatgpt",
     title: "ChatGPT",
     href: "https://chatgpt.com/",
-    categories: ["Tools", "AI"],
+    categories: ["Tools & Utilities"],
     theme: true,
   },
   {
     key: "claude",
     title: "Claude",
     href: "https://claude.ai/",
-    categories: ["Dev Tools"],
+    categories: ["Tools & Utilities"],
   },
   {
-    key: "cursor",
-    title: "Cursor",
-    href: "https://cursor.com/",
-    categories: ["Dev Tools"],
-    theme: true,
+    key: "figma",
+    title: "Figma",
+    href: "https://www.figma.com/",
+    categories: ["Tools & Utilities"],
   },
 ];

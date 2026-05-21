@@ -5,10 +5,10 @@ import { motion } from "framer-motion";
 function FooterSection() {
   return (
     <>
-      <footer className="max-w-screen overflow-x-hidden screen-line-after  bg-background z-10">
+      <footer className="max-w-screen overflow-x-hidden screen-line-after  bg-background z-10 px-2 ">
         <div className="screen-line-before  md:mx-auto border-x border-edge max-w-2xl md:max-w-3xl ">
-          <p className="mb-1 px-4 text-center font-mono text-sm text-balance text-muted-foreground">
-            Inspired by nk.studio, chanhdai.com & apple.com
+          <p className="mb-1 px-4 text-center font-mono text-sm text-balance text-muted-foreground pt-2">
+            Inspired by chanhdai.com
           </p>
 
           <p className="mb-4 px-4 text-center font-mono text-sm text-balance text-muted-foreground">

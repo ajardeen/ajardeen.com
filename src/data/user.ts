@@ -25,9 +25,9 @@ export const USER = {
   email: "bW5hemFyODc1NDBAZ21haWwuY29t", // base64 encoded
   website: "https://mohamed-ajardeen-portfolio.netlify.app/",
   resumeUrl:
-    "https://drive.google.com/file/d/1Zl1ocPnJQesoqW8CrEh_GUTL0Un4LpFw/view?usp=sharing",
+    "https://drive.google.com/file/d/1J1Y34338MPj8RXEuyNhguXkPcTcT4RU3/view?usp=sharing",
   resumeDownloadUrl:
-    "https://drive.google.com/uc?export=download&id=1Zl1ocPnJQesoqW8CrEh_GUTL0Un4LpFw",
+    "https://drive.google.com/uc?export=download&id=1J1Y34338MPj8RXEuyNhguXkPcTcT4RU3",
 
   jobTitle: "Junior Full Stack Developer",
   jobs: [
@@ -42,7 +42,7 @@ export const USER = {
   secondaryAvatar: orgAvatar,
 
   about: `
--  Frontend developer with 1+ years of experience, known for pixel-perfect execution and strong attention to small details.
+-  Frontend developer with 1+ year & 2 months of experience, known for pixel-perfect execution and strong attention to small details.
 - Passionate about exploring modern technologies, AI integration, and turning complex business requirements into polished, production-ready products.
 - Built multiple real-world platforms including POS, inventory, and food delivery systems, along with an AI-enabled developer portfolio and reusable design systems like  [TemplateUI](https://template-uii.netlify.app/)  for enterprise applications.
 `,

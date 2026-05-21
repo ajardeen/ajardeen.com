@@ -81,9 +81,17 @@ function ProfileData() {
           <p className="text-balance" onClick={() => playClick()}>
             <a
               className="underline-offset-4 hover:underline tracking-wider"
-              href={`tel:${decodeBase64(USER.phoneNumber)}`}
+              href={`tel:${decodeBase64(USER.phoneNumber || "")}`}
             >
-              {decodeBase64(USER.phoneNumber)}
+              {(() => {
+                const num = decodeBase64(USER.phoneNumber || "");
+                // If it's a standard +91 number with 10 digits (13 characters total)
+                if (num.startsWith("+") && num.length >= 13) {
+                  return `${num.slice(0, 3)} ${num.slice(3, 8)} ${num.slice(8)}`;
+                }
+                // Fallback: If it's a short/different format, just print the raw number safely
+                return num;
+              })()}
             </a>{" "}
             &nbsp;|&nbsp;&nbsp;
             <a

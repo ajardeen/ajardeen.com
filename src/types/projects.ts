@@ -23,7 +23,7 @@ export type Project = {
   logo?: string;
   imageUrls?: string[];
   recentWork?: boolean;
-  videoUrl?: string;
+  videoUrl?: { url: string; position?: number }[];
   cardUi?: boolean;
   /** Whether the project card is expanded by default in the UI. */
   isExpanded?: boolean;

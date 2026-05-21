@@ -167,29 +167,31 @@ function DesktopNavMenu({
       <div className="flex">
         <Button
           variant="link"
-          className="hidden md:flex decoration-background cursor-pointer px-2.5 text-muted-foreground hover:text-accent-foreground group "
+          className="hidden md:flex decoration-background  px-2.5 text-muted-foreground hover:text-accent-foreground group "
           onMouseEnter={() => handleMouseEnter("about")}
           onMouseLeave={scheduleClose}
-          onClick={() => {
-            scrollToSection("profile");
-            handleReset();
-          }}
+          // onClick={() => {
+          //   scrollToSection("profile");
+          //   handleReset();
+          // }}
         >
-           <span className="flex gap-1">
-                <Slash className="translate-x-0 group-hover:translate-x-2 transition-all delay-100" />
-                <span className="translate-x-0 group-hover:translate-x-2 transition-all ">About</span>
-              </span>
+          <span className="flex gap-1">
+            <Slash className="translate-x-0 group-hover:translate-x-2 transition-all delay-100" />
+            <span className="translate-x-0 group-hover:translate-x-2 transition-all ">
+              About
+            </span>
+          </span>
         </Button>
 
         <Button
           variant="link"
-          className="hidden md:flex decoration-background cursor-pointer px-2.5 text-muted-foreground hover:text-accent-foreground group"
+          className="hidden md:flex decoration-background  px-2.5 text-muted-foreground hover:text-accent-foreground group"
           onMouseEnter={() => handleMouseEnter("projects")}
           onMouseLeave={scheduleClose}
-          onClick={() => {
-            navigate("/project");
-            handleReset();
-          }}
+          // onClick={() => {
+          //   navigate("/project");
+          //   handleReset();
+          // }}
         >
           <span className="flex gap-1">
             <Slash className="translate-x-0 group-hover:translate-x-2 transition-all delay-100" />

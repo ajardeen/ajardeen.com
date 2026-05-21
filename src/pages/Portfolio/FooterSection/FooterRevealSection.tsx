@@ -96,7 +96,7 @@ export default function FooterRevealSection() {
       }}
       onMouseLeave={() => setIsHovered(false)}
       ref={sceneRef}
-      className={`w-full bg-background relative overflow-hidden h-[200px] md:h-[300px] transition-all duration-700 ${
+      className={`w-full bg-background relative overflow-hidden h-[200px] md:h-[300px] transition-all duration-400 ${
         isHovered ? "shadow-[inset_0_0_50px_rgba(52,211,153,0.1)]" : ""
       }`}
     >

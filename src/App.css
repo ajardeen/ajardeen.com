@@ -5,10 +5,9 @@ html {
   scroll-behavior: auto !important;
   scrollbar-gutter: stable;
 }
-section {
+.animate-section {
   will-change: transform;
 }
-
 /* markdown.css */
 .markdown ul {
   list-style: disc  !important;

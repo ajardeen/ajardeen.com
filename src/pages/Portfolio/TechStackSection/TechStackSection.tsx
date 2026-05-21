@@ -8,6 +8,7 @@ import {
 } from "@/components/panel";
 import { Button } from "@/components/ui/button";
 import { Layers2, LayoutGrid } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 function TechStackSection() {
   const [isGrouped, setIsGrouped] = useState(false);
@@ -15,19 +16,19 @@ function TechStackSection() {
   // 1. Group the data by category
   const groupedStack = useMemo(() => {
     const groups: Record<string, typeof TECH_STACK> = {};
-    
+
     TECH_STACK.forEach((tech) => {
       tech.categories.forEach((cat) => {
         if (!groups[cat]) groups[cat] = [];
         groups[cat].push(tech);
       });
     });
-    
+
     return groups;
   }, []);
 
   // Reusable Tech Badge component to keep code clean
-  const TechBadge = ({ tech }: { tech: typeof TECH_STACK[0] }) => (
+  const TechBadge = ({ tech }: { tech: (typeof TECH_STACK)[0] }) => (
     <li key={tech.key} className="flex">
       <a
         href={tech.href}
@@ -67,10 +68,10 @@ function TechStackSection() {
         <PanelTitle>
           <div className="flex items-center justify-between">
             <span>Tech Stack</span>
-            <Button 
-              variant={isGrouped ? "secondary" : "ghost"} 
+            <Button
+              variant={isGrouped ? "secondary" : "ghost"}
               size="sm"
-              className="cursor-pointer h-8 w-8 p-0" 
+              className="cursor-pointer h-8 w-8 p-0"
               onClick={() => setIsGrouped(!isGrouped)}
               title={isGrouped ? "Show All" : "Show Categories"}
             >
@@ -80,15 +81,22 @@ function TechStackSection() {
         </PanelTitle>
       </PanelHeader>
 
-      <PanelContent>
+      <PanelContent className={`${isGrouped && " p-0"}`}>
         {isGrouped ? (
-          <div className="space-y-5">
+          <div className=" grid md:grid-cols-2 gap-4 ">
             {Object.entries(groupedStack).map(([category, items]) => (
-              <div key={category} className="space-y-2">
-                <h4 className="text-[10px] uppercase tracking-widest text-zinc-500 font-semibold ml-1">
+              <div
+                key={category}
+                className={cn(
+                  "space-y-2 p-3 md:h-38 w-full group flex flex-col gap-3 border-edge p-4  transition border overflow-x-hidden overflow-y-auto",
+                  "max-sm:screen-line-before max-sm:screen-line-after",
+                  "sm:nth-[2n+1]:screen-line-before sm:nth-[2n+1]:screen-line-after ",
+                )}
+              >
+                <h4 className="text-[10px] md:text-[12px] uppercase tracking-widest text-zinc-500 font-semibold ml-1 mb-2">
                   {category}
                 </h4>
-                <ul className="flex flex-wrap gap-2">
+                <ul className="flex flex-wrap gap-2 ">
                   {items.map((tech) => (
                     <TechBadge key={`${category}-${tech.key}`} tech={tech} />
                   ))}

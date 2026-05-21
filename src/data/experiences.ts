@@ -1,4 +1,5 @@
 import type { Experience } from "../types/experiences";
+import { BriefcaseBusinessIcon, GraduationCapIcon } from "lucide-react";
 
 export const EXPERIENCES: Experience[] = [
   {
@@ -6,7 +7,7 @@ export const EXPERIENCES: Experience[] = [
     companyName: "KJB Info Trip",
     companyLogo:
       "https://res.cloudinary.com/di2vg4ur3/image/upload/v1768236586/kjbSolution_thvn3k.webp",
-      
+
     positions: [
       {
         isExpanded: true,
@@ -14,7 +15,6 @@ export const EXPERIENCES: Experience[] = [
         title: "Front-End Developer",
         employmentPeriod: {
           start: "04.2025",
-          end: "Present",
         },
         employmentType: "Full-time",
         icon: "code",
@@ -40,16 +40,13 @@ export const EXPERIENCES: Experience[] = [
           "REST API Integration ",
         ],
       },
-      
-     
     ],
     isCurrentEmployer: true,
-    
   },
   {
     id: "freelancer",
     companyName: "Freelancer",
-    companyLogo: "",
+    companyIcon: BriefcaseBusinessIcon,
     positions: [
       {
         id: "20f8bfe5-b6a3-4b0d-ac2f-6fccd50d417e",
@@ -86,6 +83,7 @@ export const EXPERIENCES: Experience[] = [
   {
     id: "education",
     companyName: "Education",
+    companyIcon: GraduationCapIcon,
     positions: [
       {
         id: "c47f5903-88ae-4512-8a50-0b91b0cf99b6",
@@ -96,7 +94,15 @@ export const EXPERIENCES: Experience[] = [
         },
         icon: "education",
         description: `- Mechanical Engineering Graduated  `,
-        skills: ["Html","Css","JavaScript","C++", "Self-learning", "Teamwork", "Presentation"],
+        skills: [
+          "Html",
+          "Css",
+          "JavaScript",
+          "C++",
+          "Self-learning",
+          "Teamwork",
+          "Presentation",
+        ],
       },
       {
         id: "c47f5903-88ae-4512-8a50",

@@ -1,15 +1,13 @@
-"use client";
-
 import { useState, useEffect } from "react";
 import { motion, type HTMLMotionProps } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 
-const statusIndicatorVariants = cva("size-4 sm:size-5 ", {
+const statusIndicatorVariants = cva("size-4 sm:size-4 ", {
   variants: {
     variant: {
       default: "bg-primary",
-      red: "bg-red-600",
+      red: "bg-red-900",
       green: "bg-[#00d492]",
     },
   },
@@ -41,7 +39,7 @@ function StatusIndicator({
   }, []);
 
   // Define our flicker colors
-  const redBright = "#dc2626"; // Tailwind red-600
+  const redBright = "#fa0202"; // Tailwind red-600
   const redDark = "#450a0a";    // Tailwind red-950
 
   // Logic: Animate if we are in the first 5s OR if the parent says we are hovered

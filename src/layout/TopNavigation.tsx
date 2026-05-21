@@ -2,7 +2,7 @@ import ThemeSwitcher from "@/components/ThemeSwitcher";
 import { cn } from "@/lib/utils";
 import { SiteHeaderWrapper } from "./site-header-wrapper";
 import { SiteHeaderMark } from "@/components/site-header-mark";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import {  useLocation, useNavigate } from "react-router-dom";
 import { useLenis } from "lenis/react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -30,7 +30,7 @@ function TopNavigation() {
 
   const getHeaderOffset = () => {
     const header = document.querySelector("[data-header-container]");
-    return header ? -header.clientHeight : -88;
+    return header ? -header.clientHeight - 50 : -88;
   };
 
   const scrollToSection = (id: string) => {
@@ -99,13 +99,13 @@ function TopNavigation() {
           data-header-container
           onMouseLeave={() => setPanelStayOpen(false)}
         >
-          <Link
+          <span
             className="has-data-[visible=false]:pointer-events-none [&_img]:h-9 overflow-hidden"
-            to="/"
+            onClick={() => scrollToSection("profile")}
             aria-label="Home"
           >
             <SiteHeaderMark />
-          </Link>
+          </span>
 
           <div className="flex gap-1 items-center">
             {/* Desktop nav links */}
@@ -117,13 +117,12 @@ function TopNavigation() {
             />
             <Button
               variant="ghost"
-           
               className="block md:hidden "
               onClick={() => handleMenu("search")}
             >
               <Search className="text-accent-foreground" />
             </Button>
-            
+
             <ThemeSwitcher />
             <Separator
               orientation="vertical"

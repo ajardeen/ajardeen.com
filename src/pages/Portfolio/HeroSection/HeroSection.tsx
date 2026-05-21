@@ -9,7 +9,7 @@ import ProfileCover from "./components/ProfileCover";
 import verified from "@/assets/icons/verified.svg";
 // import OpenToWorkUI from "./components/OpenToWorkUI";
 import { TextFlip } from "@/components/text-flip";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useSound as useSoundCN } from "@/hooks/use-sound";
 import { switch003Sound } from "@/lib/switch-003";
@@ -107,8 +107,15 @@ function TalkBubble({
   show: boolean;
   bubbleMessage: string;
 }) {
+  const [initialRender, setInitialRender] = useState(true);
   const [play] = useSoundCN(switch003Sound);
   const [isPlaying, setIsPlaying] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => {
+      setInitialRender(false);
+    }, 3000);
+    return () => clearTimeout(t);
+  }, []);
   const handlePlay = () => {
     if (isPlaying) return; // Prevent playing if already in the 10s window
 
@@ -121,7 +128,7 @@ function TalkBubble({
     // 3. Wait 10 seconds before resetting
     setTimeout(() => {
       setIsPlaying(false);
-    }, 10000); // 10,000 milliseconds = 10 seconds
+    }, 15000); // 15,000 milliseconds = 15 seconds
   };
   return (
     <AnimatePresence>
@@ -131,7 +138,7 @@ function TalkBubble({
           initial={{ opacity: 0, scale: 0.5, y: 20 }}
           whileInView={{ opacity: 1, scale: 1, y: 0 }}
           onViewportEnter={() => {
-            if (!isPlaying) {
+            if (!isPlaying && !initialRender) {
               handlePlay();
             }
           }}

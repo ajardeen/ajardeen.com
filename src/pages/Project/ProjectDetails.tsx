@@ -13,6 +13,7 @@ import {
   ArrowRight,
   ChevronLeft,
   ChevronRight,
+  Info,
   Pause,
   Share,
   TriangleAlert,
@@ -21,7 +22,7 @@ import { Button } from "@/components/ui/button";
 import { Markdown } from "@/components/markdown";
 import Zoom from "react-medium-image-zoom";
 import { useMemo, useState } from "react";
-import { toast, Toaster } from "sonner";
+import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
 import "react-medium-image-zoom/dist/styles.css";
 import {
@@ -30,7 +31,6 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Kbd } from "@/components/ui/kbd";
-import { useTheme } from "@/components/theme-provider";
 import { useSound } from "@/hooks/use-sounds";
 import { Prose } from "@/components/ui/typography";
 import ImageCarousel from "./components/ImageCarousel";
@@ -52,7 +52,6 @@ function ProjectDetails() {
   const [direction, setDirection] = useState(0);
   // const [[page, direction], setPage] = useState([0, 0]);
   const playNotification = useSound("/audio/ui-sounds/notification.mp3");
-  const { theme } = useTheme();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
@@ -61,16 +60,49 @@ function ProjectDetails() {
   const mediaList: MediaItem[] = useMemo(() => {
     if (!project) return [];
 
-    const images =
-      project.imageUrls?.map(
-        (img) => ({ type: "image", src: img }) as MediaItem,
-      ) ?? [];
+    // 1. Format your images cleanly
+    const items: MediaItem[] =
+      project.imageUrls?.map((img) => ({ type: "image", src: img })) ?? [];
 
-    const video = project.videoUrl
-      ? ([{ type: "video", src: project.videoUrl }] as MediaItem[])
-      : [];
+    // 2. Safely ensure videoUrl is treated as an array
+    const videosArray = Array.isArray(project.videoUrl)
+      ? project.videoUrl
+      : project.videoUrl
+        ? [{ url: project.videoUrl }]
+        : [];
 
-    return [...video, ...images]; // 👈 video first
+    // Define a strict type for items that definitely have a position
+    const unpositionedVideos: MediaItem[] = [];
+    const positionedVideos: { url: string; position: number }[] = [];
+
+    videosArray.forEach((vid) => {
+      // Explicit type-guard check to satisfy TypeScript's strict null checking
+      if (vid && typeof vid === "object" && typeof vid.position === "number") {
+        positionedVideos.push({
+          url: vid.url,
+          position: vid.position, // TypeScript now knows this is definitively a number
+        });
+      } else {
+        const urlStr = typeof vid === "string" ? vid : vid?.url;
+        if (urlStr) {
+          unpositionedVideos.push({ type: "video", src: urlStr });
+        }
+      }
+    });
+
+    // 3. Unpositioned videos line up directly at the front
+    items.unshift(...unpositionedVideos);
+
+    // 4. Sort positioned videos ascending so earlier placements don't shift later ones awkwardly
+    positionedVideos.sort((a, b) => a.position - b.position);
+
+    // 5. Splice the positioned elements into place (convert 1-indexed position to 0-indexed index)
+    positionedVideos.forEach((vid) => {
+      const targetIndex = Math.max(0, vid.position - 1);
+      items.splice(targetIndex, 0, { type: "video", src: vid.url });
+    });
+
+    return items;
   }, [project]);
 
   const [selected, setSelected] = useState<MediaItem | null>(null);
@@ -198,7 +230,7 @@ function ProjectDetails() {
   };
   return (
     <div className="">
-      <Toaster position="top-center" theme={theme} />
+
       <SeparatorUi />
 
       {/* Back */}
@@ -307,6 +339,12 @@ function ProjectDetails() {
             <div className=" border-l-secondary border-4 bg-gray-500/10 px-2 py-1 flex gap-2">
               <Pause className="" />
               Development Paused!
+            </div>
+          )}
+          {project.projectStatusMsg && (
+            <div className=" border-4 border-blue-500/20 border-l-blue-500 bg-blue-500/10 px-2 py-1 flex gap-2">
+              <Info className="" />
+              {project.projectStatusMsg ? project.projectStatusMsg : ""}
             </div>
           )}
           <div className="group relative aspect-video w-full overflow-hidden rounded-xl border border-edge bg-white">
