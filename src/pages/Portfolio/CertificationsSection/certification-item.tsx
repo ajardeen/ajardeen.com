@@ -1,11 +1,11 @@
 import { format } from "date-fns";
-import { ArrowUpRightIcon, Eye, ShieldCheckIcon } from "lucide-react";
+import { ArrowUpRightIcon, ShieldCheckIcon } from "lucide-react";
 
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 
 import type { Certification } from "@/types/certifications";
-import { Button } from "@/components/ui/button";
+
 import {
   HoverCard,
   HoverCardContent,
@@ -23,7 +23,7 @@ export function CertificationItem({
     <a
       className={cn(
         "group/cert flex items-center pr-2 hover:bg-muted/50!",
-        className
+        className,
       )}
       href={certification.credentialURL}
       target="_blank"
@@ -43,7 +43,7 @@ export function CertificationItem({
           className={cn(
             "mx-4 flex size-6 shrink-0 items-center justify-center rounded-lg select-none",
             "border border-muted-foreground/15 ring-1 ring-edge ring-offset-1 ring-offset-background",
-            "bg-muted text-muted-foreground [&_svg]:size-4"
+            "bg-muted text-muted-foreground [&_svg]:size-4",
           )}
           aria-hidden
         >
@@ -52,9 +52,33 @@ export function CertificationItem({
       )}
 
       <div className="flex-1 space-y-1 border-l border-dashed border-edge p-4 pr-2">
-        <h3 className="leading-snug font-medium text-balance underline-offset-4 group-hover/cert:underline">
-          {certification.title}
-        </h3>
+        {certification.previewCredentialUrl ? (
+          <HoverCard
+            openDelay={50}
+            closeDelay={100}
+            key={certification.credentialID}
+          >
+            <HoverCardTrigger asChild>
+              <h3 className="leading-snug font-medium text-balance underline-offset-4 group-hover/cert:underline">
+                {certification.title}
+              </h3>
+            </HoverCardTrigger>
+            <HoverCardContent className="w-70 sm:w-96 h-fit cursor-pointer border border-muted dark:brightness-90">
+              <div className="relative aspect-16/10 w-full bg-muted flex items-center justify-center">
+                <img
+                  src={certification.previewCredentialUrl}
+                  alt={`Preview of ${certification.title} certification`}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </HoverCardContent>
+          </HoverCard>
+        ) : (
+          <h3 className="leading-snug font-medium text-balance underline-offset-4 group-hover/cert:underline">
+            {certification.title}
+          </h3>
+        )}
 
         <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted-foreground">
           <dl>
@@ -81,35 +105,6 @@ export function CertificationItem({
         </div>
       </div>
       <span className="flex items-center justify-center gap-5">
-        {certification.previewCredentialUrl && (
-          <HoverCard
-            openDelay={50}
-            closeDelay={100}
-            key={certification.credentialID}
-          >
-            <HoverCardTrigger asChild>
-              <Button
-                variant={"link"}
-                className="p-0 cursor-help tracking-widest text-muted-foreground"
-              >
-                <Eye/>
-              </Button>
-            </HoverCardTrigger>
-            <HoverCardContent className="w-96 h-fit cursor-pointer border border-muted dark:brightness-90">
-              <a
-                href={certification.credentialURL}
-                target="_blank"
-                rel="noopener"
-              >
-                <img
-                  src={certification.previewCredentialUrl}
-                  alt={certification.title}
-                />
-              </a>
-            </HoverCardContent>
-          </HoverCard>
-        )}
-
         {certification.credentialURL && (
           <ArrowUpRightIcon
             className="size-4 text-muted-foreground"
