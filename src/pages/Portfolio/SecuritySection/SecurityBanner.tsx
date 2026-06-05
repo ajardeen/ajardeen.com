@@ -1,70 +1,197 @@
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { Panel, PanelContent } from '@/components/panel'
-import { Lock, ShieldAlert } from 'lucide-react'
+import { Panel } from "@/components/panel";
+import { ShieldCheck } from "lucide-react";
+import {
+  Marquee,
+  MarqueeContent,
+  MarqueeFade,
+  MarqueeItem,
+} from "@/components/kibo-ui/marquee";
+import BigText from "@/components/big-text";
 
 function SecurityBanner() {
-  const [clicks, setClicks] = useState(0)
-  const [isUnauthorized, setIsUnauthorized] = useState(false)
-  const [isShaking, setIsShaking] = useState(false)
-
-  const handleClick = () => {
-    if (isUnauthorized) return
-    
-    const nextCount = clicks + 1
-    setClicks(nextCount)
-
-    if (nextCount >= 4) {
-      setIsUnauthorized(true)
-      setIsShaking(true)
-      
-      // Stop shaking movement after 1.5s
-      setTimeout(() => setIsShaking(false), 1500)
-
-      // Reset theme and clicks after 5s
-      setTimeout(() => {
-        setIsUnauthorized(false)
-        setClicks(0)
-      }, 5000)
-    }
-  }
+  const securityWords = [
+    "SECURE",
+    "VETTING",
+    "ENCRYPT",
+    "AUDITED",
+    "FORTIFY",
+    "TRUST",
+  ];
 
   return (
-    <Panel id="security">
-      <PanelContent>
-        <motion.div 
-          onClick={handleClick}
-          animate={{ 
-            backgroundColor: isUnauthorized ? "#fee2e2" : "transparent",
-            color: isUnauthorized ? "#dc2626" : "inherit" 
-          }}
-          transition={{ duration: 0.3 }}
-          className='flex flex-col justify-center items-center gap-2 py-6 px-4 text-center md:text-left cursor-pointer rounded-xl select-none transition-all'
-        >
-          {/* Only the icon shakes */}
-          <motion.div
-            animate={isShaking ? {
-              x: [0, -5, 5, -5, 5, -5, 5, 0],
-            } : { x: 0 }}
-            transition={{ 
-              duration: 0.4, 
-              repeat: isShaking ? Infinity : 0 
-            }}
-          >
-            {isUnauthorized ? <ShieldAlert size={32} /> : <Lock size={24} />}
-          </motion.div>
+    <Panel
+      id="security"
+      className="relative py-6 bg-background select-none overflow-hidden"
+    >
+      {/* Synchronized CSS Pipeline Loops:
+        - dash: Animates the background line dashes.
+        - packetIn: Plain text travels from left into the center badge.
+        - packetOut: Hash text emerges from center badge and travels right.
+        All share linear easing and matching time factors for unified flow speed.
+      */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes dash {
+          to {
+            stroke-dashoffset: -40;
+          }
+        }
+        
+        @keyframes packetIn {
+          0% {
+            transform: translateX(-20px);
+            opacity: 0;
+          }
+          15% {
+            opacity: 1;
+          }
+          85% {
+            opacity: 1;
+          }
+          100% {
+            transform: translateX(calc(50vw - 160px));
+            opacity: 0;
+          }
+        }
 
-          <div className='max-w-md'>
-            <h4 className='text-lg font-semibold'>
-              {isUnauthorized 
-                ? 'NOT AUTHORIZED' 
-                : 'Security is not a feature; it is a foundation.'}
-            </h4>
+        @keyframes packetOut {
+          0% {
+            transform: translateX(0px);
+            opacity: 0;
+          }
+          15% {
+            opacity: 1;
+          }
+          85% {
+            opacity: 1;
+          }
+          100% {
+            transform: translateX(calc(50vw - 160px));
+            opacity: 0;
+          }
+        }
+
+        .animate-path-line {
+          animation: dash 1.5s linear infinite;
+        }
+
+        .animate-packet-in {
+          animation: packetIn 4s linear infinite ;
+        }
+
+        .animate-packet-out {
+          animation: packetOut 4s linear infinite;
+          animation-delay: 2s; 
+        }
+      `}} />
+
+      {/* Premium Radial Background Glow */}
+      <div
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[250px] pointer-events-none rounded-full blur-[120px] opacity-15 bg-gradient-to-r from-primary via-emerald-500 to-cyan-500"
+        aria-hidden="true"
+      />
+
+      <div className="relative z-10 flex flex-col gap-8">
+        {/* Top Track: Dynamic Security Vocabulary */}
+        <div className="relative w-full">
+          <Marquee>
+            <MarqueeFade side="left" />
+            <MarqueeFade side="right" />
+            <MarqueeContent speed={40}>
+              {securityWords.map((word, i) => (
+                <MarqueeItem
+                  key={`top-${i}-${word}`}
+                  className="flex items-center gap-16 pr-16"
+                >
+                  <div className="flex items-center gap-4">
+                    <span className="block h-8 w-2 rotate-12 rounded bg-muted-foreground/20" />
+                    <BigText
+                      text={word}
+                      className="tracking-tighter uppercase opacity-75"
+                    />
+                  </div>
+                </MarqueeItem>
+              ))}
+            </MarqueeContent>
+          </Marquee>
+        </div>
+
+        {/* Middle Intercept Loop Pipeline */}
+        <div className="relative w-full flex items-center justify-center my-4 h-12">
+          
+          {/* Restored Animated Foreground SVG Circuit Track */}
+          <div className="absolute inset-0 flex items-center w-full h-full px-4">
+            <svg className="w-full h-[2px]" preserveAspectRatio="none">
+              <line 
+                x1="0" y1="1" x2="100%" y2="1" 
+                className="stroke-border/20" 
+                strokeWidth="1" 
+              />
+              <line 
+                x1="0" y1="1" x2="100%" y2="1" 
+                className="stroke-primary/60 animate-path-line" 
+                strokeWidth="1.5"
+                strokeDasharray="6, 14" 
+              />
+            </svg>
           </div>
-        </motion.div>
-      </PanelContent>
+
+          {/* LEFT INNER TRACK: Traveling Input Packet */}
+          <div className="absolute left-0 right-1/2 top-1/2 -translate-y-1/2 flex justify-start pl-4 pointer-events-none overflow-hidden h-10 items-center">
+            <div className="animate-packet-in  flex items-center gap-1.5 bg-background/90 backdrop-blur-sm border border-amber-500/20 shadow-sm rounded-full px-2.5 py-1 font-mono text-[10px] text-amber-500/90 whitespace-nowrap">
+              <span className="opacity-50">USER :</span>
+              <span>password:1234</span>
+            </div>
+          </div>
+
+          {/* CENTER: Processing Core Shield Badge */}
+          <div className="relative z-20 flex items-center gap-2.5 bg-background border border-border/80 shadow-md rounded-full px-5 py-2 text-xs font-semibold tracking-wider text-muted-foreground uppercase">
+            <ShieldCheck size={14} className="text-primary " />
+            <span className="bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
+              Security foundation
+            </span>
+          </div>
+
+          {/* RIGHT INNER TRACK: Traveling Hashed Output Packet */}
+          <div className="absolute left-1/2 right-0 top-1/2 -translate-y-1/2 flex justify-start pointer-events-none overflow-hidden h-10 items-center">
+            <div className="animate-packet-out flex items-center gap-1.5 bg-background/90 backdrop-blur-sm border border-emerald-500/20 shadow-sm rounded-full px-2.5 py-1 font-mono text-[10px] text-emerald-400/90 whitespace-nowrap">
+              <span className="opacity-50">Password HASH:</span>
+              <span>03ac6742...d7c846f4</span>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Bottom Track: Technical Subtext */}
+        <div className="relative w-full">
+          <Marquee>
+            <MarqueeFade side="left" />
+            <MarqueeFade side="right" />
+            <MarqueeContent speed={25} direction="right">
+              {[...Array(6)].map((_, i) => (
+                <MarqueeItem
+                  key={`bottom-${i}`}
+                  className="flex items-center gap-12 pr-12"
+                >
+                  <span className="text-xs md:text-sm font-mono tracking-widest text-muted-foreground/60 uppercase whitespace-nowrap">
+                    Built secure by default
+                  </span>
+                  <span className="text-muted-foreground/30">•</span>
+                  <span className="text-xs md:text-sm font-mono tracking-widest text-muted-foreground/60 uppercase whitespace-nowrap">
+                    Zero Trust Architecture
+                  </span>
+                  <span className="text-muted-foreground/30">•</span>
+                  <span className="text-xs md:text-sm font-mono tracking-widest text-muted-foreground/60 uppercase whitespace-nowrap">
+                    Always Encrypted
+                  </span>
+                  <span className="text-muted-foreground/30">•</span>
+                </MarqueeItem>
+              ))}
+            </MarqueeContent>
+          </Marquee>
+        </div>
+      </div>
     </Panel>
-  )
+  );
 }
 
-export default SecurityBanner
+export default SecurityBanner;

@@ -1,4 +1,4 @@
-import { ChevronDownIcon } from "lucide-react";
+import { ChevronsDownIcon } from "lucide-react";
 import { Slot as SlotPrimitive } from "radix-ui";
 import React from "react";
 
@@ -53,11 +53,12 @@ export function CollapsibleList<T>({
       </CollapsibleContent>
 
       {items.length > max && (
-        <div className="flex h-12 items-center justify-center pb-px  ">
+        <div className="flex h-12 items-center justify-end pb-px  ">
           <CollapsibleTrigger asChild>
             <Button
-              className="group/collapsible-trigger flex  "
-              variant="default"
+              className="group/collapsible-trigger flex cursor-pointer  group"
+              variant="link"
+              
             >
               <span className="hidden group-data-[state=closed]/collapsible-trigger:block">
                 Show More
@@ -66,11 +67,19 @@ export function CollapsibleList<T>({
               <span className="hidden group-data-[state=open]/collapsible-trigger:block">
                 Show Less
               </span>
+              <span className="rounded-full bg-primary p-2">
 
-              <ChevronDownIcon
-                className="group-data-[state=open]/collapsible-trigger:rotate-180"
+              {/* <ChevronDownIcon
+                className="group-data-[state=open]/collapsible-trigger:rotate-180 text-accent group-hover:translate-y-1.5 transition-all duration-200 delay-75"
                 aria-hidden
-              />
+
+                /> */}
+              <ChevronsDownIcon
+                className="group-data-[state=open]/collapsible-trigger:rotate-180 text-accent group-hover:translate-y-0.75 group-data-[state=open]/collapsible-trigger:group-hover:-translate-y-0.75 transition-all duration-200 delay-75"
+                aria-hidden
+
+                />
+                </span>
             </Button>
           </CollapsibleTrigger>
         </div>
