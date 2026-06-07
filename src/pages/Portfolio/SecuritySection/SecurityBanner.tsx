@@ -92,7 +92,7 @@ function SecurityBanner() {
       <PanelContent className="relative bg-background select-none overflow-hidden p-0 py-4">
         {/* Premium Radial Background Glow */}
         <div
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[250px] pointer-events-none rounded-full blur-[120px] opacity-15 bg-gradient-to-r from-primary via-emerald-500 to-cyan-500"
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[250px] pointer-events-none rounded-full blur-[120px] opacity-15 bg-gradient-to-r from-muted-foreground via-accent to-muted-foreground"
           aria-hidden="true"
         />
 
@@ -122,9 +122,9 @@ function SecurityBanner() {
           </div>
 
           {/* Middle Intercept Loop Pipeline */}
-          <div className="relative w-full flex items-center justify-center my-4 h-12">
+          <div className="relative w-full flex items-center justify-center my-4 h-12 ">
             {/* Animated Foreground SVG Circuit Track */}
-            <div className="absolute inset-0 flex items-center w-full h-full px-4">
+            <div className="absolute inset-0 flex items-center w-full h-full px-4 opacity-50">
               <svg className="w-full h-[2px]" preserveAspectRatio="none">
                 <line
                   x1="0"
