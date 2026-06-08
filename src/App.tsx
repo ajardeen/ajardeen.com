@@ -20,6 +20,8 @@ import { Page_Not_Found } from "./pages/NotFound/Page_Not_Found";
 import ScrollToTopAuto from "./utils/ScrollToTopAuto";
 import PageLoader from "./components/page-loader";
 import { Toaster } from "./components/ui/sonner";
+import GameStation from "./pages/GameStation/GameStation";
+import { GameProvider } from "./context/GameContext";
 
 export function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -29,6 +31,7 @@ export function App() {
       <AnimatePresence mode="wait">
         {isLoading && <PageLoader onComplete={() => setIsLoading(false)} />}
       </AnimatePresence>
+    <GameProvider>
 
       <Router>
         <ScrollToTopAuto />
@@ -58,12 +61,14 @@ export function App() {
               <Route path="/" element={<PortfolioPage />} />
               <Route path="/project" element={<Project />} />
               <Route path="/project/:id" element={<ProjectDetails />} />
+              <Route path="/game-station" element={<GameStation />} />
             </Route>
             <Route path="*" element={<Page_Not_Found />} />
           </Routes>
         </ReactLenis>
         <Toaster position="bottom-right" />
       </Router>
+    </GameProvider>
     </ThemeProvider>
   );
 }

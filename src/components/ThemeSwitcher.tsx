@@ -1,18 +1,19 @@
+import { useState, useRef } from "react"; // Added missing imports
 import { SunIcon } from "./ui/sun";
 import { MoonIcon } from "./ui/moon";
 import { Button } from "./ui/button";
 import { useTheme } from "./theme-provider";
 import { motion } from "framer-motion";
-// import { useSound } from "@/hooks/use-sounds";
 import { useHotkey } from "@tanstack/react-hotkeys";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { Kbd } from "./ui/kbd";
 import { useSound } from "@/hooks/use-sound";
 import { click003Sound } from "@/lib/click-003";
 
-function ThemeSwitcher() {
+function ThemeSwitcher({ setGameStation }: { setGameStation: React.Dispatch<React.SetStateAction<boolean>> }) {
   const { theme, setTheme } = useTheme();
-  // const playClick = useSound("/audio/ui-sounds/click.wav");
+  const [count, setCount] = useState(0);
+  const timeoutRef = useRef<number | null>(null); // Keeps track of the running timer
   const [play] = useSound(click003Sound);
 
   const isLight = theme === "light";
@@ -20,21 +21,37 @@ function ThemeSwitcher() {
   const Icon = isLight ? MoonIcon : SunIcon;
 
   const toggleTheme = () => {
+    // 1. Clear any existing timeout so clicks within 1s keep building the count
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    // 2. Use functional update to get the immediate, precise next count
+    setCount((prevCount) => {
+      const nextCount = prevCount + 1;
+
+      if (nextCount >= 5) {
+        console.log("count",count)
+        setGameStation(true);
+        return 0; // Reset count immediately once threshold is reached
+      }
+
+      // 3. Reset count to 0 if the user stops clicking for more than 1 second
+      timeoutRef.current = setTimeout(() => {
+        setCount(0);
+      }, 1000);
+      return nextCount;
+    });
+
     play();
-
-    // if (!document.startViewTransition) {
-    //   setTheme(nextTheme);
-    //   return;
-    // }
     setTheme(nextTheme);
-
-    // document.startViewTransition(() => setTheme(nextTheme));
   };
 
   // 🔑 Press "D" to toggle theme
   useHotkey("D", () => {
     toggleTheme();
   });
+
   return (
     <motion.div
       className="max-h-9 my-2"

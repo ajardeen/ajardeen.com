@@ -2,7 +2,7 @@ import ThemeSwitcher from "@/components/ThemeSwitcher";
 import { cn } from "@/lib/utils";
 import { SiteHeaderWrapper } from "./site-header-wrapper";
 import { SiteHeaderMark } from "@/components/site-header-mark";
-import {  useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useLenis } from "lenis/react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -17,8 +17,11 @@ import { useSound } from "@/hooks/use-sounds";
 import { useState } from "react";
 import { FullScreenMenu } from "./components/MobileScreenMenu";
 import DesktopNavMenu from "./components/DesktopNavMenu";
+import GameCoin from "@/components/game-assets/game-coin";
+import { useGame } from "@/context/GameContext";
 
 function TopNavigation() {
+  const { gameStation, setGameStation } = useGame();
   const lenis = useLenis();
   const location = useLocation();
   const navigate = useNavigate();
@@ -123,7 +126,9 @@ function TopNavigation() {
               <Search className="text-accent-foreground" />
             </Button>
 
-            <ThemeSwitcher />
+            <ThemeSwitcher setGameStation={setGameStation} />
+            {gameStation && <GameCoin />}
+
             <Separator
               orientation="vertical"
               className="hidden md:block my-2.5 bg-muted-foreground/60 md:mr-1"
