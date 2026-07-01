@@ -17,6 +17,7 @@ import { FlippingAvatar } from "./components/FlippingAvatar";
 
 import { click003Sound } from "@/lib/click-003";
 import StatusIndicator from "./components/StatusIndicator";
+import PromotionSection from "../PromotionBanner/PromotionSection";
 
 function HeroSection() {
   const [playClick3] = useSoundCN(click003Sound);
@@ -92,6 +93,8 @@ function HeroSection() {
           </div>
         </div>
       </motion.div>
+      <SeparatorUi />
+      <PromotionSection/>
       <SeparatorUi />
       <ProfileData />
     </>

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { useSound } from "@/hooks/use-sound";
-import { forceField004Sound } from "@/lib/force-field-004";
+// import { useSound } from "@/hooks/use-sound";
+// import { forceField004Sound } from "@/lib/force-field-004";
 
 const SQUARES = [
   { size: "w-2.5 h-2", yOff: -38, dur: 2.1, delay: 0 },
@@ -73,7 +73,7 @@ export default function FooterRevealSection() {
   const [targetX, setTargetX] = useState(0);
   const [originY, setOriginY] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
-  const [play] = useSound(forceField004Sound);
+  // const [play] = useSound(forceField004Sound);
 
   useEffect(() => {
     function measure() {
@@ -92,7 +92,7 @@ export default function FooterRevealSection() {
     <motion.div
       onMouseEnter={() => {
         setIsHovered(true);
-        play();
+        // play();
       }}
       onMouseLeave={() => setIsHovered(false)}
       ref={sceneRef}
