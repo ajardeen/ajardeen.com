@@ -59,8 +59,10 @@ function FooterSection() {
           <div className="flex h-2" />
         </div>
       </footer>
-      <motion.div className="sticky bottom-0 z-5 h-[200px] md:h-[300px] pointer-events-auto">
-        <FooterRevealSection />
+      <motion.div className="relative h-[300px] md:h-[400px]">
+        <div className="sticky bottom-0 h-[200px] md:h-[300px] pointer-events-auto">
+          <FooterRevealSection />
+        </div>
       </motion.div>
     </>
   );

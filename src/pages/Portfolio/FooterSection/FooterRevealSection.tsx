@@ -1,180 +1,140 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-// import { useSound } from "@/hooks/use-sound";
-// import { forceField004Sound } from "@/lib/force-field-004";
 
-const SQUARES = [
-  { size: "w-2.5 h-2", yOff: -38, dur: 2.1, delay: 0 },
-  { size: "w-2 h-1.5", yOff: -20, dur: 1.8, delay: 0.35 },
-  { size: "w-3 h-2.5", yOff: 5, dur: 2.4, delay: 0.7 },
-  { size: "w-2 h-2", yOff: 28, dur: 1.9, delay: 1.1 },
-  { size: "w-1.5 h-1", yOff: 40, dur: 2.2, delay: 1.5 },
-  { size: "w-2.5 h-2", yOff: -8, dur: 2.0, delay: 1.85 },
-  { size: "w-2 h-1", yOff: 14, dur: 1.7, delay: 0.55 },
-  { size: "w-3 h-2", yOff: -50, dur: 2.3, delay: 0.9 },
+// ---------------------------------------------------------------------------
+// Dia Browser-style rising gradient — bars of one shared rainbow gradient,
+// heavily blurred so they melt together, arranged in a bell curve (short at
+// the edges, tall in the middle).
+// ---------------------------------------------------------------------------
+
+type Stop = { offset: number; color: string };
+
+const DIA_STOPS: Stop[] = [
+  { offset: 0, color: "#050B1F" },
+  { offset: 0.1827, color: "#0358F7" },
+  { offset: 0.2837, color: "#2E7FE0" },
+  { offset: 0.4135, color: "#8FC4FF" },
+  { offset: 0.5866, color: "#CFE8FF" },
+  { offset: 0.6827, color: "#EAF5FF" },
+  { offset: 0.8029, color: "#FFFFFF" },
+  { offset: 1, color: "#FFFFFF00" },
 ];
 
-function SparkleSquare({
-  yOff,
-  dur,
-  delay,
-  targetX,
-  originY,
-  // active,
-}: {
-  yOff: number;
-  dur: number;
-  delay: number;
-  targetX: number;
-  originY: number;
-  active?: boolean;
-}) {
-  const startX = -30;
-  const travel = targetX - startX + 200;
-  const y = originY + yOff;
+const VBW = 1271;
+const VBH = 599;
 
-  // Only render or animate if active is true
-  // if (!active) return null;
+function bellHeights(n: number, peak: number, valley: number): number[] {
+  const out: number[] = [];
+  const mid = (n - 1) / 2;
+  for (let i = 0; i < n; i++) {
+    const t = mid === 0 ? 0 : Math.abs(i - mid) / mid;
+    const eased = 1 - Math.pow(t, 1.24);
+    out.push(peak * VBH * (valley + (1 - valley) * eased));
+  }
+  return out;
+}
+
+function DiaGradient({
+  bars = 9,
+  blur = 15,
+  peak = 0.98,
+  valley = 0.55,
+  stops = DIA_STOPS,
+}: {
+  bars?: number;
+  blur?: number;
+  peak?: number;
+  valley?: number;
+  stops?: Stop[];
+}) {
+  const heights = bellHeights(bars, peak, valley);
+  const colW = VBW / bars;
 
   return (
-    <>
-      <motion.div
-        className="absolute -skew-x-[20deg] bg-emerald-400/20 border border-emerald-400/10"
-        style={{ left: startX, top: y, width: 100, height: 6 }}
-        initial={{ x: 0, opacity: 0 }}
-        animate={{ x: [0, travel], opacity: [0, 0.3, 0.1, 0] }}
-        transition={{
-          duration: dur * 1.05,
-          delay,
-          repeat: Infinity,
-          ease: "easeIn",
-        }}
-      />
-      <motion.div
-        className="absolute -skew-x-[20deg] bg-emerald-400 border border-emerald-300 shadow-[0_0_8px_rgba(52,211,153,0.7)]"
-        style={{ left: startX, top: y, width: 20, height: 6 }}
-        initial={{ x: 0, opacity: 0, scaleX: 1 }}
-        animate={{ x: [0, travel], opacity: [0, 1, 1, 0], scaleX: [1, 1, 0.2] }}
-        transition={{
-          duration: dur,
-          delay,
-          repeat: Infinity,
-          ease: "easeIn",
-          times: [0, 0.08, 0.7, 1],
-        }}
-      />
-    </>
+    <svg
+      style={{ height: "100%", width: "100%" }}
+      viewBox={`0 0 ${VBW} ${VBH}`}
+      preserveAspectRatio="none"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <linearGradient id="dia-grad-footer" x1="0" y1="1" x2="0" y2="0">
+          {stops.map((s, i) => (
+            <stop key={i} offset={s.offset} stopColor={s.color} />
+          ))}
+        </linearGradient>
+        <filter
+          id="dia-blur-footer"
+          x="-50%"
+          y="-50%"
+          width="200%"
+          height="200%"
+        >
+          <feGaussianBlur stdDeviation={blur} />
+        </filter>
+      </defs>
+      {heights.map((h, i) => (
+        <g key={i} filter="url(#dia-blur-footer)">
+          <rect
+            x={i * colW}
+            y={VBH - h}
+            width={colW * 1.23}
+            height={h}
+            fill="url(#dia-grad-footer)"
+          />
+        </g>
+      ))}
+    </svg>
   );
 }
 
-export default function FooterRevealSection() {
-  const barRef = useRef<HTMLDivElement>(null);
-  const sceneRef = useRef<HTMLDivElement>(null);
-  const [targetX, setTargetX] = useState(0);
-  const [originY, setOriginY] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
-  // const [play] = useSound(forceField004Sound);
+// ---------------------------------------------------------------------------
+// Footer reveal — grey JARDEEN wordmark sitting BEHIND the rising gradient.
+// The gradient's height/scale is driven by scroll progress through the
+// sticky parent, so it grows taller the further you scroll into it.
+// No hover state, no box background — just the text and the glow.
+// ---------------------------------------------------------------------------
 
-  useEffect(() => {
-    function measure() {
-      if (!barRef.current || !sceneRef.current) return;
-      const sr = sceneRef.current.getBoundingClientRect();
-      const br = barRef.current.getBoundingClientRect();
-      setTargetX(br.left - sr.left + br.width / 1);
-      setOriginY(br.top - sr.top + br.height / 2);
-    }
-    measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
-  }, []);
+export default function FooterRevealSection() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Track scroll progress across the sticky parent's scroll range.
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end end"],
+  });
+
+  const scaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
+
+  // Avoid a flash-of-full-height before the scroll listener attaches.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   return (
-    <motion.div
-      onMouseEnter={() => {
-        setIsHovered(true);
-        // play();
-      }}
-      onMouseLeave={() => setIsHovered(false)}
-      ref={sceneRef}
-      className={`w-full bg-background relative overflow-hidden h-[200px] md:h-[300px] transition-all duration-400 ${
-        isHovered ? "shadow-[inset_0_0_50px_rgba(52,211,153,0.1)]" : ""
-      }`}
+    <div
+      ref={containerRef}
+      className="w-full bg-background relative overflow-hidden h-[300px] md:h-[400px]"
     >
-      {/* Sparkle squares layer - now active on hover */}
-      <div className="absolute hidden dark:block overflow-hidden left-0 inset-0 top-0 z-10 pointer-events-none w-full">
-        {targetX > 0 &&
-          SQUARES.map((sq, i) => (
-            <SparkleSquare
-              key={i}
-              yOff={sq.yOff}
-              dur={sq.dur}
-              delay={sq.delay}
-              targetX={targetX}
-              originY={originY}
-              active={isHovered}
-            />
-          ))}
+      {/* Grey wordmark, sitting behind/under the gradient, no box/hover styling */}
+      <div className="absolute   inset-0 translate-y-20 flex items-center justify-center z-20">
+        <h2 className="text-[80px] md:text-[200px] font-bold tracking-wider text-white select-none transform md:scale-x-[1.5] md:scale-y-[1.5] origin-center">
+          ajardeen
+        </h2>
       </div>
 
-      <div className="flex h-full flex-col items-center justify-center border-t border-edge relative z-20">
-        <div className="relative flex items-center justify-center">
-          <motion.h2
-            className={`backdrop-blur-3xl relative my-2 ml-1 border font-bold tracking-tighter text-6xl md:text-[200px] z-50 px-4 transition-all duration-300
-              ${isHovered ? "dark:text-white  border-emerald-400 shadow-[0_0_20px_rgba(52,211,153,0.2)]" : "text-transparent text-shadow-2xs text-shadow-edge/50  border-edge"}
-              before:absolute before:-left-[7px] before:-top-[7px] before:h-3 before:w-3 before:border before:border-emerald-400 before:bg-accent dark:before:bg-emerald-400 before:content-['']
-              after:absolute after:-right-[7px] after:-top-[7px] after:h-3 after:w-3 after:border after:border-emerald-400/40 after:bg-accent dark:after:bg-emerald-400 after:content-['']`}
-          >
-            <span
-              className="relative flex items-center justify-center h-full w-full md:pl-4
-                  before:absolute before:-bottom-[6px] before:-left-[22px] before:h-3 before:w-3 before:border before:border-emerald-400/40 before:bg-accent dark:before:bg-emerald-400 before:content-['']
-                  after:absolute after:-bottom-[6px] after:-right-[22px] after:h-3 after:w-3 after:border after:border-emerald-400 after:bg-accent after:content-['']"
-            >
-              {/* Background gradient */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{
-                  opacity: [1, 1, 0.4, 0.9, 0.3, 1, 1, 0.4, 0.9, 0.3, 1],
-                }}
-                transition={{
-                  opacity: {
-                    duration: 5,
-                    repeat: Infinity,
-                    ease: "linear",
-                    times: [
-                      0, 0.4, 0.45, 0.5, 0.6, 0.7, 0.9, 0.92, 0.95, 0.98, 1,
-                    ],
-                  },
-                }}
-                className="absolute -left-1 bottom-0 w-full h-full bg-linear-to-r dark:from-emerald-400/20 from-10% to-15% to-transparent blur-3xl z-0"
-              />
-              {/* Glow bar */}
-              <motion.div
-                ref={barRef}
-                initial={{ opacity: 0 }}
-                animate={{
-                  opacity: [1, 1, 0.4, 0.9, 0.3, 1, 1, 0.4, 0.9, 0.3, 1],
-                }}
-                transition={{
-                  opacity: {
-                    duration: 5,
-                    repeat: Infinity,
-                    ease: "linear",
-                    times: [
-                      0, 0.4, 0.45, 0.5, 0.6, 0.7, 0.9, 0.92, 0.95, 0.98, 1,
-                    ],
-                  },
-                }}
-                className="h-12 mr-3 w-3 md:mr-8  md:h-35 md:w-8
-              bg-emerald-400
-              border-2 border-emerald-400
-              -skew-x-[20deg]
-              shadow-[0_0_15px_rgba(52,211,153,0.6)]"
-              />
-              JARDEEN
-            </span>
-          </motion.h2>
-        </div>
-      </div>
-    </motion.div>
+      {/* Rising gradient, scroll-driven, anchored to the floor */}
+      <motion.div
+        aria-hidden
+        className="absolute inset-x-0 bottom-0 h-full pointer-events-none z-10 opacity-90"
+        style={{
+          transformOrigin: "bottom",
+          scaleY: mounted ? scaleY : 0,
+          willChange: "transform",
+        }}
+      >
+        <DiaGradient bars={9} blur={16} peak={0.98} />
+      </motion.div>
+    </div>
   );
 }

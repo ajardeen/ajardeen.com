@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import Confetti from "react-confetti";
 import slLogo from "@/assets/apps/icons/SharedLivingLogo.svg";
 import mockup from "@/assets/apps/images/mockup.webp";
 
@@ -8,13 +9,35 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowLeft, ReceiptText } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useWishlistSignup } from "@/hooks/useWishlistSignup";
+
+
 export default function AppPromotionPage() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
+  const { status, submitEmail } = useWishlistSignup();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [windowSize, setWindowSize] = useState({
+    width: typeof window !== "undefined" ? window.innerWidth : 0,
+    height: typeof window !== "undefined" ? window.innerHeight : 0,
+  });
+
+  useEffect(() => {
+    const handleResize = () =>
+      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Registered email:", email);
+    const success = await submitEmail(email);
+    if (success) {
+      setEmail("");
+      setShowConfetti(true);
+      setTimeout(() => setShowConfetti(false), 10500);
+    }
   };
 
   return (
@@ -34,24 +57,6 @@ export default function AppPromotionPage() {
           />
           <span className="font-bold tracking-tight text-lg">SLE</span>
         </div>
-
-        {/* <nav className="hidden md:flex items-center gap-6 text-lg font-medium text-zinc-500">
-          <a href="#accuracy" className="hover:text-zinc-900 transition-colors">
-            Is it accurate?
-          </a>
-          <a href="#pricing" className="hover:text-zinc-900 transition-colors">
-            Pricing
-          </a>
-          <a href="#blog" className="hover:text-zinc-900 transition-colors">
-            Blog
-          </a>
-          <a href="#about" className="hover:text-zinc-900 transition-colors">
-            About
-          </a>
-          <Button className="bg-[#4f46e5] hover:bg-[#4338ca] text-white text-xs font-medium px-4 h-8 rounded-full shadow-sm">
-            Download SLE
-          </Button>
-        </nav> */}
       </header>
 
       {/* Main Content Body - Tightened Container */}
@@ -94,10 +99,9 @@ export default function AppPromotionPage() {
           </h1>
 
           <p className="text-zinc-500 text-base font-normal leading-relaxed">
-            Keeping track of shared expenses with friends is a hassle. I'm
-            building a simple solution to fix exactly that. Join the wishlist
-            and get early access when it's ready!
+            Coming Soon... !
           </p>
+
           {/* Wishlist Email Subscription Form */}
           <div className="pt-2 w-full">
             <form onSubmit={handleSubmit} className="flex gap-2 items-center">
@@ -107,27 +111,27 @@ export default function AppPromotionPage() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                disabled={status === "loading"}
                 className="bg-white border-zinc-200 h-10 px-3 text-sm shadow-sm focus-visible:ring-zinc-400"
               />
               <Button
                 type="submit"
-                className="bg-[#0099FF] hover:bg-[#0055FF] text-white font-medium text-sm h-10 px-5 rounded-md shadow-md shadow-indigo-100 transition-all shrink-0"
+                disabled={status === "loading"}
+                className="bg-[#0099FF] hover:bg-[#0055FF] text-white font-medium text-sm h-10 px-5 rounded-md shadow-md shadow-indigo-100 transition-all shrink-0 disabled:opacity-60"
               >
-                Join Wishlist
+                {status === "loading" ? "Joining..." : "Join Wishlist"}
               </Button>
             </form>
-            {/* <p className="text-[11px] text-zinc-400 mt-2 ml-1">
-              Currently building. No credit card required.
-            </p> */}
           </div>
         </motion.div>
 
         {/* Right Column: Framer Motion Floating Mockup */}
-        <motion.div 
-         initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
-        className="md:col-span-5 flex justify-center md:justify-end items-center">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
+          className="md:col-span-5 flex justify-center md:justify-end items-center"
+        >
           <motion.div
             animate={{ y: [0, -10, 0] }}
             transition={{
@@ -151,6 +155,17 @@ export default function AppPromotionPage() {
           <ArrowLeft /> Portfolio
         </span>
       </main>
+
+      {showConfetti && (
+        <Confetti
+          width={windowSize.width}
+          height={windowSize.height}
+          numberOfPieces={250}
+          recycle={false}
+          gravity={0.25}
+          className="!fixed !top-0 !left-0 pointer-events-none z-[9999]"
+        />
+      )}
     </motion.div>
   );
 }
