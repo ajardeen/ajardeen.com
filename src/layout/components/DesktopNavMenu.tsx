@@ -1,77 +1,45 @@
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useRef, useState, useMemo } from "react";
+import { useEffect, useRef, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { MacHeader, MacLinkList } from "./Navigators";
 import { useScroll, useMotionValueEvent } from "framer-motion";
 import { useHotkey } from "@tanstack/react-hotkeys";
-
-// Import your data
 import { USER } from "@/data/user";
 import { PROJECTS } from "@/data/projects";
-import { Search } from "lucide-react";
 import SearchPanel from "./SearchPanel";
 import { Slash } from "@/components/brand-slash";
 
-const MIN_NAVBAR_HEIGHT = 200; // Increased slightly for more links
+const MIN_NAVBAR_HEIGHT = 200;
 const TOP_POSITION = 53;
+
+interface DesktopNavMenuProps {
+  scrollToSection: (id: string) => void;
+  panelStayOpen: boolean;
+  setPanelStayOpen: (value: boolean) => void;
+  open: boolean;
+  setOpen: (value: boolean) => void;
+  activeMenu: "about" | "projects" | "search" | null;
+  setActiveMenu: (value: "about" | "projects" | "search" | null) => void;
+}
 
 function DesktopNavMenu({
   scrollToSection,
   panelStayOpen,
   setPanelStayOpen,
-}: {
-  scrollToSection: (id: string) => void;
-  panelStayOpen: boolean;
-  setPanelStayOpen: (value: boolean) => void;
-}) {
-  const [open, setOpen] = useState(false);
-  const [activeMenu, setActiveMenu] = useState<
-    "about" | "projects" | "search" | null
-  >(null);
-
+  open,
+  setOpen,
+  activeMenu,
+  setActiveMenu,
+}: DesktopNavMenuProps) {
+  
   const handleReset = () => {
     cancelClose();
     setOpen(false);
     setActiveMenu(null);
     setPanelStayOpen(false);
   };
-  // 1. Memoize the toggle/open logic
-  // Inside DesktopNavMenu
-  // const toggleMenu = useCallback(
-  //   (menu: "about" | "projects" | "search") => {
-  //     setOpen((prevOpen) => {
-  //       const isClosing = prevOpen && activeMenu === menu;
 
-  //       if (isClosing) {
-  //         handleReset();
-  //         return false;
-  //       }
-
-  //       // FIX: Move parent state update out of the render phase
-  //       setTimeout(() => {
-  //         setPanelStayOpen(true);
-  //       }, 0);
-
-  //       setActiveMenu(menu);
-  //       return true;
-  //     });
-  //   },
-  //   [activeMenu, setPanelStayOpen],
-  // );
-  // Keyboard shortcut support
-
-  // useHotkey("Mod+K", () => {
-  //   toggleMenu("search");
-  // });
-  // useHotkey("Mod+A", () => {
-  //   console.log("called");
-
-  //   toggleMenu("about");
-  // });
-  // useHotkey("Mod+P", () => {
-  //   toggleMenu("projects");
-  // });
   useHotkey("Escape", () => {
     handleReset();
   });
@@ -80,7 +48,6 @@ function DesktopNavMenu({
   const navigate = useNavigate();
   const { scrollY } = useScroll();
 
-  // Dynamic Menu Data Generation
   const menuData = useMemo(() => {
     return {
       about: {
@@ -104,23 +71,18 @@ function DesktopNavMenu({
         },
         category: "Recent Projects",
         links: [
-          // Map first 5 projects
           ...PROJECTS.slice(0, 5).map((proj) => ({
             label: proj.title,
             href: `/project/${proj.id}`,
             isScroll: false,
           })),
-          // Footer link
           { label: "View All Projects →", href: "/project", isScroll: false },
         ],
       },
     };
   }, []);
-  const handleItemClick = (link: {
-    label: string;
-    href: string;
-    isScroll?: boolean;
-  }) => {
+
+  const handleItemClick = (link: { label: string; href: string; isScroll?: boolean }) => {
     if (link.isScroll) {
       scrollToSection(link.href.replace("#", ""));
     } else {
@@ -133,7 +95,6 @@ function DesktopNavMenu({
     if (open) handleReset();
   });
 
-  // Logic to handle "search" alongside about/projects
   const handleMouseEnter = (menu: "about" | "projects" | "search") => {
     cancelClose();
     setActiveMenu(menu);
@@ -155,8 +116,6 @@ function DesktopNavMenu({
   };
 
   useEffect(() => {
-    // Only schedule a close if the panel isn't supposed to stay open
-    // and we are currently in an 'open' state.
     if (!panelStayOpen && open) {
       scheduleClose();
     }
@@ -164,50 +123,28 @@ function DesktopNavMenu({
 
   return (
     <>
-      <div className="flex">
+      <div className="flex items-center">
         <Button
           variant="link"
-          className="hidden md:flex decoration-background  px-2.5 text-muted-foreground hover:text-accent-foreground group "
+          className="hidden md:flex decoration-background px-2.5 text-muted-foreground hover:text-accent-foreground group"
           onMouseEnter={() => handleMouseEnter("about")}
           onMouseLeave={scheduleClose}
-          // onClick={() => {
-          //   scrollToSection("profile");
-          //   handleReset();
-          // }}
         >
-          <span className="flex gap-1">
+          <span className="flex gap-1 items-center">
             <Slash className="translate-x-0 group-hover:translate-x-2 transition-all delay-100" />
-            <span className="translate-x-0 group-hover:translate-x-2 transition-all ">
-              About
-            </span>
+            <span className="translate-x-0 group-hover:translate-x-2 transition-all">About</span>
           </span>
         </Button>
-
         <Button
           variant="link"
-          className="hidden md:flex decoration-background  px-2.5 text-muted-foreground hover:text-accent-foreground group"
+          className="hidden md:flex decoration-background px-2.5 text-muted-foreground hover:text-accent-foreground group"
           onMouseEnter={() => handleMouseEnter("projects")}
           onMouseLeave={scheduleClose}
-          // onClick={() => {
-          //   navigate("/project");
-          //   handleReset();
-          // }}
         >
-          <span className="flex gap-1">
+          <span className="flex gap-1 items-center">
             <Slash className="translate-x-0 group-hover:translate-x-2 transition-all delay-100" />
-            <span className="translate-x-0 group-hover:translate-x-2 transition-all ">
-              Projects
-            </span>
+            <span className="translate-x-0 group-hover:translate-x-2 transition-all">Projects</span>
           </span>
-        </Button>
-        <Button
-          variant="ghost"
-          className="hidden md:block"
-          onMouseEnter={() => handleMouseEnter("search")}
-          onMouseLeave={scheduleClose}
-          onClick={() => handleMouseEnter("search")}
-        >
-          <Search className=" text-accent-foreground" />
         </Button>
       </div>
 
@@ -224,7 +161,6 @@ function DesktopNavMenu({
               onMouseEnter={handleReset}
               onClick={handleReset}
             />
-
             <motion.div
               key="panel"
               initial={{ opacity: 0, scaleY: 0, height: 0 }}
@@ -243,31 +179,25 @@ function DesktopNavMenu({
                 transformOrigin: "top center",
                 minHeight: MIN_NAVBAR_HEIGHT,
               }}
-              className="z-50 bg-background/95 backdrop-blur-2xl "
+              className="z-50 bg-background/80 backdrop-blur-xl h-screen! md:max-w-3xl mx-auto border-x border-b border-border/40 rounded-b-3xl shadow-xl"
               onMouseEnter={cancelClose}
               onMouseLeave={scheduleClose}
             >
-              <div className="container mx-auto h-full flex justify-center items-center px-12">
+              <div className="container h-full flex justify-center px-12">
                 {activeMenu === "search" ? (
-                  <SearchPanel
-                    onClose={handleReset}
-                    // results={searchResults} // Pass results here
-                    onItemClick={handleItemClick}
-                  />
+                  <SearchPanel onClose={handleReset} onItemClick={handleItemClick} />
                 ) : (
                   <motion.div
                     exit="exit"
                     key={activeMenu}
                     initial="hidden"
                     animate="visible"
-                    className="grid grid-cols-1 md:grid-cols-2 gap-30 items-start w-full px-5 max-w-3xl mx-auto  py-20"
+                    className="grid grid-cols-1 md:grid-cols-2 gap-30 items-start w-full px-5 max-w-3xl mx-auto py-20"
                   >
                     <MacHeader
                       label={menuData[activeMenu].header.label}
                       title={menuData[activeMenu].header.title}
                     />
-
-                    {/* Custom MacLinkList usage to handle internal clicks */}
                     <MacLinkList
                       category={menuData[activeMenu].category}
                       links={menuData[activeMenu].links}

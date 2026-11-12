@@ -7,7 +7,7 @@ export const USER = {
   lastName: "Ajardeen",
   fullName: "Mohamed Ajardeen",
   displayName: "Mohamed Ajardeen",
-  openToWork: true,
+  openToWork: false,
   username: "ajardeen",
   gender: "male",
   pronouns: "he/him",

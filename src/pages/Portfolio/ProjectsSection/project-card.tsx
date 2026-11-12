@@ -1,9 +1,10 @@
 import { cn } from "@/lib/utils";
 import { BoxIcon, ExternalLink } from "lucide-react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; // 1. Import useNavigate
 import type { Project } from "@/types/projects";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
+import { useGlimm } from "glimm/react"; // 2. Import useGlimm instead
 
 export function ProjectCard({
   project,
@@ -11,13 +12,29 @@ export function ProjectCard({
   project: Project;
   shouldPreloadImage?: boolean;
 }) {
+  const navigate = useNavigate(); // 3. Initialize React Router navigate
+  const { sweep } = useGlimm(); // 4. Initialize Glimm sweep transition
+
   const image = project.imageUrls?.[0] || project.logo;
+  const targetUrl = "/project/" + project.id;
+
+  // 5. Handle the animated transition on click
+  const handleTransition = (e: React.MouseEvent) => {
+    e.preventDefault();
+    sweep(() => {
+      navigate(targetUrl);
+    }, {
+      palette: "azure", // Optional: Pass any PaletteName from PALETTES (e.g., 'prism', 'berry', 'lagoon')
+      sweepMs: 800,    // Optional: Customize transition speed
+    });
+  };
 
   return (
-    <Link
-      to={"/project/" + project.id}
+    <a
+      href={targetUrl}
+      onClick={handleTransition}
       className={cn(
-        "group flex flex-col gap-3 border-edge p-3 transition hover:bg-muted/40",
+        "group flex flex-col gap-3 border-edge p-3 transition hover:bg-muted/40 cursor-pointer",
         "max-sm:screen-line-before max-sm:screen-line-after",
         "sm:nth-[2n+1]:screen-line-before sm:nth-[2n+1]:screen-line-after",
       )}
@@ -33,12 +50,12 @@ export function ProjectCard({
 
           <div className="pointer-events-none absolute inset-0 ring-1 ring-black/10 dark:ring-white/10 " />
 
-          {/* Period Component: hidden by default, shown on group hover */}
+          {/* Period Component */}
           {project.logo ? (
             <img
               src={project.logo}
               alt="logo"
-              className="w-8 rounded-sm  absolute bottom-1 left-1 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              className="w-8 rounded-sm absolute bottom-1 left-1 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
             />
           ) : (
             <div
@@ -117,6 +134,6 @@ export function ProjectCard({
           </div>
         )}
       </div>
-    </Link>
+    </a>
   );
 }

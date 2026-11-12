@@ -24,6 +24,7 @@
     "@svgl": "https://svgl.app/r/{name}.json",
     "@react-bits": "https://reactbits.dev/r/{name}.json",
     "@soundcn": "https://soundcn.xyz/r/{name}.json",
-    "@ncdai": "https://chanhdai.com/r/{name}.json"
+    "@ncdai": "https://chanhdai.com/r/{name}.json",
+    "@canvas-ui": "https://canvasui.dev/r/{name}.json"
   }
 }

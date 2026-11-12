@@ -1,12 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useMemo, useState, startTransition, lazy, Suspense, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { PROJECTS } from "@/data/projects";
-import {
-  Panel,
-  PanelContent,
-  PanelHeader,
-  PanelTitle,
-} from "@/components/panel";
+import { Panel, PanelContent, PanelHeader, PanelTitle } from "@/components/panel";
 import SeparatorUi from "@/components/SeparatorUi";
 import {
   ArrowLeft,
@@ -19,21 +14,20 @@ import {
   TriangleAlert,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Markdown } from "@/components/markdown";
-import Zoom from "react-medium-image-zoom";
-import { useMemo, useState } from "react";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
-import "react-medium-image-zoom/dist/styles.css";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { Kbd } from "@/components/ui/kbd";
 import { useSound } from "@/hooks/use-sounds";
+import { useGlimm } from "glimm/react";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Prose } from "@/components/ui/typography";
-import ImageCarousel from "./components/ImageCarousel";
+import Zoom from "react-medium-image-zoom";
+import "react-medium-image-zoom/dist/styles.css";
+
+// Lazy load intensive inner text/markdown/carousel renderers to prevent parsing lags
+const Markdown = lazy(() => import("@/components/markdown").then(m => ({ default: m.Markdown })));
+const ImageCarousel = lazy(() => import("./components/ImageCarousel"));
 
 /* ---------- helpers ---------- */
 function getYouTubeEmbedUrl(url: string) {
@@ -48,39 +42,38 @@ type MediaItem =
   | { type: "image"; src: string }
   | { type: "video"; src: string };
 
-function ProjectDetails() {
-  const [direction, setDirection] = useState(0);
-  // const [[page, direction], setPage] = useState([0, 0]);
-  const playNotification = useSound("/audio/ui-sounds/notification.mp3");
+export default function ProjectDetails() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { sweep } = useGlimm();
+  const playNotification = useSound("/audio/ui-sounds/notification.mp3");
 
-  const project = PROJECTS.find((p) => p.id === id);
+  const [direction, setDirection] = useState(0);
+  const [mediaLoaded, setMediaLoaded] = useState(false);
+  const isInitialMount = useRef(true);
+
+  const project = useMemo(() => PROJECTS.find((p) => p.id === id), [id]);
 
   const mediaList: MediaItem[] = useMemo(() => {
     if (!project) return [];
 
-    // 1. Format your images cleanly
     const items: MediaItem[] =
       project.imageUrls?.map((img) => ({ type: "image", src: img })) ?? [];
 
-    // 2. Safely ensure videoUrl is treated as an array
     const videosArray = Array.isArray(project.videoUrl)
       ? project.videoUrl
       : project.videoUrl
         ? [{ url: project.videoUrl }]
         : [];
 
-    // Define a strict type for items that definitely have a position
     const unpositionedVideos: MediaItem[] = [];
     const positionedVideos: { url: string; position: number }[] = [];
 
     videosArray.forEach((vid) => {
-      // Explicit type-guard check to satisfy TypeScript's strict null checking
       if (vid && typeof vid === "object" && typeof vid.position === "number") {
         positionedVideos.push({
           url: vid.url,
-          position: vid.position, // TypeScript now knows this is definitively a number
+          position: vid.position,
         });
       } else {
         const urlStr = typeof vid === "string" ? vid : vid?.url;
@@ -90,13 +83,9 @@ function ProjectDetails() {
       }
     });
 
-    // 3. Unpositioned videos line up directly at the front
     items.unshift(...unpositionedVideos);
-
-    // 4. Sort positioned videos ascending so earlier placements don't shift later ones awkwardly
     positionedVideos.sort((a, b) => a.position - b.position);
 
-    // 5. Splice the positioned elements into place (convert 1-indexed position to 0-indexed index)
     positionedVideos.forEach((vid) => {
       const targetIndex = Math.max(0, vid.position - 1);
       items.splice(targetIndex, 0, { type: "video", src: vid.url });
@@ -106,80 +95,54 @@ function ProjectDetails() {
   }, [project]);
 
   const [selected, setSelected] = useState<MediaItem | null>(null);
-  // const [loading, setLoading] = useState(false);
 
-  if (!project) {
-    return (
-      <Panel>
-        <PanelContent>
-          <p className="text-muted-foreground">Project not found.</p>
-        </PanelContent>
-      </Panel>
-    );
-  }
   const projectIds = useMemo(() => PROJECTS.map((p) => p.id), []);
-
-  const currentIndex = projectIds.indexOf(id ?? "");
+  const currentIndex = useMemo(() => projectIds.indexOf(id ?? ""), [projectIds, id]);
 
   const prevProjectId = currentIndex > 0 ? projectIds[currentIndex - 1] : null;
+  const nextProjectId = currentIndex < projectIds.length - 1 ? projectIds[currentIndex + 1] : null;
 
-  const nextProjectId =
-    currentIndex < projectIds.length - 1 ? projectIds[currentIndex + 1] : null;
-
-  const handleProjectNavigation = (direction: "prev" | "next") => {
-    if (direction === "prev" && prevProjectId) {
-      navigate(`/project/${prevProjectId}`);
-    }
-
-    if (direction === "next" && nextProjectId) {
-      navigate(`/project/${nextProjectId}`);
-    }
-  };
-
+  // Track active media index seamlessly without lag on project swap
   useEffect(() => {
+    setMediaLoaded(false);
+    isInitialMount.current = true;
     if (mediaList.length > 0) {
-      setSelected(mediaList[0]); // first media of NEW project
-      // setLoading(true);
+      setSelected(mediaList[0]);
     } else {
-      // IMPORTANT: clear stale media
       setSelected(null);
-      // setLoading(false);
     }
-  }, [id]); // 👈 depend ONLY on id
+  }, [id, mediaList]);
 
+  // Keyboard navigation optimization using non-blocking transitions
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (!selected) return;
 
-      const currentMediaIndex = mediaList.findIndex(
-        (m) => m.src === selected.src,
-      );
+      const currentMediaIndex = mediaList.findIndex((m) => m.src === selected.src);
 
-      // 🔥 SHIFT + ARROWS → MEDIA NAVIGATION
       if (e.shiftKey) {
         if (e.key === "ArrowLeft" && currentMediaIndex > 0) {
           e.preventDefault();
+          isInitialMount.current = false;
           setSelected(mediaList[currentMediaIndex - 1]);
         }
-
-        if (
-          e.key === "ArrowRight" &&
-          currentMediaIndex < mediaList.length - 1
-        ) {
+        if (e.key === "ArrowRight" && currentMediaIndex < mediaList.length - 1) {
           e.preventDefault();
+          isInitialMount.current = false;
           setSelected(mediaList[currentMediaIndex + 1]);
         }
-
-        return; // stop here — don't trigger project navigation
+        return;
       }
 
-      // 🔹 NORMAL ARROWS → PROJECT NAVIGATION (unchanged behavior)
       if (e.key === "ArrowLeft" && prevProjectId) {
-        navigate(`/project/${prevProjectId}`);
+        startTransition(() => {
+          navigate(`/project/${prevProjectId}`);
+        });
       }
-
       if (e.key === "ArrowRight" && nextProjectId) {
-        navigate(`/project/${nextProjectId}`);
+        startTransition(() => {
+          navigate(`/project/${nextProjectId}`);
+        });
       }
     };
 
@@ -187,37 +150,40 @@ function ProjectDetails() {
     return () => window.removeEventListener("keydown", handler);
   }, [selected, mediaList, prevProjectId, nextProjectId, navigate]);
 
-  const handleShareProject = async () => {
-    const fullUrl = window.location.href;
+  // Smooth back button navigation via Glimm overlay
+  const handleGoBack = () => {
+    sweep(() => {
+      navigate("/project");
+    }, {
+      palette: "azure",
+      sweepMs: 500,
+    });
+  };
 
+  const handleShareProject = async () => {
     try {
-      await navigator.clipboard.writeText(fullUrl);
+      await navigator.clipboard.writeText(window.location.href);
       playNotification();
       toast.success("Copied Link");
     } catch (err) {
       toast.error("Failed to copy URL");
-      console.error(err);
     }
   };
 
   const currentMediaIndex = mediaList.findIndex((m) => m.src === selected?.src);
 
-  // 2. Unified selection handler
   const handleSelectMedia = (newIndex: number) => {
     if (newIndex === currentMediaIndex) return;
-
-    // If new index is greater, we are moving "forward" (slide from right)
-    // If new index is smaller, we are moving "backward" (slide from left)
+    isInitialMount.current = false;
     const newDirection = newIndex > currentMediaIndex ? 1 : -1;
-
     setDirection(newDirection);
+    setMediaLoaded(false);
     setSelected(mediaList[newIndex]);
   };
 
-  // 3. Simple variants (pure slide, no opacity)
   const slideVariants = {
     enter: (direction: number) => ({
-      x: direction > 0 ? "100%" : "-100%",
+      x: isInitialMount.current ? 0 : direction > 0 ? "100%" : "-100%",
     }),
     center: {
       x: 0,
@@ -228,24 +194,34 @@ function ProjectDetails() {
       zIndex: 0,
     }),
   };
-  return (
-    <div className="">
 
+  if (!project) {
+    return (
+      <Panel>
+        <PanelContent>
+          <p className="text-muted-foreground">Project not found.</p>
+        </PanelContent>
+      </Panel>
+    );
+  }
+
+  return (
+    <div className="w-full will-change-transform">
       <SeparatorUi />
 
-      {/* Back */}
-      <div className="screen-line-before screen-line-after mx-auto border-x border-edge md:max-w-4xl flex justify-between p-1.5 py-1">
+      {/* Action Header Panel */}
+      <div className="screen-line-before screen-line-after mx-auto border-x border-edge md:max-w-4xl flex justify-between p-1.5 py-1 bg-background/50 backdrop-blur-md sticky top-0 z-10">
         <Button
-          onClick={() => navigate("/project")}
+          onClick={handleGoBack}
           variant="link"
-          className="gap-2 text-muted-foreground cursor-pointer"
+          className="gap-2 text-muted-foreground cursor-pointer hover:text-foreground transition-colors"
         >
           <ArrowLeft className="size-4" />
           Projects
         </Button>
         <div className="flex gap-1.5">
           <Button
-            onClick={() => handleShareProject()}
+            onClick={handleShareProject}
             variant="secondary"
             className="py-2 h-fit cursor-pointer"
           >
@@ -256,15 +232,11 @@ function ProjectDetails() {
             <TooltipTrigger asChild>
               {prevProjectId && (
                 <Button
-                  onClick={() => handleProjectNavigation("prev")}
+                  onClick={() => startTransition(() => navigate(`/project/${prevProjectId}`))}
                   variant="secondary"
                   className="p-0 flex h-fit"
-                  disabled={!prevProjectId}
                 >
-                  <motion.span
-                    whileTap={{ x: -2 }}
-                    className="p-2 cursor-pointer"
-                  >
+                  <motion.span whileTap={{ x: -2 }} className="p-2 cursor-pointer">
                     <ArrowLeft className="size-4" />
                   </motion.span>
                 </Button>
@@ -277,19 +249,16 @@ function ProjectDetails() {
               </Kbd>
             </TooltipContent>
           </Tooltip>
+
           <Tooltip>
             <TooltipTrigger asChild>
               {nextProjectId && (
                 <Button
-                  onClick={() => handleProjectNavigation("next")}
+                  onClick={() => startTransition(() => navigate(`/project/${nextProjectId}`))}
                   variant="secondary"
                   className="p-0 flex h-fit"
-                  disabled={!nextProjectId}
                 >
-                  <motion.span
-                    whileTap={{ x: 2 }}
-                    className="p-2 cursor-pointer"
-                  >
+                  <motion.span whileTap={{ x: 2 }} className="p-2 cursor-pointer">
                     <ArrowRight className="size-4" />
                   </motion.span>
                 </Button>
@@ -327,28 +296,33 @@ function ProjectDetails() {
         </PanelHeader>
 
         <PanelContent className="space-y-5">
+          {/* Status Indicators */}
           {project.isProjectStatus === "IN_PROGRESS" && (
-            <div className=" border-l-destructive border-4 bg-red-500/10 px-2 py-1 flex gap-2">
+            <div className="border-l-destructive border-4 bg-red-500/10 px-2 py-1 flex gap-2">
               <TriangleAlert className="" />
-              {project.projectStatusMsg
-                ? project.projectStatusMsg
-                : "Project Under Development Stage!"}
+              {project.projectStatusMsg || "Project Under Development Stage!"}
             </div>
           )}
           {project.isProjectStatus === "HOLD" && (
-            <div className=" border-l-secondary border-4 bg-gray-500/10 px-2 py-1 flex gap-2">
+            <div className="border-l-secondary border-4 bg-gray-500/10 px-2 py-1 flex gap-2">
               <Pause className="" />
               Development Paused!
             </div>
           )}
-          {project.projectStatusMsg && (
-            <div className=" border-4 border-blue-500/20 border-l-blue-500 bg-blue-500/10 px-2 py-1 flex gap-2">
+          {project.projectStatusMsg && project.isProjectStatus !== "IN_PROGRESS" && (
+            <div className="border-4 border-blue-500/20 border-l-blue-500 bg-blue-500/10 px-2 py-1 flex gap-2">
               <Info className="" />
-              {project.projectStatusMsg ? project.projectStatusMsg : ""}
+              {project.projectStatusMsg}
             </div>
           )}
-          <div className="group relative aspect-video w-full overflow-hidden rounded-xl border border-edge bg-white">
-            {/* Overlay Buttons */}
+
+          {/* Interactive Media Stage */}
+          <div className="group relative aspect-video w-full overflow-hidden rounded-xl border border-edge bg-muted">
+            {/* Inline Asynchronous Skeleton Loader Layout */}
+            {!mediaLoaded && (
+              <Skeleton className="absolute inset-0 h-full w-full z-0 animate-pulse bg-muted-foreground/10" />
+            )}
+
             {currentMediaIndex > 0 && (
               <button
                 onClick={(e) => {
@@ -377,12 +351,7 @@ function ProjectDetails() {
               </button>
             )}
 
-            {/* Animated Image/Video */}
-            <AnimatePresence
-              initial={false}
-              custom={direction}
-              mode="popLayout"
-            >
+            <AnimatePresence initial={false} custom={direction} mode="popLayout">
               <motion.div
                 key={selected?.src}
                 custom={direction}
@@ -393,12 +362,14 @@ function ProjectDetails() {
                 transition={{
                   x: { type: "spring", stiffness: 300, damping: 32 },
                 }}
-                className="absolute inset-0 h-full w-full"
+                className="absolute inset-0 h-full w-full z-10"
               >
                 {selected?.type === "video" ? (
                   <iframe
                     src={getYouTubeEmbedUrl(selected.src)}
-                    className="h-full w-full"
+                    className="h-full w-full bg-transparent"
+                    allowFullScreen
+                    onLoad={() => setMediaLoaded(true)}
                   />
                 ) : (
                   <Zoom>
@@ -406,6 +377,7 @@ function ProjectDetails() {
                       src={selected?.src}
                       className="aspect-video w-full object-contain"
                       alt=""
+                      onLoad={() => setMediaLoaded(true)}
                     />
                   </Zoom>
                 )}
@@ -413,22 +385,22 @@ function ProjectDetails() {
             </AnimatePresence>
           </div>
 
-          {/* Update your Carousel to use the same logic if needed */}
-          <ImageCarousel
-            mediaList={mediaList}
-            selected={selected}
-            setSelected={(item) => {
-              // Check if item exists before processing
-              if (!item) return;
+          {/* Asynchronous Image Carousel */}
+          <Suspense fallback={<Skeleton className="w-full h-20 rounded-lg" />}>
+            <ImageCarousel
+              mediaList={mediaList}
+              selected={selected}
+              setSelected={(item) => {
+                if (!item) return;
+                const index = mediaList.findIndex((m) => m.src === item.src);
+                handleSelectMedia(index);
+              }}
+            />
+          </Suspense>
 
-              const index = mediaList.findIndex((m) => m.src === item.src);
-              handleSelectMedia(index);
-            }}
-          />
-
-          {/* META */}
+          {/* Core Technical Stack Grid */}
           <div className="flex flex-wrap gap-2">
-            {project.skills.map((skill, idx) => (
+            {project.skills?.map((skill, idx) => (
               <span
                 key={idx}
                 className="rounded-md bg-secondary px-2 py-1 text-xs text-secondary-foreground"
@@ -438,10 +410,19 @@ function ProjectDetails() {
             ))}
           </div>
 
-          {/* DESCRIPTION */}
+          {/* Rich Content Renderers */}
           {project.description && (
             <Prose>
-              <Markdown>{project.description}</Markdown>
+              <Suspense
+                fallback={
+                  <div className="space-y-2 mt-4">
+                    <Skeleton className="h-4 w-full" />
+                    <Skeleton className="h-4 w-5/6" />
+                  </div>
+                }
+              >
+                <Markdown>{project.description}</Markdown>
+              </Suspense>
             </Prose>
           )}
         </PanelContent>
@@ -449,5 +430,3 @@ function ProjectDetails() {
     </div>
   );
 }
-
-export default ProjectDetails;
